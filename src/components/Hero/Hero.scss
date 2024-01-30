@@ -1,0 +1,11 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.main {
+    
+
+    &__hero {
+        height: 50vh;
+        background: url(../../assets/images/games/Odd-Man-Rush-Hockey-League-Action.jpg) no-repeat center/cover;
+    }
+}

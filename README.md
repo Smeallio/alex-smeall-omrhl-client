@@ -45,21 +45,21 @@ Nothing external for this phase.
 
 **Homepage**
 
-![Homepage mockup](./src/assets/images/OMRHL-homepage-mockup.png)
+![Homepage mockup](./src/assets/images/mockups/OMRHL-homepage-mockup.png)
 
 **Team Page**
 
-![Team page mockup](./src/assets/images/OMRHL-team-page-mockup.png)
+![Team page mockup](./src/assets/images/mockups/OMRHL-team-page-mockup.png)
 
 **Login Page**
 
-![Login page mockup](./src/assets/images/OMRHL-signin-mockup.png)
+![Login page mockup](./src/assets/images/mockups/OMRHL-signin-mockup.png)
 
 **Data Updates and Entry Page**
 
 This will be available to authenticated and authorized users only. 
 
-![Data entry page mockup](./src/assets/images/OMRHL-dataentry-mockup.png)
+![Data entry page mockup](./src/assets/images/mockups/OMRHL-dataentry-mockup.png)
 
 ### Data
 

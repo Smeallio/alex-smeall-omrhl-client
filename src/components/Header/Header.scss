@@ -1,0 +1,25 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.header {
+  &__league {
+    @include flexbox(center);
+    height: 7.5rem;
+    background-color: $omr-darkblue;
+
+    &-logo {
+      height: 6rem;
+    }
+  }
+
+  &__teams {
+    @include flexbox(space-between);
+    padding: 1rem;
+    box-shadow: 0 20px 10px -15px rgba(0, 0, 0, 0.5) inset,
+      0 -20px 10px -15px rgba(0, 0, 0, 0.5) inset;
+
+    &-logo {
+      height: 15vw;
+    }
+  }
+}
