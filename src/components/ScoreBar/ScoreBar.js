@@ -12,7 +12,7 @@ const ScoreBar = () => {
     const scrollAmount = 100;
 
   return (
-    <section className="scorebar" id="scorebar">
+    <article className="scorebar" id="scorebar">
       <button
         className="scorebar__button scorebar__button-left"
         onClick={() => {
@@ -113,7 +113,7 @@ const ScoreBar = () => {
           alt="Chevron left"
         />
       </button>
-    </section>
+    </article>
   );
 };
 

@@ -1,0 +1,52 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.standings {
+  margin: 1.5rem 0.875rem;
+  max-width: 100%;
+  overflow-x: auto;
+
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+
+    &-title {
+      background-color: $omr-red;
+      height: 1.5rem;
+      padding: 0.25rem 0;
+      text-align: center;
+      border-radius: 5px 5px 0 0;
+      margin: 0;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: $white;
+    }
+
+    &-headers th {
+      padding: 0.5rem 0;
+    }
+
+    &-row:nth-of-type(odd) {
+      background-color: $omr-grey;
+    }
+
+    &-team {
+      @include flexbox(space-around);
+      padding-left: 1rem;
+    }
+
+    &-name {
+        padding: 0 1rem;
+        font-size: 0.875rem;
+    }
+
+    &-img {
+      height: 1.75rem;
+      padding: 0.25rem 0;
+    }
+
+    &-wltp {
+      padding: 0 0.5rem;
+    }
+  }
+}

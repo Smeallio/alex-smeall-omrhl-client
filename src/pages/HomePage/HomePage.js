@@ -1,7 +1,8 @@
 import Header from "../../components/Header/Header";
 import Nav from "../../components/Nav/Nav";
 import Hero from "../../components/Hero/Hero";
-import ScoreBar from "../../components/ScoreBar/ScoreBar"
+import ScoreBar from "../../components/ScoreBar/ScoreBar";
+import Standings from "../../components/Standings/Standings";
 import "./HomePage.scss";
 
 const HomePage = () => {
@@ -12,6 +13,7 @@ const HomePage = () => {
       <main className="main">
       <Hero />
       <ScoreBar />
+      <Standings />
       </main>
     </>
   );
