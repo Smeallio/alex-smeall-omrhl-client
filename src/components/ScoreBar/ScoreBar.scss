@@ -1,0 +1,73 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.scorebar {
+  @include flexbox(center);
+  height: 7.5rem;
+  background-color: $omr-darkblue;
+
+  &__button {
+    background-color: $omr-darkblue;
+    border: none;
+
+    &-img {
+        height: 1.5rem;
+    }
+
+    &-left {
+        margin-left: 0.5rem;
+    }
+
+    &-right {
+        margin-right: 0.5rem;
+    }
+  }
+
+  &__container {
+    @include flexbox(center);
+    overflow: scroll;
+    scroll-behavior: smooth;
+    transition: scroll 0.3s ease-in-out;
+    padding-left: 2rem;
+  }
+
+  &__box {
+    background-color: $white;
+    height: 5.5rem;
+    min-width: 9rem;
+    margin: 1rem 0.75rem;
+    border-radius: 5px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.25), 0 3px 6px rgba(0,0,0,0.35);
+
+    &-header {
+      @include flexbox(center);
+      background-color: $omr-red;
+      height: 1.5rem;
+      padding: 0.25rem;
+      text-align: center;
+      border-radius: 5px 5px 0 0;
+
+      &-text {
+        margin: 0;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        color: $white;
+      }
+    }
+
+    &-body {
+        @include flexbox(center);
+        height: 3.5rem;
+
+        &-img {
+            height: 2rem;
+        }
+
+        &-text {
+            font-size: 0.8125rem;
+            font-weight: 500;
+            margin: 0.5rem;
+        }
+    }
+  }
+}

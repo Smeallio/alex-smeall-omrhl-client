@@ -1,11 +1,23 @@
 @use "../../styles/variables" as *;
 @use "../../styles/mixins" as *;
 
-.main {
-    
+.hero {
+    @include flexbox(flex-end, flex-end);
+    height: 50vh;
+    background: url(../../assets/images/games/Odd-Man-Rush-Hockey-League-Action.jpg)
+      no-repeat center/cover;
 
-    &__hero {
-        height: 50vh;
-        background: url(../../assets/images/games/Odd-Man-Rush-Hockey-League-Action.jpg) no-repeat center/cover;
-    }
+  &__text {
+    margin: 1.5rem;
+    max-width: 20rem;
+  }
+
+  &__h1 {
+    font-size: 1.5rem;
+    padding: 1.5rem;
+    background-color: rgba(255, 255, 255, 0.75);
+    border-radius: 5px;
+    margin: 0;
+    text-align: right;
+  }
 }

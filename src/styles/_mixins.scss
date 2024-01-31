@@ -7,8 +7,8 @@
   $display: flex
 ) {
   justify-content: $justify-content;
-  flex-direction: $direction;
   align-items: $align-items;
+  flex-direction: $direction;
   flex-wrap: $wrap;
   gap: $gap;
   display: $display;
