@@ -24,14 +24,16 @@
   }
 
   &__container {
-    @include flexbox(center);
+    @include flexbox;
     overflow: scroll;
-    scroll-behavior: smooth;
-    transition: scroll 0.3s ease-in-out;
-    padding-left: 2rem;
+    scroll-snap-type: x mandatory;
+    white-space: nowrap;
+    scrollbar-width: none;
   }
 
   &__box {
+    flex: 0 0 auto;
+    scroll-snap-align: center;
     background-color: $white;
     height: 5.5rem;
     min-width: 9rem;
