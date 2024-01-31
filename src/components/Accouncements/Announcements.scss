@@ -1,0 +1,38 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.announcements {
+  margin: 1.5rem 0.875rem 0.75rem;
+  max-width: 100%;
+
+  &__title {
+    @include tableHeader(1.25rem);
+  }
+
+  &__box {
+    @include flexbox(space-between, flex-start, row, wrap);
+    font-size: 0.875rem;
+    padding: 1rem 0;
+    border-bottom: 2px solid $omr-grey;
+
+    &:last-of-type {
+        border-bottom: none;
+    }
+
+    &-title {
+      width: 70%;
+      font-weight: 600;
+    }
+
+    &-date {
+      width: 30%;
+      font-weight: 600;
+      text-align: right;
+    }
+
+    &-body {
+      width: 100%;
+      padding-top: 0.75rem;
+    }
+  }
+}

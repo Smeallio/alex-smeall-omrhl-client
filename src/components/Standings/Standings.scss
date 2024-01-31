@@ -11,19 +11,15 @@
     border-collapse: collapse;
 
     &-title {
-      background-color: $omr-red;
-      height: 1.5rem;
-      padding: 0.25rem 0;
-      text-align: center;
-      border-radius: 5px 5px 0 0;
-      margin: 0;
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: $white;
+      @include tableHeader(1.25rem);
     }
 
     &-headers th {
       padding: 0.5rem 0;
+    }
+
+    &-row {
+      font-size: 0.875rem;
     }
 
     &-row:nth-of-type(odd) {
@@ -36,8 +32,7 @@
     }
 
     &-name {
-        padding: 0 1rem;
-        font-size: 0.875rem;
+      padding: 0 1rem;
     }
 
     &-img {
@@ -47,6 +42,7 @@
 
     &-wltp {
       padding: 0 0.5rem;
+      text-align: center;
     }
   }
 }

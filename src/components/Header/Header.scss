@@ -15,8 +15,8 @@
   &__teams {
     @include flexbox(space-between);
     padding: 1rem;
-    box-shadow: 0 20px 10px -15px rgba(0, 0, 0, 0.5) inset,
-      0 -20px 10px -15px rgba(0, 0, 0, 0.5) inset;
+    box-shadow: 0 20px 10px -15px rgba(91, 177, 250, 0.5) inset,
+      0 -20px 10px -15px rgba(91, 177, 250, 0.5) inset;
 
     &-logo {
       height: 15vw;

@@ -29,7 +29,7 @@ const Standings = () => {
         <caption className="standings__table-title">Standings</caption>
         <thead className="standings__table-headers">
           <tr>
-            <th colspan="2">Team</th>
+            <th colSpan="2">Team</th>
             <th>W</th>
             <th>L</th>
             <th>T</th>

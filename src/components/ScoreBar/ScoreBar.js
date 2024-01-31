@@ -5,19 +5,37 @@ import lepLogo from "../../assets/images/logos/Leprechauns-vector.png";
 import mooseLogo from "../../assets/images/logos/Moose-vector.png";
 import chevLeft from "../../assets/images/icons/chevron-left-icon.png";
 import chevRight from "../../assets/images/icons/chevron-right-icon.png";
+import { scoreSked } from "../../utils/scoreSked";
 import "./ScoreBar.scss";
 
 const ScoreBar = () => {
-    const sliderRef = useRef(null);
-    const scrollAmount = 100;
+  const sliderRef = useRef(null);
+  const scrollAmount = 100;
+
+  const getImageByTeamName = (teamName) => {
+    switch (teamName) {
+      case "Fogtown Leprechauns":
+        return lepLogo;
+      case "Duck Island Saints":
+        return ducksLogo;
+      case "Mighty Moose":
+        return mooseLogo;
+      case "Kraken Beers":
+        return krakenLogo;
+      default:
+        return null;
+    }
+  };
+
+  console.log(scoreSked);
 
   return (
     <article className="scorebar" id="scorebar">
       <button
         className="scorebar__button scorebar__button-left"
         onClick={() => {
-            const container = sliderRef.current;
-            container.scrollLeft -= scrollAmount;
+          const container = sliderRef.current;
+          container.scrollLeft -= scrollAmount;
         }}
       >
         <img
@@ -27,84 +45,36 @@ const ScoreBar = () => {
         />
       </button>
       <section className="scorebar__container" ref={sliderRef}>
-        <section className="scorebar__box">
-          <section className="scorebar__box-header">
-            <p className="scorebar__box-header-text">Tues, Feb 6 @ 9pm</p>
+        {scoreSked.map((game) => (
+          <section className="scorebar__box" key={game.id}>
+            <section className="scorebar__box-header">
+              <p className="scorebar__box-header-text">{`${game.date} @ ${game.time}`}</p>
+            </section>
+            <section className="scorebar__box-body">
+              <img
+                className="scorebar__box-body-img"
+                src={getImageByTeamName(game.team1.name)}
+                alt="Fogtown Leprechauns"
+              />
+              {game.complete ? (
+                <p className="scorebar__box-body-text">{`${game.team1.score} - ${game.team2.score}`}</p>
+              ) : (
+                <p className="scorebar__box-body-text">vs</p>
+              )}
+              <img
+                className="scorebar__box-body-img"
+                src={getImageByTeamName(game.team2.name)}
+                alt="Fogtown Leprechauns"
+              />
+            </section>
           </section>
-          <section className="scorebar__box-body">
-            <img
-              className="scorebar__box-body-img"
-              src={lepLogo}
-              alt="Fogtown Leprechauns"
-            />
-            <p className="scorebar__box-body-text">6 - 3</p>
-            <img
-              className="scorebar__box-body-img"
-              src={mooseLogo}
-              alt="Mighty Moose"
-            />
-          </section>
-        </section>
-        <section className="scorebar__box">
-          <section className="scorebar__box-header">
-            <p className="scorebar__box-header-text">Tues, Feb 6 @ 10pm</p>
-          </section>
-          <section className="scorebar__box-body">
-            <img
-              className="scorebar__box-body-img"
-              src={ducksLogo}
-              alt="Duck Island Saints"
-            />
-            <p className="scorebar__box-body-text">4 - 5</p>
-            <img
-              className="scorebar__box-body-img"
-              src={krakenLogo}
-              alt="Kraken Beers"
-            />
-          </section>
-        </section>
-        <section className="scorebar__box">
-          <section className="scorebar__box-header">
-            <p className="scorebar__box-header-text">Tues, Feb 6 @ 11pm</p>
-          </section>
-          <section className="scorebar__box-body">
-            <img
-              className="scorebar__box-body-img"
-              src={lepLogo}
-              alt="Fogtown Leprechauns"
-            />
-            <p className="scorebar__box-body-text">6 - 3</p>
-            <img
-              className="scorebar__box-body-img"
-              src={mooseLogo}
-              alt="Mighty Moose"
-            />
-          </section>
-        </section>
-        <section className="scorebar__box">
-          <section className="scorebar__box-header">
-            <p className="scorebar__box-header-text">Tues, Feb 6 @ 12pm</p>
-          </section>
-          <section className="scorebar__box-body">
-            <img
-              className="scorebar__box-body-img"
-              src={ducksLogo}
-              alt="Duck Island Saints"
-            />
-            <p className="scorebar__box-body-text">4 - 5</p>
-            <img
-              className="scorebar__box-body-img"
-              src={krakenLogo}
-              alt="Kraken Beers"
-            />
-          </section>
-        </section>
+        ))}
       </section>
       <button
         className="scorebar__button scorebar__button-right"
         onClick={() => {
-            const container = sliderRef.current;
-            container.scrollLeft += scrollAmount;
+          const container = sliderRef.current;
+          container.scrollLeft += scrollAmount;
         }}
       >
         <img
