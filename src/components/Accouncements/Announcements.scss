@@ -5,6 +5,10 @@
   margin: 1.5rem 0.875rem 0.75rem;
   max-width: 100%;
 
+  @include tablet {
+    width: 55%;
+  }
+
   &__title {
     @include tableHeader(1.25rem);
   }
@@ -20,12 +24,12 @@
     }
 
     &-title {
-      width: 70%;
+      width: 60%;
       font-weight: 600;
     }
 
     &-date {
-      width: 30%;
+      width: 35%;
       font-weight: 600;
       text-align: right;
     }

@@ -2,24 +2,49 @@
 @use "../../styles/mixins" as *;
 
 .header {
-  &__league {
+  @include flexbox(center, center, column);
+
+  @include tablet {
+    @include flexbox (space-between, center, row);
+    background-color: $omr-darkblue;
+  }
+
+  &__league-logo {
     @include flexbox(center);
     height: 7.5rem;
+    width: 100%;
     background-color: $omr-darkblue;
 
-    &-logo {
-      height: 6rem;
+    &-img {
+    height: 6rem;
+    }
+
+    @include tablet {
+        @include flexbox(flex-start);
+        margin-left: 3rem;
     }
   }
 
-  &__teams {
-    @include flexbox(space-between);
-    padding: 1rem;
-    box-shadow: 0 20px 10px -15px rgba(91, 177, 250, 0.5) inset,
-      0 -20px 10px -15px rgba(91, 177, 250, 0.5) inset;
+  &__team-logos {
+    @include flexbox(space-around);
+    padding: 1rem 0;
+    width: 100%;
+    box-shadow: 0 20px 10px -15px rgba(0,0,0,0.5) inset,
+      0 -20px 10px -15px rgba(0,0,0,0.5) inset;
 
-    &-logo {
-      height: 15vw;
-    }
+      &-img {
+        height: 15vw;
+      }
+
+      @include tablet {
+        background-color: white;
+        border-radius: 5px;
+        margin-right: 3rem;
+        box-shadow: 0 0 12px 0 rgba(0,0,0,0.65) inset;
+
+        &-img {
+            height: 3.5rem;
+        }
+      }
   }
 }

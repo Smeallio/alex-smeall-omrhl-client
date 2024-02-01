@@ -1,0 +1,9 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.main__stand-announce {
+    @include tablet {
+        @include flexbox(flex-start, flex-start, row-reverse);
+        margin: 0 3rem;
+    }
+}

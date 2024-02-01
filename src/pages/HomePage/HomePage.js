@@ -11,12 +11,14 @@ const HomePage = () => {
   return (
     <>
       <Header />
-      {/* <Nav /> */}
+      <Nav />
       <main className="main">
-      <Hero />
-      <ScoreBar />
-      <Standings />
-      <Announcements />
+        <Hero />
+        <ScoreBar />
+        <section className="main__stand-announce">
+          <Standings />
+          <Announcements />
+        </section>
       </main>
       <Footer />
     </>
