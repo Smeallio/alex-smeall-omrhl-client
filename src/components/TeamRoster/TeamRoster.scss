@@ -1,0 +1,44 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.roster {
+  margin: 0.75rem 0.875rem 0;
+  max-width: 100%;
+  overflow-x: auto;
+
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2.5rem;
+
+    &-title {
+      @include tableHeader(1.25rem);
+    }
+
+    &-headers th {
+        padding: 0.5rem 0;
+      }
+  
+      &-row {
+        font-size: 0.875rem;
+        height: 1.5rem;
+      }
+  
+      &-row:nth-of-type(odd) {
+        background-color: $omr-grey;
+      }
+
+      &-name {
+        padding-left: 0.75rem;
+      }
+
+      &-stat {
+        text-align: center;
+        padding: 0 0.25rem;
+
+        &:last-of-type {
+            padding-right: 0.5rem;
+        }
+      }
+  }
+}
