@@ -34,4 +34,10 @@
   @include tablet {
     margin: 0 3rem;
   }
+
+  @include desktop {
+    margin: 0 8rem;
+    height: 30rem;
+    max-width: 1280px;
+  }
 }

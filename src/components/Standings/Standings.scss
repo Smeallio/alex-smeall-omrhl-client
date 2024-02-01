@@ -6,10 +6,6 @@
   max-width: 100%;
   overflow-x: auto;
 
-  @include tablet {
-    width: 45%;
-  }
-
   &__table {
     width: 100%;
     border-collapse: collapse;
@@ -48,5 +44,13 @@
       padding: 0 0.5rem;
       text-align: center;
     }
+  }
+
+  @include tablet {
+    width: 45%;
+  }
+
+  @include desktop {
+    width: 35%;
   }
 }

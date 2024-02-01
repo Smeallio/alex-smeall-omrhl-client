@@ -6,4 +6,9 @@
         @include flexbox(flex-start, flex-start, row-reverse);
         margin: 0 3rem;
     }
+
+    @include desktop {
+        margin: 0 8rem;
+        max-width: 1280px;
+    }
 }

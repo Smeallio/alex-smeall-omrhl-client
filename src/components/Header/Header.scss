@@ -2,49 +2,56 @@
 @use "../../styles/mixins" as *;
 
 .header {
-  @include flexbox(center, center, column);
+  background-color: $omr-darkblue;
 
-  @include tablet {
-    @include flexbox (space-between, center, row);
-    background-color: $omr-darkblue;
+  &__container {
+    @include flexbox(center, center, column);
+
+    @include tablet {
+      @include flexbox(space-between, center, row);
+      margin: 0 3rem;
+    }
+
+    @include desktop {
+      margin: 0 8rem;
+      max-width: 1280px;
+    }
   }
 
   &__league-logo {
     @include flexbox(center);
     height: 7.5rem;
     width: 100%;
-    background-color: $omr-darkblue;
 
     &-img {
-    height: 6rem;
+      height: 6rem;
     }
 
     @include tablet {
-        @include flexbox(flex-start);
-        margin-left: 3rem;
+      @include flexbox(flex-start);
     }
   }
 
   &__team-logos {
     @include flexbox(space-around);
+    background-color: white;
     padding: 1rem 0;
     width: 100%;
-    box-shadow: 0 20px 10px -15px rgba(0,0,0,0.5) inset,
-      0 -20px 10px -15px rgba(0,0,0,0.5) inset;
+    box-shadow: 0 20px 10px -15px rgba(0, 0, 0, 0.5) inset,
+      0 -20px 10px -15px rgba(0, 0, 0, 0.5) inset;
+
+    &-img {
+      height: 15vw;
+    }
+
+    @include tablet {
+      border-radius: 5px;
+      box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.65) inset;
+      max-width: 25rem;
 
       &-img {
-        height: 15vw;
+        height: 3.5rem;
       }
-
-      @include tablet {
-        background-color: white;
-        border-radius: 5px;
-        margin-right: 3rem;
-        box-shadow: 0 0 12px 0 rgba(0,0,0,0.65) inset;
-
-        &-img {
-            height: 3.5rem;
-        }
-      }
+    }
   }
 }

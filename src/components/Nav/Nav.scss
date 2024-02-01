@@ -16,6 +16,14 @@
 
   &__link {
     padding: 0 1.5rem;
+
+    @include tablet {
+      padding: 0 3.5rem;
+    }
+
+    @include desktop {
+      padding: 0 5.5rem;
+    }
   }
 
   &__link:nth-of-type(2) {
