@@ -2,7 +2,7 @@
 @use "../../styles/mixins" as *;
 
 .schedule {
-  margin: 0 0.875rem 1.5rem;
+  padding: 0 0.875rem 1.5rem;
   max-width: 100%;
   overflow-x: auto;
 
@@ -16,29 +16,34 @@
     }
 
     &-headers th {
-        padding: 0.5rem 0;
-      }
-  
-      &-row {
-        font-size: 0.875rem;
-        height: 1.5rem;
-      }
-  
-      &-row:nth-of-type(odd) {
-        background-color: $omr-grey;
-      }
+      padding: 0.5rem 0;
+    }
 
-      &-name {
-        padding-left: 0.75rem;
-      }
+    &-row {
+      font-size: 0.875rem;
+      height: 1.5rem;
+    }
 
-      &-stat {
-        text-align: center;
-        padding: 0 0.25rem;
+    &-row:nth-of-type(odd) {
+      background-color: $omr-grey;
+    }
 
-        &:last-of-type {
-            padding-right: 0.5rem;
-        }
+    &-name {
+      padding-left: 0.75rem;
+    }
+
+    &-stat {
+      text-align: center;
+      padding: 0 0.25rem;
+
+      &:last-of-type {
+        padding-right: 0.5rem;
       }
+    }
+  }
+
+  @include desktop {
+    width: 45%;
+    padding: 0.75rem 2.25rem 0.75rem 0.75rem;
   }
 }

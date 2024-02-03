@@ -1,0 +1,42 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.admin-main {
+  background-color: $omr-grey;
+
+  @include tablet {
+    padding: 0 5rem;
+  }
+}
+
+.managePlayers {
+  max-width: 100%;
+  overflow-x: auto;
+  margin-top: 1rem;
+
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2.5rem;
+
+    &-headers {
+      height: 2rem;
+    }
+
+    &-title {
+      @include tableHeader(1.25rem);
+    }
+
+    &-row {
+      border-top: 1px solid $black;
+      height: 2rem;
+    }
+
+    &-box {
+      text-align: center;
+      &-button {
+        @include button;
+      }
+    }
+  }
+}

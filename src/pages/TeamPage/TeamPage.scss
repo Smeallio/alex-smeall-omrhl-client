@@ -1,0 +1,10 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.team-main {
+  @include desktop {
+    &__ros-sked {
+      @include flexbox(flex-start, flex-start);
+    }
+  }
+}

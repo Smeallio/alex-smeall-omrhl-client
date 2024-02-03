@@ -1,14 +1,21 @@
 @use "../../styles/variables" as *;
 @use "../../styles/mixins" as *;
 
-.main__stand-announce {
+.home-main {
+  &__stand-announce {
     @include tablet {
-        @include flexbox(flex-start, flex-start, row-reverse);
-        margin: 0 3rem;
+      @include flexbox(center, flex-start, row-reverse);
+      padding: 0 3rem;
     }
 
     @include desktop {
-        margin: 0 8rem;
-        max-width: 1280px;
+      margin: 0 auto;
+      width: 90%;
+      max-width: 1280px;
     }
+  }
+
+  & article {
+    margin: 0 auto;
+  }
 }

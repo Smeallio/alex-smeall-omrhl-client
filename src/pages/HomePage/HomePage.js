@@ -12,10 +12,10 @@ const HomePage = () => {
     <>
       <Header />
       <Nav />
-      <main className="main">
+      <main className="home-main">
         <Hero />
         <ScoreBar />
-        <section className="main__stand-announce">
+        <section className="home-main__stand-announce">
           <Standings />
           <Announcements />
         </section>

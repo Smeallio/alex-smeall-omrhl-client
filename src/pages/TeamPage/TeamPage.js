@@ -6,15 +6,18 @@ import TeamSked from "../../components/TeamSked/TeamSked";
 import Footer from "../../components/Footer/Footer";
 import "./TeamPage.scss";
 
-
 const TeamPage = () => {
   return (
     <>
       <Header />
       <Nav />
-      <TeamHeader />
-      <TeamRoster />
-      <TeamSked />
+      <main className="team-main">
+        <TeamHeader />
+        <section className="team-main__ros-sked">
+          <TeamRoster />
+          <TeamSked />
+        </section>
+      </main>
       <Footer />
     </>
   );
