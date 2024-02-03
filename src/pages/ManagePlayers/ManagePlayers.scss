@@ -3,28 +3,90 @@
 
 .admin-main {
   background-color: $omr-grey;
+  padding: 0 1rem 2rem;
 
   @include tablet {
-    padding: 0 5rem;
+    padding: 0 5rem 2rem;
   }
 }
 
 .managePlayers {
   max-width: 100%;
-  overflow-x: auto;
-  margin-top: 1rem;
+  overflow: hidden;
+
+  &__add {
+    @include flexbox(flex-start, center, row, wrap);
+
+    &-name {
+      @include flexbox;
+      width: 100%;
+      margin-bottom: 0.75rem;
+
+      @include tablet {
+        width: 40%;
+      }
+
+      &-input {
+        @include input;
+        margin-left: 1rem;
+        width: 100%;
+      }
+    }
+    &-number {
+      width: 50%;
+
+      &-input {
+        @include input;
+        margin-left: 1rem;
+        width: 40%;
+      }
+    }
+    &-position {
+        width: 50%;
+        text-align: right;
+
+        &-input {
+          @include input;
+          margin-left: 1rem;
+          width: 40%;
+        }
+      }
+
+      &-button {
+        @include button;
+        margin: 0.75rem auto;
+        width: 80%;
+      }
+  }
+
+  &__edit {
+    max-height: 500px;
+    position: relative;
+    margin-top: 1.5rem;
+    overflow-x: auto;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
 
   &__table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 2.5rem;
-
-    &-headers {
-      height: 2rem;
-    }
+    border-spacing: 0;
+    z-index: 1;
 
     &-title {
       @include tableHeader(1.25rem);
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+
+    &-headers {
+      background-color: $white;
+      height: 2rem;
+      position: sticky;
+      top: 2rem;
+      z-index: 2;
     }
 
     &-row {
@@ -34,8 +96,14 @@
 
     &-box {
       text-align: center;
-      &-button {
-        @include button;
+      padding: 0.25rem;
+
+      &-edit {
+        color: $omr-darkblue;
+      }
+
+      &-delete {
+        color: $omr-red;
       }
     }
   }

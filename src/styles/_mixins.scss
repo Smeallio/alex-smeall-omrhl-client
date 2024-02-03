@@ -38,10 +38,14 @@
   color: $white;
 }
 
-@mixin button {
-  background-color: $omr-lightblue;
+@mixin button($background: $omr-lightblue) {
+  background-color: $background;
   color: $white;
   border: none;
   padding: 0.375rem 0.75rem;
+}
 
+@mixin input {
+    border: none;
+    height: 1.5rem;
 }

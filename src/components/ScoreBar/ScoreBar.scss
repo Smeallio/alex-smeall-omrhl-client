@@ -30,13 +30,20 @@
     height: 6rem;
     padding: 0 0.5rem; 
 
+    @include tablet {
+        @include flexbox(space-between, center, row, nowrap, 4vw);
+        padding: 0;
+    }
+
     @include desktop {
-        @include flexbox(space-between, center, row, nowrap, 3.5rem);
+        @include flexbox(space-between, center, row, nowrap, 7.5vw);
+        padding: 0;
+        height: 6.75rem;
     }
   }
 
   &__box {
-    flex: 0 0 auto;
+    flex: 1 0 auto;
     scroll-snap-align: center;
     background-color: $white;
     height: 100%;
@@ -60,6 +67,10 @@
       @include flexbox(center);
       @include tableHeader;
 
+      @include desktop {
+        font-size: 1rem;
+      }
+
       &-text {
         margin: 0;
       }
@@ -71,13 +82,44 @@
 
       &-img {
         height: 2rem;
+
+        @include desktop {
+            height: 2.25rem;
+        }
       }
 
       &-text {
         font-size: 1rem;
         font-weight: 500;
         margin: 0.5rem;
+
+        @include desktop {
+            font-size: 1.25rem;
+            margin: 0.75rem;
+        }
+      }
+
+      @include desktop {
+        height: 4.75rem;
       }
     }
+
+    @include tablet {
+        margin: auto;
+        flex-grow: 1;
+    }
+
+    @include desktop {
+        min-width: 11rem;
+    }
+  }
+
+  @include tablet {
+    @include flexbox(center, center, row, nowrap, normal);
+    width: 100%;
+  }
+
+  @include desktop{
+    height: 8.5rem;
   }
 }

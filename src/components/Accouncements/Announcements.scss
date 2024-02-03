@@ -2,7 +2,7 @@
 @use "../../styles/mixins" as *;
 
 .announcements {
-  padding: 1.5rem 0.875rem 0.75rem;
+  padding: 0 0.875rem 0.75rem;
   max-width: 100%;
 
   &__title {
@@ -12,7 +12,7 @@
   &__box {
     @include flexbox(space-between, flex-start, row, wrap);
     font-size: 0.875rem;
-    padding: 1rem 0;
+    padding: 1rem 0.5rem;
     border-bottom: 2px solid $omr-grey;
 
     &:last-of-type {
@@ -37,6 +37,7 @@
   }
 
   @include tablet {
+    padding: 1.5rem 0.875rem 0.75rem 0;
     width: 55%;
   }
 
