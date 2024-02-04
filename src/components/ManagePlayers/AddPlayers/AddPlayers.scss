@@ -1,0 +1,91 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
+.addPlayers {
+  &__form {
+    @include flexbox(space-between, center, row, wrap);
+    max-width: 750px;
+
+    &-name {
+      @include flexbox;
+      width: 100%;
+      margin-bottom: 0.75rem;
+
+      @include tablet {
+        width: 32.5%;
+        margin-bottom: 0;
+      }
+
+      @include desktop {
+        width: 37.5%;
+      }
+
+      &-input {
+        @include input;
+        margin-left: 0.75rem;
+        width: 100%;
+
+        @include tablet {
+          margin-right: 0.75rem;
+        }
+      }
+    }
+    &-number {
+      width: 50%;
+
+      @include tablet {
+        width: 22.5%;
+        text-align: left;
+      }
+
+      &-input {
+        @include input;
+        margin-left: 0.75rem;
+        width: 40%;
+
+        @include tablet {
+          margin-right: 0.75rem;
+          width: 30%;
+        }
+
+        @include desktop {
+            width: 40%;
+        }
+      }
+    }
+    &-position {
+      width: 45%;
+
+      @include tablet {
+        width: 20%;
+        text-align: left;
+      }
+
+      &-input {
+        @include input;
+        margin-left: 0.75rem;
+        width: 30%;
+
+        @include desktop {
+            width: 40%;
+        }
+      }
+    }
+
+    &-button {
+      @include button;
+      margin: 0.75rem auto;
+      width: 90%;
+      max-width: 10rem;
+
+      @include tablet {
+        width: 20%;
+        margin: 0 0 0 1rem;
+      }
+
+      @include desktop {
+        width: 15%;
+      }
+    }
+  }
+}

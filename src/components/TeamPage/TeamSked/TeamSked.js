@@ -1,4 +1,4 @@
-import { scoreSked } from "../../utils/scoreSked";
+import { scoreSked } from "../../../utils/scoreSked";
 import { useParams } from "react-router-dom";
 import "./TeamSked.scss";
 

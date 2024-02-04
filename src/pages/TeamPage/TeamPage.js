@@ -1,9 +1,9 @@
-import Header from "../../components/Header/Header";
-import Nav from "../../components/Nav/Nav";
-import TeamHeader from "../../components/TeamHeader/TeamHeader";
-import TeamRoster from "../../components/TeamRoster/TeamRoster";
-import TeamSked from "../../components/TeamSked/TeamSked";
-import Footer from "../../components/Footer/Footer";
+import Header from "../../components/Globals/Header/Header";
+import Nav from "../../components/Globals/Nav/Nav";
+import TeamHeader from "../../components/TeamPage/TeamHeader/TeamHeader";
+import TeamRoster from "../../components/TeamPage/TeamRoster/TeamRoster";
+import TeamSked from "../../components/TeamPage/TeamSked/TeamSked";
+import Footer from "../../components/Globals/Footer/Footer";
 import "./TeamPage.scss";
 
 const TeamPage = () => {

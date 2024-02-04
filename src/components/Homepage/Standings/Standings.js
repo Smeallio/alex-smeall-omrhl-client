@@ -1,8 +1,8 @@
-import saintsLogo from "../../assets/images/logos/Duck-Island-Saints-vector.png";
-import krakenLogo from "../../assets/images/logos/Kraken-Beers-vector.png";
-import lepLogo from "../../assets/images/logos/Leprechauns-vector.png";
-import mooseLogo from "../../assets/images/logos/Moose-vector.png";
-import { teamData } from "../../utils/teams.js";
+import saintsLogo from "../../../assets/images/logos/Duck-Island-Saints-vector.png";
+import krakenLogo from "../../../assets/images/logos/Kraken-Beers-vector.png";
+import lepLogo from "../../../assets/images/logos/Leprechauns-vector.png";
+import mooseLogo from "../../../assets/images/logos/Moose-vector.png";
+import { teamData } from "../../../utils/teams.js";
 import "./Standings.scss";
 
 const Standings = () => {

@@ -1,4 +1,4 @@
-import { announcements } from "../../utils/announcements";
+import { announcements } from "../../../utils/announcements";
 import "./Announcements.scss";
 
 const Announcements = () => {

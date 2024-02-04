@@ -1,4 +1,4 @@
-import { players } from "../../utils/players";
+import { players } from "../../../utils/players";
 import { useParams } from "react-router-dom";
 import "./TeamRoster.scss";
 

@@ -6,105 +6,15 @@
   padding: 0 1rem 2rem;
 
   @include tablet {
-    padding: 0 5rem 2rem;
+    padding: 0 3rem 2rem;
+  }
+
+  @include desktop {
+    padding: 0 8rem 2rem;
+  }
+
+  & .teamHeader {
+    padding: 1rem 0 0;
   }
 }
 
-.managePlayers {
-  max-width: 100%;
-  overflow: hidden;
-
-  &__add {
-    @include flexbox(flex-start, center, row, wrap);
-
-    &-name {
-      @include flexbox;
-      width: 100%;
-      margin-bottom: 0.75rem;
-
-      @include tablet {
-        width: 40%;
-      }
-
-      &-input {
-        @include input;
-        margin-left: 1rem;
-        width: 100%;
-      }
-    }
-    &-number {
-      width: 50%;
-
-      &-input {
-        @include input;
-        margin-left: 1rem;
-        width: 40%;
-      }
-    }
-    &-position {
-        width: 50%;
-        text-align: right;
-
-        &-input {
-          @include input;
-          margin-left: 1rem;
-          width: 40%;
-        }
-      }
-
-      &-button {
-        @include button;
-        margin: 0.75rem auto;
-        width: 80%;
-      }
-  }
-
-  &__edit {
-    max-height: 500px;
-    position: relative;
-    margin-top: 1.5rem;
-    overflow-x: auto;
-    overflow-y: auto;
-    scrollbar-width: none;
-  }
-
-  &__table {
-    width: 100%;
-    border-collapse: collapse;
-    border-spacing: 0;
-    z-index: 1;
-
-    &-title {
-      @include tableHeader(1.25rem);
-      position: sticky;
-      top: 0;
-      z-index: 2;
-    }
-
-    &-headers {
-      background-color: $white;
-      height: 2rem;
-      position: sticky;
-      top: 2rem;
-      z-index: 2;
-    }
-
-    &-row {
-      border-top: 1px solid $black;
-      height: 2rem;
-    }
-
-    &-box {
-      text-align: center;
-      padding: 0.25rem;
-
-      &-edit {
-        color: $omr-darkblue;
-      }
-
-      &-delete {
-        color: $omr-red;
-      }
-    }
-  }
-}

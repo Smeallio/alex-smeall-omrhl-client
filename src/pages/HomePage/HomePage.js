@@ -1,10 +1,10 @@
-import Header from "../../components/Header/Header";
-import Nav from "../../components/Nav/Nav";
-import Hero from "../../components/Hero/Hero";
-import ScoreBar from "../../components/ScoreBar/ScoreBar";
-import Standings from "../../components/Standings/Standings";
-import Announcements from "../../components/Accouncements/Announcements";
-import Footer from "../../components/Footer/Footer";
+import Header from "../../components/Globals/Header/Header";
+import Nav from "../../components/Globals/Nav/Nav";
+import Hero from "../../components/Homepage/Hero/Hero";
+import ScoreBar from "../../components/Homepage/ScoreBar/ScoreBar";
+import Standings from "../../components/Homepage/Standings/Standings";
+import Announcements from "../../components/Homepage/Accouncements/Announcements";
+import Footer from "../../components/Globals/Footer/Footer";
 import "./HomePage.scss";
 
 const HomePage = () => {

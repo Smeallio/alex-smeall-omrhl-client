@@ -1,11 +1,11 @@
 import { useRef } from "react";
-import saintsLogo from "../../assets/images/logos/Duck-Island-Saints-vector.png";
-import krakenLogo from "../../assets/images/logos/Kraken-Beers-vector.png";
-import lepLogo from "../../assets/images/logos/Leprechauns-vector.png";
-import mooseLogo from "../../assets/images/logos/Moose-vector.png";
-import chevLeft from "../../assets/images/icons/chevron-left-icon.png";
-import chevRight from "../../assets/images/icons/chevron-right-icon.png";
-import { scoreSked } from "../../utils/scoreSked";
+import saintsLogo from "../../../assets/images/logos/Duck-Island-Saints-vector.png";
+import krakenLogo from "../../../assets/images/logos/Kraken-Beers-vector.png";
+import lepLogo from "../../../assets/images/logos/Leprechauns-vector.png";
+import mooseLogo from "../../../assets/images/logos/Moose-vector.png";
+import chevLeft from "../../../assets/images/icons/chevron-left-icon.png";
+import chevRight from "../../../assets/images/icons/chevron-right-icon.png";
+import { scoreSked } from "../../../utils/scoreSked";
 import "./ScoreBar.scss";
 
 const ScoreBar = () => {

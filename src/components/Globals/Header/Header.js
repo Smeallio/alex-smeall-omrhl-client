@@ -1,12 +1,12 @@
-import omrLogo from "../../assets/images/logos/OMRHL-logo-vector.png";
-import saintsLogo from "../../assets/images/logos/Duck-Island-Saints-vector.png";
-import krakenLogo from "../../assets/images/logos/Kraken-Beers-vector.png";
-import lepLogo from "../../assets/images/logos/Leprechauns-vector.png";
-import mooseLogo from "../../assets/images/logos/Moose-vector.png";
-import saintsLogoGrey from "../../assets/images/logos/Duck-Island-Saints-vector-grey.png";
-import krakenLogoGrey from "../../assets/images/logos/Kraken-Beers-vector-grey.png";
-import lepLogoGrey from "../../assets/images/logos/Leprechauns-vector-grey.png";
-import mooseLogoGrey from "../../assets/images/logos/Moose-vector-grey.png";
+import omrLogo from "../../../assets/images/logos/OMRHL-logo-vector.png";
+import saintsLogo from "../../../assets/images/logos/Duck-Island-Saints-vector.png";
+import krakenLogo from "../../../assets/images/logos/Kraken-Beers-vector.png";
+import lepLogo from "../../../assets/images/logos/Leprechauns-vector.png";
+import mooseLogo from "../../../assets/images/logos/Moose-vector.png";
+import saintsLogoGrey from "../../../assets/images/logos/Duck-Island-Saints-vector-grey.png";
+import krakenLogoGrey from "../../../assets/images/logos/Kraken-Beers-vector-grey.png";
+import lepLogoGrey from "../../../assets/images/logos/Leprechauns-vector-grey.png";
+import mooseLogoGrey from "../../../assets/images/logos/Moose-vector-grey.png";
 import { Link, useParams } from "react-router-dom";
 import "./Header.scss";
 
