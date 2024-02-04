@@ -1,5 +1,6 @@
 import ConfirmModal from "../../Globals/ConfirmModal/ConfirmModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import axios from "axios";
 import { useState, useEffect, useRef } from "react";
@@ -9,6 +10,7 @@ import "./EditPlayers.scss";
 
 const EditPlayers = ({ players, fetchPlayers }) => {
   const [confirmDelete, setConfirmDelete] = useState(null);
+  const [editablePlayer, setEditablePlayer] = useState(0);
 
   const handleDeletePlayer = async (playerId) => {
     setConfirmDelete(playerId);
@@ -28,6 +30,27 @@ const EditPlayers = ({ players, fetchPlayers }) => {
     } finally {
       setConfirmDelete(null);
     }
+  };
+
+  const handleEditClick = (player) => {
+    console.log("Edit clicked: ", player);
+    setEditablePlayer({ ...player });
+  };
+
+  const cancelEdit = () => {
+    setEditablePlayer(0);
+  };
+
+  const confirmEditPlayer = () => {
+    // API CALL
+    setEditablePlayer(null);
+  };
+
+  const handleInputChange = (event) => {
+    setEditablePlayer((prevEditablePlayer) => ({
+      ...prevEditablePlayer,
+      [event.target.name]: event.target.value,
+    }));
   };
 
   return (
@@ -51,28 +74,77 @@ const EditPlayers = ({ players, fetchPlayers }) => {
           <tbody>
             {players.map((player) => (
               <tr className="editPlayers__table-row" key={player.id}>
-                <td className="editPlayers__table-box editPlayers__table-box-name">
-                  {player.name}
-                </td>
-                <td className="editPlayers__table-box editPlayers__table-box-number">
-                  {player.number}
-                </td>
-                <td className="editPlayers__table-box editPlayers__table-position">
-                  {player.position}
-                </td>
-                <td className="editPlayers__table-box editPlayers__table-box-edit">
-                  <FontAwesomeIcon
-                    className="editPlayers__table-box-edit-icon"
-                    icon={faPenToSquare}
-                  />
-                </td>
-                <td className="editPlayers__table-box editPlayers__table-box-delete">
-                  <FontAwesomeIcon
-                    className="editPlayers__table-box-delete-icon"
-                    icon={faTrashCan}
-                    onClick={() => handleDeletePlayer(player.id)}
-                  />
-                </td>
+                {editablePlayer.id === player.id ? (
+                  <>
+                    <td className="editPlayers__table-box editPlayers__table-name">
+                      <input
+                        type="text"
+                        name="name"
+                        value={editablePlayer.name}
+                        onChange={handleInputChange}
+                      />
+                    </td>
+                    <td className="editPlayers__table-box editPlayers__table-number">
+                      <input
+                        type="number"
+                        name="number"
+                        value={editablePlayer.number}
+                        onChange={handleInputChange}
+                      />
+                    </td>
+                    <td className="editPlayers__table-box editPlayers__table-position">
+                      <select
+                        name="position"
+                        value={editablePlayer.position}
+                        onChange={handleInputChange}
+                      >
+                        <option value="F">F</option>
+                        <option value="D">D</option>
+                        <option value="G">G</option>
+                      </select>
+                    </td>
+                    <td className="editPlayers__table-box editPlayers__table-box-check">
+                      <FontAwesomeIcon
+                        className="editPlayers__table-box-check-icon"
+                        icon={faCheck}
+                        onClick={confirmEditPlayer}
+                      />
+                      </td>
+                      <td className="editPlayers__table-box editPlayers__table-box-x">
+                      <FontAwesomeIcon
+                        className="editPlayers__table-box-x-icon"
+                        icon={faXmark}
+                        onClick={cancelEdit}
+                      />
+                    </td>
+                  </>
+                ) : (
+                  <>
+                    <td className="editPlayers__table-box editPlayers__table-box-name">
+                      {player.name}
+                    </td>
+                    <td className="editPlayers__table-box editPlayers__table-box-number">
+                      {player.number}
+                    </td>
+                    <td className="editPlayers__table-box editPlayers__table-position">
+                      {player.position}
+                    </td>
+                    <td className="editPlayers__table-box editPlayers__table-box-edit">
+                      <FontAwesomeIcon
+                        className="editPlayers__table-box-edit-icon"
+                        icon={faPenToSquare}
+                        onClick={() => handleEditClick(player)}
+                      />
+                    </td>
+                    <td className="editPlayers__table-box editPlayers__table-box-delete">
+                      <FontAwesomeIcon
+                        className="editPlayers__table-box-delete-icon"
+                        icon={faTrashCan}
+                        onClick={() => handleDeletePlayer(player.id)}
+                      />
+                    </td>
+                  </>
+                )}
               </tr>
             ))}
           </tbody>

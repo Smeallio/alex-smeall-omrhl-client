@@ -60,12 +60,39 @@
         }
 
         &-warning {
-            display: block;
-            color: $white;
-            background-color: $omr-red;
-            max-width: 6rem;
+          display: block;
+          color: $white;
+          background-color: $omr-red;
+          max-width: 6rem;
         }
       }
+
+      &-check {
+        color: $omr-darkblue;
+
+        &-icon {
+          cursor: pointer;
+          height: 1.25rem;
+        }
+      }
+
+      &-x {
+        color: $omr-red;
+
+        &-icon {
+          cursor: pointer;
+          height: 1.25rem;
+        }
+      }
+
+      & input,
+      select {
+        @include input;
+      }
+    }
+
+    &-number input {
+      width: 2rem;
     }
   }
 }

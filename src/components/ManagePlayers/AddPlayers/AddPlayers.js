@@ -3,33 +3,29 @@ import { useRef } from "react";
 import { postPlayer } from "../../../utils/api-utils";
 import "./AddPlayers.scss";
 
-const AddPlayers = ({teamId, fetchPlayers}) => {
-    const formRef = useRef();
+const AddPlayers = ({ teamId, fetchPlayers }) => {
+  const formRef = useRef();
 
-    console.log("AddPlayer team ID = " + teamId);
+  console.log("AddPlayer team ID = " + teamId);
 
-    const addPlayer = async (event) => {
-        event.preventDefault();
-        const player = {
-          name: formRef.current.name.value,
-          team_id: teamId,
-          position: formRef.current.position.value,
-          number: formRef.current.number.value,
-        };
-        try {
-          await axios.post(postPlayer(teamId), player).then(() => {
-            alert("New Player Added");
-          });
-    
-          fetchPlayers();
-    
-          formRef.current.name.value = "";
-          formRef.current.position.value = "F";
-          formRef.current.number.value = "";
-        } catch(err) {
-          console.log(err.message);
-        }
-      };
+  const addPlayer = async (event) => {
+    event.preventDefault();
+    const player = {
+      name: formRef.current.name.value,
+      team_id: teamId,
+      position: formRef.current.position.value,
+      number: formRef.current.number.value,
+    };
+    try {
+      await axios.post(postPlayer(teamId), player);
+      fetchPlayers();
+      formRef.current.name.value = "";
+      formRef.current.position.value = "F";
+      formRef.current.number.value = "";
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
 
   return (
     <article className="addPlayers">

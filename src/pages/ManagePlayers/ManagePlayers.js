@@ -15,7 +15,7 @@ const ManagePlayers = () => {
 
   const [players, setPlayers] = useState(null);
   const [teamId, setTeamId] = useState(null);
-  const [editablePlayer, setEditablePlayer] = useState(null);
+
 
   useEffect(() => {
     let numTeamId;
@@ -59,10 +59,6 @@ const ManagePlayers = () => {
   console.log(players);
   console.log(teamId);
   console.log(getPlayersByTeam(teamId));
-
-  const handleEditClick = (player) => {
-    setEditablePlayer({ ...player });
-  };
 
   if (players === null) {
     return <p>Loading...</p>;
