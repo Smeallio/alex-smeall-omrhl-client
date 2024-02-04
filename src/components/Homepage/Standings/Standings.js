@@ -6,7 +6,6 @@ import { teamData } from "../../../utils/teams.js";
 import "./Standings.scss";
 
 const Standings = () => {
-  console.log(teamData);
 
   const getImageByTeamName = (teamName) => {
     switch (teamName) {

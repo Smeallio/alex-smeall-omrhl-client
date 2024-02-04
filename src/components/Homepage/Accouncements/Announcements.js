@@ -8,8 +8,6 @@ const Announcements = () => {
     return dateB - dateA;
   });
 
-  console.log(sortedAnnouncements);
-
   return (
     <article className="announcements">
       <section className="announcements__title">Latest Announcements</section>

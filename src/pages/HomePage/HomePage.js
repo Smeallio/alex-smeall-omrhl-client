@@ -9,7 +9,7 @@ import "./HomePage.scss";
 
 const HomePage = () => {
   return (
-    <>
+    <section className="background">
       <Header />
       <Nav />
       <main className="home-main">
@@ -21,7 +21,7 @@ const HomePage = () => {
         </section>
       </main>
       <Footer />
-    </>
+    </section>
   );
 };
 

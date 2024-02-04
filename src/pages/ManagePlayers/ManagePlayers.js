@@ -61,7 +61,7 @@ const ManagePlayers = () => {
   }
 
   return (
-    <>
+    <section className="background">
       <Header />
       <Nav />
       <main className="admin-main">
@@ -70,7 +70,7 @@ const ManagePlayers = () => {
         <EditPlayers players={players} teamId={teamId} fetchPlayers={fetchPlayers} />
       </main>
       <Footer />
-    </>
+    </section>
   );
 };
 

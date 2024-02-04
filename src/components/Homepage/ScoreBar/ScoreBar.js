@@ -27,8 +27,6 @@ const ScoreBar = () => {
     }
   };
 
-  console.log(scoreSked);
-
   return (
     <article className="scorebar" id="scorebar">
       <button

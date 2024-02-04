@@ -2,6 +2,9 @@
 @use "../../../styles/mixins" as *;
 
 .footer {
-    height: 7.5rem;
-    background-color: $black;
+  height: 7.5rem;
+  background-color: $black;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }

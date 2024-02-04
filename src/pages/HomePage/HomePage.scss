@@ -1,7 +1,15 @@
 @use "../../styles/variables" as *;
 @use "../../styles/mixins" as *;
 
+.background {
+  height: 100%;
+  min-height: 100vh;
+  padding-bottom: 7.5rem;
+  position: relative;
+}
+
 .home-main {
+  background-color: $white;
   &__stand-announce {
     @include tablet {
       @include flexbox(center, flex-start, row-reverse);

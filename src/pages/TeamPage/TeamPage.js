@@ -8,7 +8,7 @@ import "./TeamPage.scss";
 
 const TeamPage = () => {
   return (
-    <>
+    <section className="background">
       <Header />
       <Nav />
       <main className="team-main">
@@ -19,7 +19,7 @@ const TeamPage = () => {
         </section>
       </main>
       <Footer />
-    </>
+    </section>
   );
 };
 
