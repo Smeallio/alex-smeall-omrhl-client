@@ -47,7 +47,7 @@ const ManagePlayers = () => {
         const response = await axios.get(getPlayersByTeam(teamId));
         setPlayers(response.data);
       }
-    } catch (err) {
+    } catch(err) {
       console.log(err.message);
     }
   };
@@ -75,7 +75,7 @@ const ManagePlayers = () => {
       <main className="admin-main">
         <TeamHeader />
         <AddPlayers teamId={teamId} fetchPlayers={fetchPlayers} />
-        <EditPlayers players={players} />
+        <EditPlayers players={players} fetchPlayers={fetchPlayers} />
       </main>
       <Footer />
     </>

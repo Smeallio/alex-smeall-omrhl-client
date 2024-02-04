@@ -26,7 +26,7 @@ const AddPlayers = ({teamId, fetchPlayers}) => {
           formRef.current.name.value = "";
           formRef.current.position.value = "F";
           formRef.current.number.value = "";
-        } catch (err) {
+        } catch(err) {
           console.log(err.message);
         }
       };

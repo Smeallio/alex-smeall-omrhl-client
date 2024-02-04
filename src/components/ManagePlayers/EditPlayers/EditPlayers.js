@@ -1,11 +1,35 @@
+import ConfirmModal from "../../Globals/ConfirmModal/ConfirmModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-regular-svg-icons";
+import axios from "axios";
 import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
-import { getPlayersByTeam, postPlayer } from "../../../utils/api-utils";
+import { deletePlayer } from "../../../utils/api-utils";
 import "./EditPlayers.scss";
 
-const EditPlayers = ({ players }) => {
+const EditPlayers = ({ players, fetchPlayers }) => {
+  const [confirmDelete, setConfirmDelete] = useState(null);
+
+  const handleDeletePlayer = async (playerId) => {
+    setConfirmDelete(playerId);
+  };
+
+  const cancelDelete = () => {
+    setConfirmDelete(null);
+  };
+
+  const confirmDeletePlayer = async () => {
+    try {
+      await axios.delete(deletePlayer(confirmDelete));
+      console.log("Played deleted successfully");
+      fetchPlayers();
+    } catch (err) {
+      console.log("Player delete failed ", err);
+    } finally {
+      setConfirmDelete(null);
+    }
+  };
+
   return (
     <article className="editPlayers">
       <h3 className="editPlayers__header">Edit Players</h3>
@@ -37,16 +61,30 @@ const EditPlayers = ({ players }) => {
                   {player.position}
                 </td>
                 <td className="editPlayers__table-box editPlayers__table-box-edit">
-                  <FontAwesomeIcon icon={faPenToSquare} />
+                  <FontAwesomeIcon
+                    className="editPlayers__table-box-edit-icon"
+                    icon={faPenToSquare}
+                  />
                 </td>
                 <td className="editPlayers__table-box editPlayers__table-box-delete">
-                  <FontAwesomeIcon icon={faTrashCan} />
+                  <FontAwesomeIcon
+                    className="editPlayers__table-box-delete-icon"
+                    icon={faTrashCan}
+                    onClick={() => handleDeletePlayer(player.id)}
+                  />
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </section>
+      {confirmDelete && (
+        <ConfirmModal
+          message="Are you sure you want to delete this player? You will not be able to undo this."
+          cancel={cancelDelete}
+          confirm={confirmDeletePlayer}
+        />
+      )}
     </article>
   );
 };
