@@ -3,12 +3,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import axios from "axios";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { deletePlayer } from "../../../utils/api-utils";
+import { deletePlayer, updatePlayer } from "../../../utils/api-utils";
 import "./EditPlayers.scss";
 
-const EditPlayers = ({ players, fetchPlayers }) => {
+const EditPlayers = ({ players, teamId, fetchPlayers }) => {
   const [confirmDelete, setConfirmDelete] = useState(null);
   const [editablePlayer, setEditablePlayer] = useState(0);
 
@@ -41,9 +41,21 @@ const EditPlayers = ({ players, fetchPlayers }) => {
     setEditablePlayer(0);
   };
 
-  const confirmEditPlayer = () => {
-    // API CALL
-    setEditablePlayer(null);
+  const confirmEditPlayer = async (event) => {
+    event.preventDefault();
+    const updatedPlayer = {
+      name: editablePlayer.name,
+      team_id: teamId,
+      position: editablePlayer.position,
+      number: editablePlayer.number,
+    };
+    try {
+      await axios.put(updatePlayer(editablePlayer.id), updatedPlayer);
+      fetchPlayers();
+    } catch (err) {
+      console.log("Error updating player: ", err);
+    }
+    setEditablePlayer(0);
   };
 
   const handleInputChange = (event) => {
@@ -57,98 +69,100 @@ const EditPlayers = ({ players, fetchPlayers }) => {
     <article className="editPlayers">
       <h3 className="editPlayers__header">Edit Players</h3>
       <section className="editPlayers__block">
-        <table className="editPlayers__table">
-          <caption className="editPlayers__table-title">
-            Roster & Statistics (Skaters)
-          </caption>
-          <thead className="editPlayers__table-headers">
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">No.</th>
-              <th scope="col">Pos.</th>
-              <th scope="col" colSpan="2">
-                Edit
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {players.map((player) => (
-              <tr className="editPlayers__table-row" key={player.id}>
-                {editablePlayer.id === player.id ? (
-                  <>
-                    <td className="editPlayers__table-box editPlayers__table-name">
-                      <input
-                        type="text"
-                        name="name"
-                        value={editablePlayer.name}
-                        onChange={handleInputChange}
-                      />
-                    </td>
-                    <td className="editPlayers__table-box editPlayers__table-number">
-                      <input
-                        type="number"
-                        name="number"
-                        value={editablePlayer.number}
-                        onChange={handleInputChange}
-                      />
-                    </td>
-                    <td className="editPlayers__table-box editPlayers__table-position">
-                      <select
-                        name="position"
-                        value={editablePlayer.position}
-                        onChange={handleInputChange}
-                      >
-                        <option value="F">F</option>
-                        <option value="D">D</option>
-                        <option value="G">G</option>
-                      </select>
-                    </td>
-                    <td className="editPlayers__table-box editPlayers__table-box-check">
-                      <FontAwesomeIcon
-                        className="editPlayers__table-box-check-icon"
-                        icon={faCheck}
-                        onClick={confirmEditPlayer}
-                      />
+        <form className="editPlayers__form" onSubmit={confirmEditPlayer}>
+          <table className="editPlayers__table">
+            <caption className="editPlayers__table-title">
+              Roster & Statistics (Skaters)
+            </caption>
+            <thead className="editPlayers__table-headers">
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">No.</th>
+                <th scope="col">Pos.</th>
+                <th scope="col" colSpan="2">
+                  Edit
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {players.map((player) => (
+                <tr className="editPlayers__table-row" key={player.id}>
+                  {editablePlayer.id === player.id ? (
+                    <>
+                      <td className="editPlayers__table-box editPlayers__table-name">
+                        <input
+                          type="text"
+                          name="name"
+                          value={editablePlayer.name}
+                          onChange={handleInputChange}
+                        />
+                      </td>
+                      <td className="editPlayers__table-box editPlayers__table-number">
+                        <input
+                          type="number"
+                          name="number"
+                          value={editablePlayer.number}
+                          onChange={handleInputChange}
+                        />
+                      </td>
+                      <td className="editPlayers__table-box editPlayers__table-position">
+                        <select
+                          name="position"
+                          value={editablePlayer.position}
+                          onChange={handleInputChange}
+                        >
+                          <option value="F">F</option>
+                          <option value="D">D</option>
+                          <option value="G">G</option>
+                        </select>
+                      </td>
+                      <td className="editPlayers__table-box editPlayers__table-box-check">
+                        <FontAwesomeIcon
+                          className="editPlayers__table-box-check-icon"
+                          icon={faCheck}
+                          onClick={confirmEditPlayer}
+                        />
                       </td>
                       <td className="editPlayers__table-box editPlayers__table-box-x">
-                      <FontAwesomeIcon
-                        className="editPlayers__table-box-x-icon"
-                        icon={faXmark}
-                        onClick={cancelEdit}
-                      />
-                    </td>
-                  </>
-                ) : (
-                  <>
-                    <td className="editPlayers__table-box editPlayers__table-box-name">
-                      {player.name}
-                    </td>
-                    <td className="editPlayers__table-box editPlayers__table-box-number">
-                      {player.number}
-                    </td>
-                    <td className="editPlayers__table-box editPlayers__table-position">
-                      {player.position}
-                    </td>
-                    <td className="editPlayers__table-box editPlayers__table-box-edit">
-                      <FontAwesomeIcon
-                        className="editPlayers__table-box-edit-icon"
-                        icon={faPenToSquare}
-                        onClick={() => handleEditClick(player)}
-                      />
-                    </td>
-                    <td className="editPlayers__table-box editPlayers__table-box-delete">
-                      <FontAwesomeIcon
-                        className="editPlayers__table-box-delete-icon"
-                        icon={faTrashCan}
-                        onClick={() => handleDeletePlayer(player.id)}
-                      />
-                    </td>
-                  </>
-                )}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                        <FontAwesomeIcon
+                          className="editPlayers__table-box-x-icon"
+                          icon={faXmark}
+                          onClick={cancelEdit}
+                        />
+                      </td>
+                    </>
+                  ) : (
+                    <>
+                      <td className="editPlayers__table-box editPlayers__table-box-name">
+                        {player.name}
+                      </td>
+                      <td className="editPlayers__table-box editPlayers__table-box-number">
+                        {player.number}
+                      </td>
+                      <td className="editPlayers__table-box editPlayers__table-position">
+                        {player.position}
+                      </td>
+                      <td className="editPlayers__table-box editPlayers__table-box-edit">
+                        <FontAwesomeIcon
+                          className="editPlayers__table-box-edit-icon"
+                          icon={faPenToSquare}
+                          onClick={() => handleEditClick(player)}
+                        />
+                      </td>
+                      <td className="editPlayers__table-box editPlayers__table-box-delete">
+                        <FontAwesomeIcon
+                          className="editPlayers__table-box-delete-icon"
+                          icon={faTrashCan}
+                          onClick={() => handleDeletePlayer(player.id)}
+                        />
+                      </td>
+                    </>
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </form>
       </section>
       {confirmDelete && (
         <ConfirmModal

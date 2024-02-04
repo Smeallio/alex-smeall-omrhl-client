@@ -56,10 +56,6 @@ const ManagePlayers = () => {
     fetchPlayers();
   }, [teamId]);
 
-  console.log(players);
-  console.log(teamId);
-  console.log(getPlayersByTeam(teamId));
-
   if (players === null) {
     return <p>Loading...</p>;
   }
@@ -71,7 +67,7 @@ const ManagePlayers = () => {
       <main className="admin-main">
         <TeamHeader />
         <AddPlayers teamId={teamId} fetchPlayers={fetchPlayers} />
-        <EditPlayers players={players} fetchPlayers={fetchPlayers} />
+        <EditPlayers players={players} teamId={teamId} fetchPlayers={fetchPlayers} />
       </main>
       <Footer />
     </>

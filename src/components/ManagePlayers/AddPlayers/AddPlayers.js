@@ -6,8 +6,6 @@ import "./AddPlayers.scss";
 const AddPlayers = ({ teamId, fetchPlayers }) => {
   const formRef = useRef();
 
-  console.log("AddPlayer team ID = " + teamId);
-
   const addPlayer = async (event) => {
     event.preventDefault();
     const player = {

@@ -12,7 +12,7 @@ import "./Header.scss";
 
 const Header = () => {
   const { teamName } = useParams();
-  console.log(teamName);
+  // console.log(teamName);
 
   let saints, kraken, leprechauns, moose;
 
