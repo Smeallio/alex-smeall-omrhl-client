@@ -1,8 +1,8 @@
 import Header from "../../components/Globals/Header/Header";
 import Nav from "../../components/Globals/Nav/Nav";
-import TeamHeader from "../../components/TeamPage/TeamHeader/TeamHeader";
-import AddPlayers from "../../components/ManagePlayers/AddPlayers/AddPlayers";
-import EditPlayers from "../../components/ManagePlayers/EditPlayers/EditPlayers"
+import TeamHeaderAdmin from "../../components/Admin/TeamHeaderAdmin/TeamHeaderAdmin"
+import AddPlayers from "../../components/Admin/AddPlayers/AddPlayers";
+import EditPlayers from "../../components/Admin/EditPlayers/EditPlayers";
 import Footer from "../../components/Globals/Footer/Footer";
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -10,12 +10,11 @@ import { useParams } from "react-router-dom";
 import { getPlayersByTeam } from "../../utils/api-utils";
 import "./ManagePlayers.scss";
 
-const ManagePlayers = () => {
+const ManagePlayers = ({ authUser }) => {
   const { teamName } = useParams();
 
   const [players, setPlayers] = useState(null);
   const [teamId, setTeamId] = useState(null);
-
 
   useEffect(() => {
     let numTeamId;
@@ -47,7 +46,7 @@ const ManagePlayers = () => {
         const response = await axios.get(getPlayersByTeam(teamId));
         setPlayers(response.data);
       }
-    } catch(err) {
+    } catch (err) {
       console.log(err.message);
     }
   };
@@ -60,14 +59,29 @@ const ManagePlayers = () => {
     return <p>Loading...</p>;
   }
 
+  if (authUser === false) {
+    return (
+      <section className="background">
+        <Header />
+        <Nav />
+        <p>You must be logged in to view this page</p>
+        <Footer />
+      </section>
+    );
+  }
+
   return (
     <section className="background">
       <Header />
       <Nav />
       <main className="admin-main">
-        <TeamHeader />
+        <TeamHeaderAdmin />
         <AddPlayers teamId={teamId} fetchPlayers={fetchPlayers} />
-        <EditPlayers players={players} teamId={teamId} fetchPlayers={fetchPlayers} />
+        <EditPlayers
+          players={players}
+          teamId={teamId}
+          fetchPlayers={fetchPlayers}
+        />
       </main>
       <Footer />
     </section>

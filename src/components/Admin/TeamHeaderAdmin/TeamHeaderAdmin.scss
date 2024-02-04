@@ -1,0 +1,28 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
+.teamHeaderAdmin {
+    padding: 0.75rem 0 0;
+
+    &__title {
+        @include flexbox;
+
+        &-logo {
+            height: 4rem;
+        }
+
+        &-teamname {
+            font-size: 1.75rem;
+            margin-left: 1rem;
+            font-weight: 600;
+        }
+    }
+
+    &__link {
+        margin-right: 0.75rem;
+        &-back-icon {
+            height: 2rem;
+            color: $black;
+        }
+    }
+}

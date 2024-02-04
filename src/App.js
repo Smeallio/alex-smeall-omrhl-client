@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage/HomePage";
 import TeamPage from "./pages/TeamPage/TeamPage";
 import Login from "./pages/Login/Login";
+import Dashboard from "./pages/Dashboard/Dashboard";
 import ManagePlayers from "./pages/ManagePlayers/ManagePlayers";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -41,7 +42,6 @@ function App() {
   }, []);
 
   console.log(authUser);
-  // console.log(token);
 
   return (
     <BrowserRouter>
@@ -49,7 +49,8 @@ function App() {
         <Route path="/" element={<HomePage />}></Route>
         <Route path="/teams/:teamName" element={<TeamPage />}></Route>
         <Route path="/admin" element={<Login authUser={authUser} />}></Route>
-        <Route path="/admin/players/:teamName" element={<ManagePlayers />}></Route>
+        <Route path="/admin/dashboard" element={<Dashboard authUser={authUser}/>}></Route>
+        <Route path="/admin/dashboard/:teamName" element={<ManagePlayers authUser={authUser} />}></Route>
       </Routes>
     </BrowserRouter>
   );
