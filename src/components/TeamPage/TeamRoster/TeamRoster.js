@@ -34,24 +34,25 @@ const TeamRoster = () => {
     setTeamId(numTeamId);
   }, [teamName]);
 
-  const fetchPlayers = async () => {
-    try {
-      if (teamId !== null) {
-        const response = await axios.get(getPlayersByTeam(teamId));
-        setPlayers(response.data);
-      }
-    } catch (err) {
-      console.log(err.message);
-    }
-  };
-
   useEffect(() => {
+    const fetchPlayers = async () => {
+      try {
+        if (teamId !== null) {
+          const response = await axios.get(getPlayersByTeam(teamId));
+          setPlayers(response.data);
+        }
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+  
     const fetchAndSetPlayers = async () => {
       await fetchPlayers();
     };
   
     fetchAndSetPlayers();
-  }, [teamId, fetchPlayers]);
+  }, [teamId]);
+  
 
   if (players === null) {
     return <p>Loading...</p>;

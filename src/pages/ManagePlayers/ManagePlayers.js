@@ -1,6 +1,6 @@
 import Header from "../../components/Globals/Header/Header";
 import Nav from "../../components/Globals/Nav/Nav";
-import TeamHeaderAdmin from "../../components/Admin/TeamHeaderAdmin/TeamHeaderAdmin"
+import TeamHeaderAdmin from "../../components/Admin/TeamHeaderAdmin/TeamHeaderAdmin";
 import AddPlayers from "../../components/Admin/AddPlayers/AddPlayers";
 import EditPlayers from "../../components/Admin/EditPlayers/EditPlayers";
 import Footer from "../../components/Globals/Footer/Footer";
@@ -55,9 +55,9 @@ const ManagePlayers = ({ authUser }) => {
     const fetchAndSetPlayers = async () => {
       await fetchPlayers();
     };
-  
+
     fetchAndSetPlayers();
-  }, [teamId, fetchPlayers]);
+  }, [teamId]);
 
   if (players === null) {
     return <p>Loading...</p>;
@@ -73,7 +73,6 @@ const ManagePlayers = ({ authUser }) => {
       </section>
     );
   }
-
 
   return (
     <section className="background">
