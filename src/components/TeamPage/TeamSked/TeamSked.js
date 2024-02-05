@@ -48,8 +48,12 @@ const TeamSked = () => {
   };
 
   useEffect(() => {
-    fetchGamesByTeam();
-  }, [teamId]);
+    const fetchAndSetGames = async () => {
+      await fetchGamesByTeam();
+    };
+  
+    fetchAndSetGames();
+  }, [teamId, fetchGamesByTeam]);
 
   const toTitleCase = (string) => {
     return string.replace(/\b\w/g, (match) => match.toUpperCase());

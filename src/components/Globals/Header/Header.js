@@ -12,7 +12,6 @@ import "./Header.scss";
 
 const Header = () => {
   const { teamName } = useParams();
-  // console.log(teamName);
 
   let saints, kraken, leprechauns, moose;
 
@@ -47,18 +46,20 @@ const Header = () => {
       leprechauns = lepLogoGrey;
       moose = mooseLogo;
       break;
+    default:
+      return null;
   }
 
   return (
     <header className="header">
       <section className="header__container">
         <section className="header__league-logo">
-        <Link className="header__league-logo-link" to="/">
-          <img
-            className="header__league-logo-img"
-            src={omrLogo}
-            alt="Odd Man Rush Hockey League"
-          />
+          <Link className="header__league-logo-link" to="/">
+            <img
+              className="header__league-logo-img"
+              src={omrLogo}
+              alt="Odd Man Rush Hockey League"
+            />
           </Link>
         </section>
         <section className="header__team-logos">

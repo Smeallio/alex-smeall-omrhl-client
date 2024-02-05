@@ -29,6 +29,8 @@ const TeamHeaderAdmin = () => {
       teamLogo = mooseLogo;
       fullTeamName = "Mighty Moose";
       break;
+    default:
+        return null;
   }
 
   return (
