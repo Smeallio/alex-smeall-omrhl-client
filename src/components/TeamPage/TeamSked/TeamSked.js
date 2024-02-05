@@ -34,26 +34,29 @@ const TeamSked = () => {
     setTeamId(numTeamId);
   }, [teamName]);
 
-  const fetchGamesByTeam = async () => {
-    try {
-      if (teamId !== null) {
-        const response = await axios.get(getGames());
-        const allGames = response.data;
-        const gamesByTeam = allGames.filter((game) => game.team1_team_id === teamId || game.team2_team_id === teamId);
-        setGames(gamesByTeam);
-      }
-    } catch (err) {
-      console.log(err.message);
-    }
-  };
-
   useEffect(() => {
+    const fetchGamesByTeam = async () => {
+      try {
+        if (teamId !== null) {
+          const response = await axios.get(getGames());
+          const allGames = response.data;
+          const gamesByTeam = allGames.filter(
+            (game) =>
+              game.team1_team_id === teamId || game.team2_team_id === teamId
+          );
+          setGames(gamesByTeam);
+        }
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+
     const fetchAndSetGames = async () => {
       await fetchGamesByTeam();
     };
-  
+
     fetchAndSetGames();
-  }, [teamId, fetchGamesByTeam]);
+  }, [teamId]);
 
   const toTitleCase = (string) => {
     return string.replace(/\b\w/g, (match) => match.toUpperCase());
