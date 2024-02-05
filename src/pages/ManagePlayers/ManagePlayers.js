@@ -57,7 +57,7 @@ const ManagePlayers = ({ authUser }) => {
     };
 
     fetchAndSetPlayers();
-  }, [teamId]);
+  }, [teamId, fetchPlayers]);
 
   if (players === null) {
     return <p>Loading...</p>;
