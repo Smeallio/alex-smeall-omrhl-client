@@ -70,6 +70,7 @@ const ManagePlayers = ({ authUser }) => {
     );
   }
 
+
   return (
     <section className="background">
       <Header />

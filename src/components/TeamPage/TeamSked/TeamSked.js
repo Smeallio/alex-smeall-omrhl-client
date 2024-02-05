@@ -1,36 +1,63 @@
-import { scoreSked } from "../../../utils/scoreSked";
 import { useParams } from "react-router-dom";
+import axios from "axios";
+import { useState, useEffect } from "react";
+import { getGames } from "../../../utils/api-utils";
 import "./TeamSked.scss";
 
 const TeamSked = () => {
   const { teamName } = useParams();
 
-  let teamId;
+  const [games, setGames] = useState(null);
+  const [teamId, setTeamId] = useState(null);
 
-  switch (teamName) {
-    case "leprechauns":
-      teamId = 1;
-      break;
-    case "saints":
-      teamId = 2;
-      break;
-    case "moose":
-      teamId = 3;
-      break;
-    case "kraken":
-      teamId = 4;
-      break;
-  }
+  useEffect(() => {
+    let numTeamId;
 
-  const scoresAndSked = scoreSked.filter(
-    (game) => game.team1.team_id === teamId || game.team2.team_id === teamId
-  );
+    switch (teamName) {
+      case "leprechauns":
+        numTeamId = 1;
+        break;
+      case "saints":
+        numTeamId = 2;
+        break;
+      case "moose":
+        numTeamId = 3;
+        break;
+      case "kraken":
+        numTeamId = 4;
+        break;
+      default:
+        alert("Invalid team name");
+        break;
+    }
 
-  console.log(scoresAndSked);
+    setTeamId(numTeamId);
+  }, [teamName]);
+
+  const fetchGamesByTeam = async () => {
+    try {
+      if (teamId !== null) {
+        const response = await axios.get(getGames());
+        const allGames = response.data;
+        const gamesByTeam = allGames.filter((game) => game.team1_team_id === teamId || game.team2_team_id === teamId);
+        setGames(gamesByTeam);
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchGamesByTeam();
+  }, [teamId]);
 
   const toTitleCase = (string) => {
     return string.replace(/\b\w/g, (match) => match.toUpperCase());
   };
+
+  if (games === null) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <article className="schedule">
@@ -44,33 +71,33 @@ const TeamSked = () => {
           </tr>
         </thead>
         <tbody>
-          {scoresAndSked.map((game) => (
+          {games.map((game) => (
             <tr className="schedule__table-row" key={game.id}>
               <td
                 className="schedule__table-name"
                 data-label="Date"
               >{`${game.date} @ ${game.time}`}</td>
               <td className="schedule__table-stat" data-label="Opponent">
-                {game.team1.team_id === teamId
-                  ? game.team2.name
-                  : game.team1.name}
+                {game.team1_team_id === teamId
+                  ? game.team2_name
+                  : game.team1_name}
               </td>
               <td className="schedule__table-stat" data-label="Result">
                 {(game.complete &&
-                  game.team1.team_id === teamId &&
-                  toTitleCase(game.team1.result) +
+                  game.team1_team_id === teamId &&
+                  toTitleCase(game.team1_result) +
                     ": " +
-                    game.team1.score +
+                    game.team1_score +
                     " - " +
-                    game.team2.score) ||
+                    game.team2_score) ||
                   ""}
                 {(game.complete &&
-                  game.team2.team_id === teamId &&
-                  toTitleCase(game.team2.result) +
+                  game.team2_team_id === teamId &&
+                  toTitleCase(game.team2_result) +
                     ": " +
-                    game.team2.score +
+                    game.team2_score +
                     " - " +
-                    game.team1.score) ||
+                    game.team1_score) ||
                   ""}
               </td>
             </tr>

@@ -13,7 +13,7 @@ const Login = ({ authUser }) => {
 
   useEffect(() => {
     if (authUser) {
-      navigate("/admin/dashboard");
+      navigate("/admin/dashboard/");
     }
   }, []);
 
@@ -26,7 +26,7 @@ const Login = ({ authUser }) => {
         password: event.target.password.value,
       });
       sessionStorage.setItem("token", response.data.token);
-      navigate("/admin/dashboard");
+      navigate("/admin/dashboard/");
     } catch (err) {
       setError("Something went wrong");
     }
