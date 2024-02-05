@@ -5,7 +5,7 @@ import AddPlayers from "../../components/Admin/AddPlayers/AddPlayers";
 import EditPlayers from "../../components/Admin/EditPlayers/EditPlayers";
 import Footer from "../../components/Globals/Footer/Footer";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { getPlayersByTeam } from "../../utils/api-utils";
 import "./ManagePlayers.scss";
@@ -15,6 +15,17 @@ const ManagePlayers = ({ authUser }) => {
 
   const [players, setPlayers] = useState(null);
   const [teamId, setTeamId] = useState(null);
+
+  const fetchPlayers = useCallback(async () => {
+    try {
+      if (teamId !== null) {
+        const response = await axios.get(getPlayersByTeam(teamId));
+        setPlayers(response.data);
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
+  }, [teamId]);
 
   useEffect(() => {
     let numTeamId;
@@ -39,17 +50,6 @@ const ManagePlayers = ({ authUser }) => {
 
     setTeamId(numTeamId);
   }, [teamName]);
-
-  const fetchPlayers = async () => {
-    try {
-      if (teamId !== null) {
-        const response = await axios.get(getPlayersByTeam(teamId));
-        setPlayers(response.data);
-      }
-    } catch (err) {
-      console.log(err.message);
-    }
-  };
 
   useEffect(() => {
     const fetchAndSetPlayers = async () => {
