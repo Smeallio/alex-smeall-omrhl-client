@@ -1,3 +1,5 @@
+*Last Update: Feb 5, 2024*
+
 # Project Title
 
 **The Official Website for the [Odd Man Rush Hockey League](https://www.facebook.com/profile.php?id=61550747964046)**
