@@ -41,8 +41,6 @@ function App() {
     authorizeUser();
   }, []);
 
-  console.log(authUser);
-
   return (
     <BrowserRouter>
       <Routes>

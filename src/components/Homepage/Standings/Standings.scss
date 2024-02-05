@@ -20,6 +20,10 @@
 
     &-row {
       font-size: 0.875rem;
+
+      @include tablet {
+        font-size: 1rem;
+      }
     }
 
     &-row:nth-of-type(odd) {

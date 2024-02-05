@@ -1,31 +1,45 @@
-import { useRef } from "react";
 import saintsLogo from "../../../assets/images/logos/Duck-Island-Saints-vector.png";
 import krakenLogo from "../../../assets/images/logos/Kraken-Beers-vector.png";
 import lepLogo from "../../../assets/images/logos/Leprechauns-vector.png";
 import mooseLogo from "../../../assets/images/logos/Moose-vector.png";
 import chevLeft from "../../../assets/images/icons/chevron-left-icon.png";
 import chevRight from "../../../assets/images/icons/chevron-right-icon.png";
-import { scoreSked } from "../../../utils/scoreSked";
+import { useRef } from "react";
 import "./ScoreBar.scss";
 
-const ScoreBar = () => {
+const ScoreBar = ({ games }) => {
   const sliderRef = useRef(null);
   const scrollAmount = 100;
 
-  const getImageByTeamName = (teamName) => {
+  const getImageByTeamId = (teamName) => {
     switch (teamName) {
-      case "Fogtown Leprechauns":
+      case 1:
         return lepLogo;
-      case "Duck Island Saints":
+      case 2:
         return saintsLogo;
-      case "Mighty Moose":
+      case 3:
         return mooseLogo;
-      case "Kraken Beers":
+      case 4:
         return krakenLogo;
       default:
         return null;
     }
   };
+
+  if (games === null) {
+    return <p>Loading...</p>;
+  }
+
+  const sortedGames = games.sort((a, b) => a.date - b.date);
+  const today = new Date().getTime();
+
+  const pastGames = sortedGames
+    .filter((game) => new Date(game.date).getTime() < today)
+    .slice(-2);
+  const futureGames = sortedGames
+    .filter((game) => new Date(game.date).getTime() > today)
+    .slice(0, 2);
+  const closestGames = [...pastGames, ...futureGames];
 
   return (
     <article className="scorebar" id="scorebar">
@@ -43,7 +57,7 @@ const ScoreBar = () => {
         />
       </button>
       <section className="scorebar__container" ref={sliderRef}>
-        {scoreSked.map((game) => (
+        {closestGames.map((game) => (
           <section className="scorebar__box" key={game.id}>
             <section className="scorebar__box-header">
               <p className="scorebar__box-header-text">{`${game.date} @ ${game.time}`}</p>
@@ -51,17 +65,17 @@ const ScoreBar = () => {
             <section className="scorebar__box-body">
               <img
                 className="scorebar__box-body-img"
-                src={getImageByTeamName(game.team1.name)}
+                src={getImageByTeamId(game.team1_team_id)}
                 alt="Fogtown Leprechauns"
               />
               {game.complete ? (
-                <p className="scorebar__box-body-text">{`${game.team1.score} - ${game.team2.score}`}</p>
+                <p className="scorebar__box-body-text">{`${game.team1_score} - ${game.team2_score}`}</p>
               ) : (
                 <p className="scorebar__box-body-text">vs</p>
               )}
               <img
                 className="scorebar__box-body-img"
-                src={getImageByTeamName(game.team2.name)}
+                src={getImageByTeamId(game.team2_team_id)}
                 alt="Fogtown Leprechauns"
               />
             </section>
