@@ -15,7 +15,7 @@ const Login = ({ authUser }) => {
     if (authUser) {
       navigate("/admin/dashboard/");
     }
-  }, []);
+  }, [authUser, navigate]);
 
   const handleLogin = async (event) => {
     event.preventDefault();

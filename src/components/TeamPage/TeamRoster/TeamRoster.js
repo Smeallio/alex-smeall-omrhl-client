@@ -46,8 +46,12 @@ const TeamRoster = () => {
   };
 
   useEffect(() => {
-    fetchPlayers();
-  }, [teamId]);
+    const fetchAndSetPlayers = async () => {
+      await fetchPlayers();
+    };
+  
+    fetchAndSetPlayers();
+  }, [teamId, fetchPlayers]);
 
   if (players === null) {
     return <p>Loading...</p>;
