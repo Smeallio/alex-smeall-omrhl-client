@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5050";
+const API_URL = "https://oddmanrushhockey-c7e535f96e7a.herokuapp.com/";
 
 export const getPlayersByTeam = (teamId) => API_URL + "/api/players/" + teamId;
 export const postPlayer = (teamId) => API_URL + "/api/players/" + teamId;
