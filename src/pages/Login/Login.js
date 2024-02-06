@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { logInUser } from "../../utils/api-utils";
 import "./Login.scss";
 
-const Login = ({ authUser }) => {
+const Login = ({ authUser, setAuthUser }) => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -26,6 +26,7 @@ const Login = ({ authUser }) => {
         password: event.target.password.value,
       });
       sessionStorage.setItem("token", response.data.token);
+      setAuthUser(true);
       navigate("/admin/dashboard/");
     } catch (err) {
       setError("Something went wrong");

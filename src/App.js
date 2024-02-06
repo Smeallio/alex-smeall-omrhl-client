@@ -47,7 +47,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
         <Route path="/teams/:teamName" element={<TeamPage />}></Route>
-        <Route path="/admin" element={<Login authUser={authUser} />}></Route>
+        <Route path="/admin" element={<Login authUser={authUser} setAuthUser={setAuthUser} />}></Route>
         <Route path="/admin/dashboard" element={<Dashboard authUser={authUser}/>}></Route>
         <Route path="/admin/dashboard/:teamName" element={<ManagePlayers authUser={authUser} />}></Route>
         <Route path='*' element={<NotFound />} />
