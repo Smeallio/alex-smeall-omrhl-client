@@ -68,10 +68,6 @@ const Standings = ({ games }) => {
     }
   });
 
-  console.log(games);
-
-  console.log(teamResults);
-
   const standingsArray = Object.keys(teamResults).map((teamName) => ({
     name: teamName,
     id: getIdByTeam(teamName),

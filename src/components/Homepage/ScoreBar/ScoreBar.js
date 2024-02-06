@@ -31,15 +31,16 @@ const ScoreBar = ({ games }) => {
   }
 
   const sortedGames = games.sort((a, b) => a.date - b.date);
-  const today = new Date().getTime();
 
-  const pastGames = sortedGames
-    .filter((game) => new Date(game.date).getTime() < today)
+  console.log(sortedGames);
+
+  const completeGames = sortedGames
+    .filter((game) => game.complete === 1)
     .slice(-2);
-  const futureGames = sortedGames
-    .filter((game) => new Date(game.date).getTime() > today)
+  const pendingGames = sortedGames
+    .filter((game) => game.complete === 0)
     .slice(0, 2);
-  const closestGames = [...pastGames, ...futureGames];
+  const closestGames = [...completeGames, ...pendingGames];
 
   return (
     <article className="scorebar" id="scorebar">
