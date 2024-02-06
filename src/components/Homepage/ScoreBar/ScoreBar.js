@@ -32,15 +32,13 @@ const ScoreBar = ({ games }) => {
 
   const sortedGames = games.sort((a, b) => a.date - b.date);
 
-  console.log(sortedGames);
-
   const completeGames = sortedGames
     .filter((game) => game.complete === 1)
     .slice(-2);
-  const pendingGames = sortedGames
+  const upcomingGames = sortedGames
     .filter((game) => game.complete === 0)
     .slice(0, 2);
-  const closestGames = [...completeGames, ...pendingGames];
+  const closestGames = [...completeGames, ...upcomingGames];
 
   return (
     <article className="scorebar" id="scorebar">
