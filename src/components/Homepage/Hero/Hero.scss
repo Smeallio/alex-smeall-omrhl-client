@@ -13,12 +13,16 @@
 
     @include tablet {
         margin: 1.5rem 3rem;
-        max-width: 25rem;
+        max-width: 22.5rem;
+    }
+
+    @include desktop {
+      max-width: 27.5rem;
     }
   }
 
   &__h1 {
-    font-size: 1.25rem;
+    @include h1;
     padding: 1.5rem;
     background-color: rgba(255, 255, 255, 0.75);
     border-radius: 5px;
@@ -26,8 +30,6 @@
     text-align: center;
 
     @include tablet {
-        font-size: 1.75rem;
-        font-weight: 600;
         text-align: right;
     }
   }

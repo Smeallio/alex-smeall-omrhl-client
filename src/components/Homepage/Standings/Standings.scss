@@ -15,15 +15,13 @@
     }
 
     &-headers th {
+      @include bigp;
       padding: 0.5rem 0;
+      font-weight: 600;
     }
 
     &-row {
-      font-size: 0.875rem;
-
-      @include tablet {
-        font-size: 1rem;
-      }
+      @include bigp;
     }
 
     &-row:nth-of-type(odd) {

@@ -20,23 +20,22 @@
     }
 
     &-title {
+      @include bigp;
       width: 60%;
       font-weight: 600;
     }
 
     &-date {
+      @include bigp;
       width: 35%;
       font-weight: 600;
       text-align: right;
     }
 
     &-body {
+      @include bigp;
       width: 100%;
       padding-top: 0.75rem;
-    }
-
-    @include tablet {
-      font-size: 1rem;
     }
   }
 

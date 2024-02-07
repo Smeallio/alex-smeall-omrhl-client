@@ -68,7 +68,11 @@ const ScoreBar = ({ games }) => {
                 alt="Fogtown Leprechauns"
               />
               {game.complete ? (
-                <p className="scorebar__box-body-text">{`${game.team1_score} - ${game.team2_score}`}</p>
+                <p className="scorebar__box-body-text">
+                  { game.team1_score >= game.team_2_score ?
+                  `${game.team1_score} - ${game.team2_score}`
+                : `${game.team2_score} - ${game.team1_score}`
+              }</p>
               ) : (
                 <p className="scorebar__box-body-text">vs</p>
               )}
