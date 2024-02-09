@@ -30,6 +30,10 @@
     height: 6rem;
     padding: 0 0.5rem; 
 
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
     @include tablet {
         @include flexbox(space-between, center, row, nowrap, 4vw);
         padding: 0;
