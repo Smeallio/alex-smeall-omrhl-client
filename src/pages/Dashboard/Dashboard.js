@@ -29,6 +29,7 @@ const Dashboard = ({ authUser }) => {
             <Link className="dashboard__link" to="/admin/dashboard/moose">Mighty Moose</Link>
             <Link className="dashboard__link" to="/admin/dashboard/kraken">Kraken Beers</Link>
           <h2 className="dashboard__subtitle">Update Games</h2>
+          <Link className="dashboard__link" to="/admin/dashboard/games">Scores & Schedule</Link>
         </article>
       </main>
       <Footer />

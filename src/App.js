@@ -4,6 +4,7 @@ import TeamPage from "./pages/TeamPage/TeamPage";
 import Login from "./pages/Login/Login";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import ManagePlayers from "./pages/ManagePlayers/ManagePlayers";
+import ManageGames from "./pages/ManageGames/ManageGames"
 import NotFound from "./pages/NotFound/NotFound";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -50,6 +51,7 @@ function App() {
         <Route path="/admin" element={<Login authUser={authUser} setAuthUser={setAuthUser} />}></Route>
         <Route path="/admin/dashboard" element={<Dashboard authUser={authUser}/>}></Route>
         <Route path="/admin/dashboard/:teamName" element={<ManagePlayers authUser={authUser} />}></Route>
+        <Route path="/admin/dashboard/games" element={<ManageGames authUser={authUser} />}></Route>
         <Route path='*' element={<NotFound />} />
       </Routes>
     </BrowserRouter>
