@@ -46,7 +46,7 @@ const EditPlayers = ({ players, teamId, fetchPlayers }) => {
       name: editablePlayer.name,
       team_id: teamId,
       position: editablePlayer.position,
-      number: editablePlayer.number,
+      number: editablePlayer.number || undefined,
     };
     try {
       await axios.put(updatePlayer(editablePlayer.id), updatedPlayer);
