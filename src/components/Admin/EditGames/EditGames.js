@@ -5,7 +5,7 @@ import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import axios from "axios";
 import { useState } from "react";
-import { updateGame } from "../../../utils/api-utils";
+import { updateGame, deleteGame } from "../../../utils/api-utils";
 import "./EditGames.scss";
 
 const EditGames = ({ games, fetchGames, getIdByTeam }) => {
@@ -20,17 +20,17 @@ const EditGames = ({ games, fetchGames, getIdByTeam }) => {
     setConfirmDelete(null);
   };
 
-  // const confirmDeleteGame = async () => {
-  //   try {
-  //     await axios.delete(deletePlayer(confirmDelete));
-  //     console.log("Played deleted successfully");
-  //     fetchPlayers();
-  //   } catch (err) {
-  //     console.log("Player delete failed ", err);
-  //   } finally {
-  //     setConfirmDelete(null);
-  //   }
-  // };
+  const confirmDeleteGame = async () => {
+    try {
+      await axios.delete(deleteGame(confirmDelete));
+      console.log("Played deleted successfully");
+      fetchGames();
+    } catch (err) {
+      console.log("Player delete failed ", err);
+    } finally {
+      setConfirmDelete(null);
+    }
+  };
 
   const handleEditClick = (game) => {
     console.log("Edit clicked: ", game);
@@ -327,6 +327,13 @@ const EditGames = ({ games, fetchGames, getIdByTeam }) => {
           </table>
         </form>
       </section>
+      {confirmDelete && (
+        <ConfirmModal
+          message="Are you sure you want to delete this game? You will not be able to undo this."
+          cancel={cancelDelete}
+          confirm={confirmDeleteGame}
+        />
+      )}
     </article>
   );
 };

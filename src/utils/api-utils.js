@@ -11,3 +11,4 @@ export const logInUser = () => API_URL + "/api/users/login"
 export const getGames = () => API_URL + "/api/games/"
 export const postGame = () => API_URL + "/api/games/"
 export const updateGame = (gameId) => API_URL + "/api/games/" + gameId
+export const deleteGame = (gameId) => API_URL + "/api/games/" + gameId
