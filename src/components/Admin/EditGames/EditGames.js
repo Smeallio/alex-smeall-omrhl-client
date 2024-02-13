@@ -1,4 +1,5 @@
 import ConfirmModal from "../../Globals/ConfirmModal/ConfirmModal";
+import CustomDatePicker from "../../Globals/DatePicker/DatePicker";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-regular-svg-icons";
@@ -7,24 +8,9 @@ import { useState } from "react";
 import { updateGame } from "../../../utils/api-utils";
 import "./EditGames.scss";
 
-const EditGames = ({ games, fetchGames }) => {
+const EditGames = ({ games, fetchGames, getIdByTeam }) => {
   const [confirmDelete, setConfirmDelete] = useState(null);
   const [editableGame, setEditableGame] = useState(0);
-  
-  const getIdByTeam = (teamName) => {
-    switch (teamName) {
-      case "Fogtown Leprechauns":
-        return 1;
-      case "Duck Island Saints":
-        return 2;
-      case "Mighty Moose":
-        return 3;
-      case "Kraken Beers":
-        return 4;
-      default:
-        return null;
-    }
-  }
 
   const handleDeleteGame = async (gameId) => {
     setConfirmDelete(gameId);
@@ -65,41 +51,42 @@ const EditGames = ({ games, fetchGames }) => {
     }
   };
 
-  const determineTeamOneResult = game => {
+  const determineTeamOneResult = (game) => {
     if (game.team1_score > game.team2_score) {
-        return "win";
-      } else if (game.team2_score > game.team1_score) {
-        return "loss";
-      } else {
-        return "tie";
-      }
+      return "win";
+    } else if (game.team2_score > game.team1_score) {
+      return "loss";
+    } else {
+      return "tie";
+    }
   };
 
-  const determineTeamTwoResult = game => {
+  const determineTeamTwoResult = (game) => {
     if (game.team2_score > game.team1_score) {
-        return "win";
-      } else if (game.team1_score > game.team2_score) {
-        return "loss";
-      } else {
-        return "tie";
-      }
+      return "win";
+    } else if (game.team1_score > game.team2_score) {
+      return "loss";
+    } else {
+      return "tie";
+    }
   };
 
   const confirmEditGame = async (event) => {
     event.preventDefault();
     const updatedGame = {
-        date: editableGame.date,
-        time: editableGame.time,
-        complete: editableGame.complete,
-        team1_name: editableGame.team1_name,
-        team1_id: getIdByTeam(editableGame.team1_name),
-        team1_score: editableGame.team1_score || " ",
-        team1_result: determineTeamOneResult(editableGame) || " ",
-        team2_name: editableGame.team2_name,
-        team2_id: getIdByTeam(editableGame.team2_name),
-        team2_score: editableGame.team2_score || " ",
-        team2_result: determineTeamTwoResult(editableGame) || " ",
+      date: editableGame.date,
+      time: editableGame.time,
+      complete: editableGame.complete,
+      team1_name: editableGame.team1_name,
+      team1_team_id: getIdByTeam(editableGame.team1_name),
+      team1_score: editableGame.team1_score || " ",
+      team1_result: determineTeamOneResult(editableGame) || " ",
+      team2_name: editableGame.team2_name,
+      team2_team_id: getIdByTeam(editableGame.team2_name),
+      team2_score: editableGame.team2_score || " ",
+      team2_result: determineTeamTwoResult(editableGame) || " ",
     };
+    console.log(updatedGame);
     try {
       await axios.put(updateGame(editableGame.id), updatedGame);
       fetchGames();
@@ -110,11 +97,17 @@ const EditGames = ({ games, fetchGames }) => {
   };
 
   const handleInputChange = (event) => {
+    const { name, value, type, checked } = event.target;
+    const updatedValue = type === "checkbox" ? checked : value;
     setEditableGame((prevEditableGame) => ({
       ...prevEditableGame,
-      [event.target.name]: event.target.value,
+      [name]: updatedValue === true ? 1 : updatedValue,
     }));
   };
+
+  const handleDateChange = date => {
+    setEditableGame({ ...editableGame, date })
+  }
 
   if (games === null) {
     return <p>Loading...</p>;
@@ -148,12 +141,10 @@ const EditGames = ({ games, fetchGames }) => {
                   {editableGame.id === game.id ? (
                     <>
                       <td className="editGames__table-box editGames__table-box-date">
-                        <input
-                          type="date"
-                          name="date"
-                          value={editableGame.date}
-                          onChange={handleInputChange}
-                        ></input>
+                        <CustomDatePicker
+                          selectedDate={editableGame.date}
+                          handleDateChange={handleDateChange}
+                        />
                       </td>
                       <td className="editGames__table-box editGames__table-box-time">
                         <input
@@ -179,10 +170,38 @@ const EditGames = ({ games, fetchGames }) => {
                           onChange={handleInputChange}
                         >
                           <option value="none">Pick one...</option>
-                          <option value="Fogtown Leprechauns" selected={editableGame.team1_name === "Fogtown Leprechauns"}>Fogtown Leprechauns</option>
-                          <option value="Duck Island Saints" selected={editableGame.team1_name === "Duck Island Saints"}>Duck Island Saints</option>
-                          <option value="Mighty Moose" selected={editableGame.team1_name === "Mighty Moose"}>Mighty Moose</option>
-                          <option value="Kraken Beers" selected={editableGame.team1_name === "Kraken Beers"}>Kraken Beers</option>
+                          <option
+                            value="Fogtown Leprechauns"
+                            selected={
+                              editableGame.team1_name === "Fogtown Leprechauns"
+                            }
+                          >
+                            Fogtown Leprechauns
+                          </option>
+                          <option
+                            value="Duck Island Saints"
+                            selected={
+                              editableGame.team1_name === "Duck Island Saints"
+                            }
+                          >
+                            Duck Island Saints
+                          </option>
+                          <option
+                            value="Mighty Moose"
+                            selected={
+                              editableGame.team1_name === "Mighty Moose"
+                            }
+                          >
+                            Mighty Moose
+                          </option>
+                          <option
+                            value="Kraken Beers"
+                            selected={
+                              editableGame.team1_name === "Kraken Beers"
+                            }
+                          >
+                            Kraken Beers
+                          </option>
                         </select>
                       </td>
                       <td className="editGames__table-box editGames__table-box-team-score">
@@ -200,10 +219,38 @@ const EditGames = ({ games, fetchGames }) => {
                           onChange={handleInputChange}
                         >
                           <option value="none">Pick one...</option>
-                          <option value="Fogtown Leprechauns" selected={editableGame.team2_name === "Fogtown Leprechauns"}>Fogtown Leprechauns</option>
-                          <option value="Duck Island Saints" selected={editableGame.team2_name === "Duck Island Saints"}>Duck Island Saints</option>
-                          <option value="Mighty Moose" selected={editableGame.team2_name === "Mighty Moose"}>Mighty Moose</option>
-                          <option value="Kraken Beers" selected={editableGame.team2_name === "Kraken Beers"}>Kraken Beers</option>
+                          <option
+                            value="Fogtown Leprechauns"
+                            selected={
+                              editableGame.team2_name === "Fogtown Leprechauns"
+                            }
+                          >
+                            Fogtown Leprechauns
+                          </option>
+                          <option
+                            value="Duck Island Saints"
+                            selected={
+                              editableGame.team2_name === "Duck Island Saints"
+                            }
+                          >
+                            Duck Island Saints
+                          </option>
+                          <option
+                            value="Mighty Moose"
+                            selected={
+                              editableGame.team2_name === "Mighty Moose"
+                            }
+                          >
+                            Mighty Moose
+                          </option>
+                          <option
+                            value="Kraken Beers"
+                            selected={
+                              editableGame.team2_name === "Kraken Beers"
+                            }
+                          >
+                            Kraken Beers
+                          </option>
                         </select>
                       </td>
                       <td className="editGames__table-box editGames__table-box-team-score">
@@ -215,7 +262,7 @@ const EditGames = ({ games, fetchGames }) => {
                         ></input>
                       </td>
                       <td className="editGames__table-box editGames__table-box-result">
-                      {game.complete ? determineWinner(game) : " "}
+                        {game.complete ? determineWinner(game) : " "}
                       </td>
                       <td className="editGames__table-box editGames__table-box-check">
                         <FontAwesomeIcon

@@ -1,6 +1,6 @@
 import Header from "../../components/Globals/Header/Header";
 import Nav from "../../components/Globals/Nav/Nav";
-import TeamHeaderAdmin from "../../components/Admin/TeamHeaderAdmin/TeamHeaderAdmin";
+import AddGames from "../../components/Admin/AddGames/AddGames";
 import EditGames from "../../components/Admin/EditGames/EditGames";
 import Footer from "../../components/Globals/Footer/Footer";
 import axios from "axios";
@@ -27,6 +27,21 @@ const ManageGames = ({ authUser }) => {
     fetchGames();
   }, []);
 
+  const getIdByTeam = (teamName) => {
+    switch (teamName) {
+      case "Fogtown Leprechauns":
+        return 1;
+      case "Duck Island Saints":
+        return 2;
+      case "Mighty Moose":
+        return 3;
+      case "Kraken Beers":
+        return 4;
+      default:
+        return null;
+    }
+  };
+
   console.log(games);
 
   if (authUser === false) {
@@ -45,7 +60,8 @@ const ManageGames = ({ authUser }) => {
       <Header />
       <Nav />
       <main className="admin-main">
-        <EditGames games={games} fetchGames={fetchGames} />
+        <AddGames fetchGames={fetchGames} getIdByTeam={getIdByTeam} />
+        <EditGames games={games} fetchGames={fetchGames} getIdByTeam={getIdByTeam} />
       </main>
       <Footer />
     </section>

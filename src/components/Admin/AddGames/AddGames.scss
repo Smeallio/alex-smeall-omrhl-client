@@ -1,0 +1,107 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
+.addGames {
+  &__form {
+    @include flexbox(space-between, center, row, wrap);
+
+    &-date {
+      @include flexbox;
+      width: 60%;
+
+      @include tablet {
+        margin-bottom: 0;
+      }
+
+      @include desktop {
+        width: 16%;
+      }
+
+      & span {
+        margin-right: 0.75rem;
+      }
+    }
+    &-time {
+      width: 40%;
+
+      @include tablet {
+        text-align: left;
+      }
+
+      @include desktop {
+        width: 12%;
+      }
+
+      &-input {
+        @include input;
+        margin-left: 0.75rem;
+        width: 50%;
+
+        @include tablet {
+          margin-right: 0.75rem;
+          width: 40%;
+        }
+
+        @include desktop {
+          width: 40%;
+        }
+      }
+    }
+    &-team {
+      width: 100%;
+      margin-top: 0.75rem;
+
+      & span {
+        margin-right: 0.75rem;
+      }
+
+      &-input {
+        @include input;
+        width: 70%;
+      }
+
+      @include desktop {
+        width: 27%;
+        margin-top: 0;
+      }
+    }
+
+    &-button {
+      @include button;
+      margin: 0.75rem auto;
+      width: 90%;
+      max-width: 10rem;
+
+      @include tablet {
+        width: 50%;
+        margin-top: 0.75rem;
+      }
+
+      @include desktop {
+        width: 15%;
+      }
+    }
+
+    @include tablet {
+      max-width: 300px;
+    }
+
+    @include desktop {
+      max-width: 1200px;
+    }
+  }
+}
+
+.react-datepicker {
+  &__input-container input {
+    @include input;
+    width: 9rem;
+
+    @include tablet {
+      width: 7rem;
+    }
+  }
+  &-popper {
+    z-index: 3 !important;
+  }
+}
