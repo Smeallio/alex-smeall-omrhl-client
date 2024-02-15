@@ -105,9 +105,9 @@ const EditGames = ({ games, fetchGames, getIdByTeam }) => {
     }));
   };
 
-  const handleDateChange = date => {
-    setEditableGame({ ...editableGame, date })
-  }
+  const handleDateChange = (date) => {
+    setEditableGame({ ...editableGame, date });
+  };
 
   if (games === null) {
     return <p>Loading...</p>;
@@ -121,7 +121,7 @@ const EditGames = ({ games, fetchGames, getIdByTeam }) => {
           <table className="editGames__table">
             <caption className="editGames__table-title">Games</caption>
             <thead className="editGames__table-headers">
-              <tr>
+              <tr className="editGames__table-row">
                 <th scope="col">Date</th>
                 <th scope="col">Time</th>
                 <th scope="col">Complete?</th>
@@ -140,13 +140,19 @@ const EditGames = ({ games, fetchGames, getIdByTeam }) => {
                 <tr className="editGames__table-row" key={game.id}>
                   {editableGame.id === game.id ? (
                     <>
-                      <td className="editGames__table-box editGames__table-box-date">
+                      <td
+                        className="editGames__table-box editGames__table-box-date"
+                        data-label="Date"
+                      >
                         <CustomDatePicker
                           selectedDate={editableGame.date}
                           handleDateChange={handleDateChange}
                         />
                       </td>
-                      <td className="editGames__table-box editGames__table-box-time">
+                      <td
+                        className="editGames__table-box editGames__table-box-time"
+                        data-label="Time"
+                      >
                         <input
                           type="text"
                           name="time"
@@ -154,7 +160,10 @@ const EditGames = ({ games, fetchGames, getIdByTeam }) => {
                           onChange={handleInputChange}
                         ></input>
                       </td>
-                      <td className="editGames__table-box editGames__table-box-complete">
+                      <td
+                        className="editGames__table-box editGames__table-box-complete"
+                        data-label="Complete?"
+                      >
                         <input
                           type="checkbox"
                           name="complete"
@@ -163,7 +172,10 @@ const EditGames = ({ games, fetchGames, getIdByTeam }) => {
                           onChange={handleInputChange}
                         ></input>
                       </td>
-                      <td className="editGames__table-box editGames__table-box-team">
+                      <td
+                        className="editGames__table-box editGames__table-box-team"
+                        data-label="Team 1"
+                      >
                         <select
                           name="team1_name"
                           value={editableGame.team1_name}
@@ -204,7 +216,10 @@ const EditGames = ({ games, fetchGames, getIdByTeam }) => {
                           </option>
                         </select>
                       </td>
-                      <td className="editGames__table-box editGames__table-box-team-score">
+                      <td
+                        className="editGames__table-box editGames__table-box-team-score"
+                        data-label="Score"
+                      >
                         <input
                           type="text"
                           name="team1_score"
@@ -212,7 +227,10 @@ const EditGames = ({ games, fetchGames, getIdByTeam }) => {
                           onChange={handleInputChange}
                         ></input>
                       </td>
-                      <td className="editGames__table-box editGames__table-box-team">
+                      <td
+                        className="editGames__table-box editGames__table-box-team"
+                        data-label="Team 2"
+                      >
                         <select
                           name="team2_name"
                           value={editableGame.team3_name}
@@ -253,7 +271,10 @@ const EditGames = ({ games, fetchGames, getIdByTeam }) => {
                           </option>
                         </select>
                       </td>
-                      <td className="editGames__table-box editGames__table-box-team-score">
+                      <td
+                        className="editGames__table-box editGames__table-box-team-score"
+                        data-label="Score"
+                      >
                         <input
                           type="text"
                           name="team2_score"
@@ -261,19 +282,23 @@ const EditGames = ({ games, fetchGames, getIdByTeam }) => {
                           onChange={handleInputChange}
                         ></input>
                       </td>
-                      <td className="editGames__table-box editGames__table-box-result">
+                      <td
+                        className="editGames__table-box editGames__table-box-result"
+                        data-label="Result"
+                      >
                         {game.complete ? determineWinner(game) : " "}
                       </td>
-                      <td className="editGames__table-box editGames__table-box-check">
+                      <td
+                        className="editGames__table-box editGames__table-box-icons"
+                        data-label="Edit"
+                      >
                         <FontAwesomeIcon
-                          className="editGames__table-box-check-icon"
+                          className="editGames__table-box-icon editGames__table-box-icon-check"
                           icon={faCheck}
                           onClick={confirmEditGame}
                         />
-                      </td>
-                      <td className="editGames__table-box editGames__table-box-x">
                         <FontAwesomeIcon
-                          className="editGames__table-box-x-icon"
+                          className="editGames__table-box-icon editGames__table-box-icon-x"
                           icon={faXmark}
                           onClick={cancelEdit}
                         />
@@ -281,44 +306,69 @@ const EditGames = ({ games, fetchGames, getIdByTeam }) => {
                     </>
                   ) : (
                     <>
-                      <td className="editGames__table-box editGames__table-box-date">
-                        {game.date}
-                      </td>
-                      <td className="editGames__table-box editGames__table-box-time">
-                        {game.time}
-                      </td>
-                      <td className="editGames__table-box editGames__table-box-complete">
-                        {game.complete ? "Yes" : "No"}
-                      </td>
-                      <td className="editGames__table-box editGames__table-box-team">
-                        {game.team1_name}
-                      </td>
-                      <td className="editGames__table-box editGames__table-box-team-score">
-                        {game.team1_score ? game.team1_score : " "}
-                      </td>
-                      <td className="editGames__table-box editGames__table-box-team">
-                        {game.team2_name}
-                      </td>
-                      <td className="editGames__table-box editGames__table-box-team-score">
-                        {game.team2_score ? game.team2_score : " "}
-                      </td>
-                      <td className="editGames__table-box editGames__table-box-result">
-                        {game.complete ? determineWinner(game) : " "}
-                      </td>
-                      <td className="editGames__table-box editGames__table-box-edit">
-                        <FontAwesomeIcon
-                          className="editGames__table-box-edit-icon"
-                          icon={faPenToSquare}
-                          onClick={() => handleEditClick(game)}
-                        />
-                      </td>
-                      <td className="editGames__table-box editGames__table-box-delete">
-                        <FontAwesomeIcon
-                          className="editGames__table-box-delete-icon"
-                          icon={faTrashCan}
-                          onClick={() => handleDeleteGame(game.id)}
-                        />
-                      </td>
+                        <td
+                          className="editGames__table-box editGames__table-box-date"
+                          data-label="Date"
+                        >
+                          {game.date}
+                        </td>
+                        <td
+                          className="editGames__table-box editGames__table-box-time"
+                          data-label="Time"
+                        >
+                          {game.time}
+                        </td>
+                        <td
+                          className="editGames__table-box editGames__table-box-complete"
+                          data-label="Complete?"
+                        >
+                          {game.complete ? "Yes" : "No"}
+                        </td>
+                        <td
+                          className="editGames__table-box editGames__table-box-team"
+                          data-label="Team 1"
+                        >
+                          {game.team1_name}
+                        </td>
+                        <td
+                          className="editGames__table-box editGames__table-box-team-score"
+                          data-label="Score"
+                        >
+                          {game.team1_score ? game.team1_score : " "}
+                        </td>
+                        <td
+                          className="editGames__table-box editGames__table-box-team"
+                          data-label="Team 2"
+                        >
+                          {game.team2_name}
+                        </td>
+                        <td
+                          className="editGames__table-box editGames__table-box-team-score"
+                          data-label="Score"
+                        >
+                          {game.team2_score ? game.team2_score : " "}
+                        </td>
+                        <td
+                          className="editGames__table-box editGames__table-box-result"
+                          data-label="Result"
+                        >
+                          {game.complete ? determineWinner(game) : " "}
+                        </td>
+                        <td
+                          className="editGames__table-box editGames__table-box-icons"
+                          data-label="Edit"
+                        >
+                          <FontAwesomeIcon
+                            className="editGames__table-box-icon editGames__table-box-icon-edit"
+                            icon={faPenToSquare}
+                            onClick={() => handleEditClick(game)}
+                          />
+                          <FontAwesomeIcon
+                            className="editGames__table-box-icon editGames__table-box-icon-delete"
+                            icon={faTrashCan}
+                            onClick={() => handleDeleteGame(game.id)}
+                          />
+                        </td>
                     </>
                   )}
                 </tr>

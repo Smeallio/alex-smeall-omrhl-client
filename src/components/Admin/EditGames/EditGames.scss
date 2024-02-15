@@ -33,55 +33,81 @@
       position: sticky;
       top: 2rem;
       z-index: 2;
+
+      @include responsive-table {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+      }
     }
 
     &-row {
       border-top: 1px solid $black;
-      height: 2rem;
+
+      @include responsive-table {
+        padding-top: 0.75rem;
+        @include flexbox(space-between, center, row, wrap);
+        margin-bottom: 0.625em;
+        font-size: 0.875rem;
+      }
+
+      @include desktop {
+        height: 2rem;
+      }
     }
 
     &-box {
       text-align: center;
       padding: 0.25rem;
 
-      &-edit {
-        color: $omr-darkblue;
+      @include responsive-table {
+        text-align: right;
 
-        &-icon {
-          cursor: pointer;
+        &::before {
+          content: attr(data-label);
+          float: left;
+          font-weight: bold;
+          text-transform: uppercase;
+          margin-right: 1.25rem;
+        }
+
+        &[data-label="Edit"]::before {
+          content: "";
         }
       }
 
-      &-delete {
-        color: $omr-red;
-
-        &-icon {
-          cursor: pointer;
-        }
-
-        &-warning {
-          display: block;
-          color: $white;
-          background-color: $omr-red;
-          max-width: 6rem;
+      &-icons {
+        @include responsive-table {
+          @include flexbox(space-between);
+          width: 100%;
         }
       }
 
-      &-check {
-        color: $omr-darkblue;
-
-        &-icon {
-          cursor: pointer;
-          height: 1.25rem;
+      &-icon {
+        cursor: pointer;
+        @include responsive-table {
+          height: 1.5rem;
+          margin: 0 auto;
         }
-      }
 
-      &-x {
-        color: $omr-red;
+        @include tablet {
+            height: 1.25rem;
+        }
 
-        &-icon {
-          cursor: pointer;
-          height: 1.25rem;
+        &-edit,
+        &-check {
+          color: $omr-darkblue;
+          margin-right: 1.75rem;
+        }
+
+        &-delete,
+        &-x {
+          color: $omr-red;
         }
       }
 

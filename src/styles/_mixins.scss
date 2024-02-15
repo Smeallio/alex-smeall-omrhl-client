@@ -1,5 +1,11 @@
 @use "./variables" as *;
 
+@mixin responsive-table {
+  @media (max-width: 1279px) {
+    @content;
+  }
+}
+
 @mixin tablet {
   @media (min-width: 768px) {
     @content;

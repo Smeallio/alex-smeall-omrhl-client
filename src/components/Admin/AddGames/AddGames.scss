@@ -95,11 +95,8 @@
 .react-datepicker {
   &__input-container input {
     @include input;
-    width: 9rem;
+    width: 6.5rem;
 
-    @include tablet {
-      width: 7rem;
-    }
   }
   &-popper {
     z-index: 3 !important;
