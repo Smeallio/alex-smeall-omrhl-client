@@ -1,32 +1,45 @@
 import Header from "../../components/Globals/Header/Header";
 import Nav from "../../components/Globals/Nav/Nav";
 import GameDetails from "../../components/Admin/GameDetails/GameDetails";
+import GameStats from "../../components/Admin/GameStats/GameStats";
 import Footer from "../../components/Globals/Footer/Footer";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { getOneGame } from "../../utils/api-utils";
+import { getOneGame, getSkaterStats } from "../../utils/api-utils";
 import "./ManageStats.scss";
 
+
 const ManageStats = ({ authUser }) => {
-    const { gameId } = useParams();
+  const { gameId } = useParams();
 
-    const [game, setGame] = useState(null);
+  const [game, setGame] = useState(null);
+  const [skaterStats, setSkaterStats] = useState(null);
 
-    const fetchGame = async () => {
-      try {
-        const response = await axios.get(getOneGame(gameId));;
-        setGame(response.data);
-      } catch (err) {
-        console.log(err.message);
-      }
-    };
-  
-    useEffect(() => {
-      fetchGame();
-    }, []);
+  const fetchGame = async () => {
+    try {
+      const response = await axios.get(getOneGame(gameId));
+      setGame(response.data);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  const fetchSkaterStats = async () => {
+    try {
+      const response = await axios.get(getSkaterStats(gameId));
+      setSkaterStats(response.data);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchGame();
+    fetchSkaterStats();
+  }, []);
 
   if (authUser === false) {
     return (
@@ -40,17 +53,22 @@ const ManageStats = ({ authUser }) => {
   }
 
   if (game === null) {
-    return <p>Loading...</p>;
+    return (
+        <section className="background">
+          <Header />
+          <Nav />
+          <p>Loading...</p>
+          <Footer />
+        </section>
+      );
   }
-
-  console.log(game);
 
   return (
     <section className="background">
       <Header />
       <Nav />
       <main className="admin-main">
-      <section className="manageStats__header">
+        <section className="manageStats__header">
           <Link className="manageStats__return-link" to="/admin/dashboard/">
             <FontAwesomeIcon
               className="manageStats__return-link-back-icon"
@@ -62,6 +80,7 @@ const ManageStats = ({ authUser }) => {
           </Link>
         </section>
         <GameDetails game={game} />
+        <GameStats stats={skaterStats} />
       </main>
       <Footer />
     </section>

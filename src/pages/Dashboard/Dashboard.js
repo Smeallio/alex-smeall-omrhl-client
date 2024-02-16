@@ -23,8 +23,6 @@ const Dashboard = ({ authUser }) => {
     fetchGames();
   }, []);
 
-  console.log(games);
-
   if (authUser === false) {
     return (
       <section className="background">
@@ -74,7 +72,7 @@ const Dashboard = ({ authUser }) => {
               <h2 className="dashboard__subtitle">Update Boxscores</h2>
               <ul>
                 {games.map((game) => (
-                  <li>
+                  <li key={game.id}>
                     <Link
                       className="dashboard__link"
                       to={`/admin/dashboard/games/${game.id}`}

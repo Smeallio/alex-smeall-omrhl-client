@@ -13,3 +13,5 @@ export const postGame = () => API_URL + "/api/games/";
 export const getOneGame = (gameId) => API_URL + "/api/games/" + gameId;
 export const updateGame = (gameId) => API_URL + "/api/games/" + gameId;
 export const deleteGame = (gameId) => API_URL + "/api/games/" + gameId;
+
+export const getSkaterStats = (gameId) => API_URL + "/api/stats/skaters/" + gameId;

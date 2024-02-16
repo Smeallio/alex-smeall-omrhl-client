@@ -40,8 +40,6 @@ const ScoreBar = ({ games }) => {
     .slice(0, 2);
   const closestGames = [...completeGames, ...upcomingGames];
 
-  console.log(closestGames);
-
   return (
     <article className="scorebar" id="scorebar">
       <button
