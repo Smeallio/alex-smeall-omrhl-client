@@ -81,18 +81,18 @@ const TeamSked = () => {
           {games.map((game) => (
             <tr className="schedule__table-row" key={game.id}>
               <td
-                className="schedule__table-name"
+                className="schedule__table-date"
                 data-label="Date"
               >{`${game.date} @ ${game.time}`}</td>
-              <td className="schedule__table-stat" data-label="Opponent">
+              <td className="schedule__table-opp" data-label="Opponent">
                 {game.team1_team_id === teamId
                   ? game.team2_name
                   : game.team1_name}
               </td>
-              <td className="schedule__table-stat" data-label="Result">
+              <td className="schedule__table-res" data-label="Result">
                 {(game.complete &&
                   game.team1_team_id === teamId &&
-                  toTitleCase(game.team1_result) +
+                  toTitleCase(game.team1_result[0]) +
                     ": " +
                     game.team1_score +
                     " - " +
@@ -100,7 +100,7 @@ const TeamSked = () => {
                   ""}
                 {(game.complete &&
                   game.team2_team_id === teamId &&
-                  toTitleCase(game.team2_result) +
+                  toTitleCase(game.team2_result[0]) +
                     ": " +
                     game.team2_score +
                     " - " +

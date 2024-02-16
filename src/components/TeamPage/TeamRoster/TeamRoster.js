@@ -88,10 +88,10 @@ const TeamRoster = () => {
               <td className="roster__table-name" data-label="Name">
                 {player.name}
               </td>
-              <td className="roster__table-stat" data-label="No.">
+              <td className="roster__table-no" data-label="No.">
                 {player.number}
               </td>
-              <td className="roster__table-stat" data-label="Pos.">
+              <td className="roster__table-pos" data-label="Pos.">
                 {player.position}
               </td>
               {/* <td className="roster__table-stat" data-label="GP">
@@ -130,10 +130,10 @@ const TeamRoster = () => {
               <td className="roster__table-name" data-label="Name">
                 {player.name}
               </td>
-              <td className="roster__table-stat" data-label="No.">
+              <td className="roster__table-no" data-label="No.">
                 {player.number}
               </td>
-              <td className="roster__table-stat" data-label="Pos.">
+              <td className="roster__table-pos" data-label="Pos.">
                 {player.position}
               </td>
               {/* <td className="roster__table-stat" data-label="GP">

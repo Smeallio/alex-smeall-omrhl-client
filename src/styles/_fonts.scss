@@ -1,14 +1,17 @@
-
+@font-face {
+  font-family: "Rubik";
+  src: url(../assets/fonts/Rubik-Regular.ttf) format("truetype");
+  font-weight: 400;
+}
 
 @font-face {
-    font-family: "Lexend";
-    src: url(../assets/fonts/Lexend-Regular.ttf) format("truetype");
-    font-weight: 400;
-  }
-  
-  @font-face {
-    font-family: "Lexend";
-    src: url(../assets/fonts/Lexend-SemiBold.ttf) format("truetype");
-    font-weight: 600;
-  }
+  font-family: "Rubik";
+  src: url(../assets/fonts/Rubik-SemiBold.ttf) format("truetype");
+  font-weight: 600;
+}
 
+@font-face {
+  font-family: "Rubik";
+  src: url(../assets/fonts/Rubik-Bold.ttf) format("truetype");
+  font-weight: 700;
+}

@@ -13,15 +13,19 @@
 
     &-title {
       @include tableHeader(1.25rem);
+
+      @include tablet {
+        @include tableHeader(1.5rem, 1.75rem);
+      }
     }
 
     &-headers th {
+      @include columnheader;
       padding: 0.5rem 0;
     }
 
     &-row {
-      font-size: 0.875rem;
-      height: 1.5rem;
+      @include bigp;
     }
 
     &-row:nth-of-type(odd) {
@@ -30,16 +34,18 @@
 
     &-name {
       text-align: center;
-      padding-left: 0.75rem;
+      padding: 0.5rem 0 0.5rem 0.75rem;
+
     }
 
-    &-stat {
+    &-no {
       text-align: center;
-      padding: 0 0.25rem;
+      padding: 0.5rem;
+    }
 
-      &:last-of-type {
-        padding-right: 0.5rem;
-      }
+    &-pos {
+      text-align: center;
+      padding: 0.5rem 0.75rem 0.5rem 0;
     }
   }
 

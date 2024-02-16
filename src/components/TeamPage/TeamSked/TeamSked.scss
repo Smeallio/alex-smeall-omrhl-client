@@ -16,28 +16,41 @@
     }
 
     &-headers th {
+      @include columnheader;
       padding: 0.5rem 0;
     }
 
     &-row {
-      font-size: 0.875rem;
-      height: 1.5rem;
+      @include bigp;
     }
 
     &-row:nth-of-type(odd) {
       background-color: $omr-grey;
     }
 
-    &-name {
-      padding-left: 0.75rem;
+    &-date {
+      padding: 0.5rem 0 0.5rem 0.25rem;
+
+      @include tablet {
+        text-align: center;
+      }
     }
 
-    &-stat {
+    &-opp {
       text-align: center;
-      padding: 0 0.25rem;
+      padding: 0.5rem;
 
       &:last-of-type {
         padding-right: 0.5rem;
+      }
+    }
+
+    &-res {
+      text-align: right;
+      padding: 0.5rem 0.25rem 0.5rem 0;
+
+      @include tablet {
+        text-align: center;
       }
     }
   }

@@ -9,7 +9,7 @@
 
     @include tablet {
       @include flexbox(space-between, center, row);
-      margin: 0 3rem;
+      margin: 0 2rem;
     }
 
     @include desktop {

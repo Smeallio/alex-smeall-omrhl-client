@@ -12,9 +12,8 @@
         }
 
         &-teamname {
-            font-size: 1.75rem;
+            @include teamh1;
             margin-left: 1rem;
-            font-weight: 600;
         }
     }
 

@@ -104,7 +104,7 @@ const ScoreBar = ({ games }) => {
                   src={getImageByTeamId(game.team1_team_id)}
                   alt={game.team1_name}
                 />
-                <p className="scorebar__box-body-text">vs</p>
+                <p className="scorebar__box-body-text">&nbsp;vs&nbsp;</p>
                 <img
                   className="scorebar__box-body-img"
                   src={getImageByTeamId(game.team2_team_id)}

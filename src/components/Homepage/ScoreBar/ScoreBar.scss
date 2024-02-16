@@ -55,9 +55,6 @@
     margin: 0 0.75rem;
     border-radius: 5px;
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.65) inset;
-    // box-shadow: 0 1px 1px rgba(0,0,0,0.11), 0 2px 2px rgba(0,0,0,0.11),
-    //   0 4px 4px rgba(0,0,0,0.11), 0 8px 8px rgba(0,0,0,0.11),
-    //   0 16px 16px rgba(0,0,0,0.11), 0 32px 32px rgba(0,0,0,0.11);
 
     &:first-of-type {
       margin-left: 0;
@@ -69,15 +66,8 @@
 
     &-header {
       @include flexbox(center);
-      @include tableHeader;
-
-      @include desktop {
-        font-size: 1rem;
-      }
-
-      &-text {
-        @include bigp;
-      }
+      @include tableHeader(0.875rem, 1.25rem);
+      box-shadow: 0 6px 8px rgba(0,0,0,0.165);
     }
 
     &-body {
@@ -88,7 +78,7 @@
         height: 2rem;
 
         @include desktop {
-            height: 2.25rem;
+            height: 2.5rem;
         }
       }
 
@@ -113,7 +103,7 @@
     }
 
     @include desktop {
-        min-width: 11rem;
+        min-width: 12rem;
     }
   }
 
