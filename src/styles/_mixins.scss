@@ -73,6 +73,20 @@
   }
 }
 
+@mixin h2 {
+  font-family: $Rubik;
+  font-size: 1.125rem;
+  font-weight: 600;
+
+  @include tablet {
+    font-size: 1.5rem;
+  }
+
+  @include desktop {
+    font-size: 2rem;
+  }
+}
+
 @mixin teamh1 {
   font-family: $Rubik;
   font-size: 1.75rem;

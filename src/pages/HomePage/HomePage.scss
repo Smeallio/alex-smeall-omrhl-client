@@ -4,7 +4,7 @@
 .background {
   height: 90%;
   min-height: 90vh;
-  padding-bottom: 7.5rem;
+  padding-bottom: 17.5rem;
   position: relative;
 }
 
@@ -12,7 +12,7 @@
   background-color: $white;
   &__stand-announce {
     @include tablet {
-      @include flexbox(center, flex-start, row-reverse);
+      @include flexbox(space-between, flex-start, row-reverse);
       padding: 0 2rem;
     }
 

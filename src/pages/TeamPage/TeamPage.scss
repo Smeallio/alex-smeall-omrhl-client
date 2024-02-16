@@ -4,7 +4,7 @@
 .background {
   height: 90%;
   min-height: 90vh;
-  padding-bottom: 7.5rem;
+  padding-bottom: 17.5rem;
   position: relative;
 }
 
@@ -12,7 +12,9 @@
   background-color: $white;
   @include desktop {
     &__ros-sked {
-      @include flexbox(flex-start, flex-start);
+      @include flexbox(space-between, flex-start);
+      max-width: 1400px;
+      margin: 0 auto;
     }
   }
 }
