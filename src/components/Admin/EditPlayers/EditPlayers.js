@@ -71,7 +71,7 @@ const EditPlayers = ({ players, teamId, fetchPlayers }) => {
         <form className="editPlayers__form" onSubmit={confirmEditPlayer}>
           <table className="editPlayers__table">
             <caption className="editPlayers__table-title">
-              Roster & Statistics (Skaters)
+              Current Roster
             </caption>
             <thead className="editPlayers__table-headers">
               <tr>
@@ -100,7 +100,7 @@ const EditPlayers = ({ players, teamId, fetchPlayers }) => {
                         <input
                           type="number"
                           name="number"
-                          value={editablePlayer.number}
+                          value={editablePlayer.number == 0 ? "" : editablePlayer.number}
                           onChange={handleInputChange}
                         />
                       </td>
@@ -136,7 +136,7 @@ const EditPlayers = ({ players, teamId, fetchPlayers }) => {
                         {player.name}
                       </td>
                       <td className="editPlayers__table-box editPlayers__table-box-number">
-                        {player.number}
+                        {player.number == 0 ? "" : player.number}
                       </td>
                       <td className="editPlayers__table-box editPlayers__table-position">
                         {player.position}

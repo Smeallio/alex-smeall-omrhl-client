@@ -1,0 +1,71 @@
+import Header from "../../components/Globals/Header/Header";
+import Nav from "../../components/Globals/Nav/Nav";
+import GameDetails from "../../components/Admin/GameDetails/GameDetails";
+import Footer from "../../components/Globals/Footer/Footer";
+import axios from "axios";
+import { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { getOneGame } from "../../utils/api-utils";
+import "./ManageStats.scss";
+
+const ManageStats = ({ authUser }) => {
+    const { gameId } = useParams();
+
+    const [game, setGame] = useState(null);
+
+    const fetchGame = async () => {
+      try {
+        const response = await axios.get(getOneGame(gameId));;
+        setGame(response.data);
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+  
+    useEffect(() => {
+      fetchGame();
+    }, []);
+
+  if (authUser === false) {
+    return (
+      <section className="background">
+        <Header />
+        <Nav />
+        <p>You must be logged in to view this page</p>
+        <Footer />
+      </section>
+    );
+  }
+
+  if (game === null) {
+    return <p>Loading...</p>;
+  }
+
+  console.log(game);
+
+  return (
+    <section className="background">
+      <Header />
+      <Nav />
+      <main className="admin-main">
+      <section className="manageStats__header">
+          <Link className="manageStats__return-link" to="/admin/dashboard/">
+            <FontAwesomeIcon
+              className="manageStats__return-link-back-icon"
+              icon={faArrowLeft}
+            />
+            <h1 className="manageStats__return-link-text">
+              Return to Dashboard
+            </h1>
+          </Link>
+        </section>
+        <GameDetails game={game} />
+      </main>
+      <Footer />
+    </section>
+  );
+};
+
+export default ManageStats;

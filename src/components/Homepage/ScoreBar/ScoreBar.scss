@@ -68,6 +68,10 @@
       @include flexbox(center);
       @include tableHeader(0.875rem, 1.25rem);
       box-shadow: 0 0px 8px rgba(0,0,0,0.65);
+
+      @include desktop {
+        @include tableHeader(1rem, 1.375rem);
+      }
     }
 
     &-body {

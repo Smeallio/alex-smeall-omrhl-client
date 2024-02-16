@@ -5,10 +5,11 @@ export const postPlayer = (teamId) => API_URL + "/api/players/" + teamId;
 export const updatePlayer = (playerId) => API_URL + "/api/players/" + playerId;
 export const deletePlayer = (playerId) => API_URL + "/api/players/" + playerId;
 
-export const getUsers = () => API_URL + "/api/users/"
-export const logInUser = () => API_URL + "/api/users/login"
+export const getUsers = () => API_URL + "/api/users/";
+export const logInUser = () => API_URL + "/api/users/login";
 
-export const getGames = () => API_URL + "/api/games/"
-export const postGame = () => API_URL + "/api/games/"
-export const updateGame = (gameId) => API_URL + "/api/games/" + gameId
-export const deleteGame = (gameId) => API_URL + "/api/games/" + gameId
+export const getGames = () => API_URL + "/api/games/";
+export const postGame = () => API_URL + "/api/games/";
+export const getOneGame = (gameId) => API_URL + "/api/games/" + gameId;
+export const updateGame = (gameId) => API_URL + "/api/games/" + gameId;
+export const deleteGame = (gameId) => API_URL + "/api/games/" + gameId;

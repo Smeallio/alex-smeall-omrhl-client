@@ -12,6 +12,10 @@
 
     &-title {
       @include tableHeader(1.25rem);
+
+      @include desktop {
+        @include tableHeader(1.375rem, 1.75rem);
+      }
     }
 
     &-headers th {

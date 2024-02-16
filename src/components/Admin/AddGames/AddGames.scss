@@ -2,6 +2,9 @@
 @use "../../../styles/mixins" as *;
 
 .addGames {
+  &__header {
+    margin: 0.5rem 0 1.5rem;
+  }
   &__form {
     @include flexbox(space-between, center, row, wrap);
 
@@ -96,7 +99,6 @@
   &__input-container input {
     @include input;
     width: 6.5rem;
-
   }
   &-popper {
     z-index: 3 !important;

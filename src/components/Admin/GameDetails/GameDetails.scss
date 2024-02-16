@@ -1,0 +1,19 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
+.gameDetails {
+  &__block {
+    @include flexbox(flex-start, baseline);
+
+    &-header {
+      @include h3;
+      margin: 0.25rem 0;
+    }
+
+    &-text {
+      @include bigp;
+      padding-left: 1rem;
+      margin: 0.25rem 0;
+    }
+  }
+}

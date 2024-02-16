@@ -2,27 +2,41 @@
 @use "../../styles/mixins" as *;
 
 .background {
-    height: 90%;
-    min-height: 90vh;
-    position: relative;
-    padding-bottom: 17.5rem;
-    background-color: $omr-grey
+  height: 90%;
+  min-height: 90vh;
+  position: relative;
+  padding-bottom: 17.5rem;
+  background-color: $omr-grey;
 }
 
-.dashboard { 
-    &__title {
-        font-size: 1.75rem;
-    }
+.dashboard {
+  &__flex {
+    @include desktop {
+      @include flexbox(flex-start, flex-start);
 
-    &__subtitle {
-        font-size: 1.375rem
-    }
+      &-teams-games {
+        width: 25%;
+      }
 
-    &__link {
-        display: block;
-        text-decoration: none;
-        color: $omr-darkblue;
-        font-size: 1.125rem;
-        padding: 0.25rem 0;
+      &-boxscores {
+        width: 75%;
+      }
     }
+  }
+
+  &__title {
+    font-size: 1.75rem;
+  }
+
+  &__subtitle {
+    font-size: 1.375rem;
+  }
+
+  &__link {
+    display: block;
+    text-decoration: none;
+    color: $omr-darkblue;
+    font-size: 1.125rem;
+    padding: 0.25rem 0;
+  }
 }
