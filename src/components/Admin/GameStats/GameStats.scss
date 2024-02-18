@@ -1,0 +1,98 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
+.editStats {
+  width: 100%;
+  overflow: hidden;
+
+  &__block {
+    max-height: 550px;
+    position: relative;
+    margin-top: 1.5rem;
+    overflow-x: auto;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    z-index: 1;
+
+    &-title {
+      @include tableHeader(1.25rem);
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+
+    &-headers {
+      background-color: $white;
+      height: 2rem;
+      position: sticky;
+      top: 2rem;
+      z-index: 2;
+    }
+
+    &-row {
+      border-bottom: 1px solid $black;
+      height: 2rem;
+    }
+
+    &-box {
+      text-align: center;
+      padding: 0.25rem;
+
+      &-edit {
+        color: $omr-darkblue;
+
+        &-icon {
+          cursor: pointer;
+        }
+      }
+
+      &-delete {
+        color: $omr-red;
+
+        &-icon {
+          cursor: pointer;
+        }
+
+        &-warning {
+          display: block;
+          color: $white;
+          background-color: $omr-red;
+          max-width: 6rem;
+        }
+      }
+
+      &-check {
+        color: $omr-darkblue;
+
+        &-icon {
+          cursor: pointer;
+          height: 1.25rem;
+        }
+      }
+
+      &-x {
+        color: $omr-red;
+
+        &-icon {
+          cursor: pointer;
+          height: 1.25rem;
+        }
+      }
+
+      & input,
+      select {
+        @include input;
+      }
+    }
+
+    &-number input {
+      width: 2rem;
+    }
+  }
+}

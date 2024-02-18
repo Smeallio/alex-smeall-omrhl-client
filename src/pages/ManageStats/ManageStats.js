@@ -11,7 +11,6 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { getOneGame, getSkaterStats } from "../../utils/api-utils";
 import "./ManageStats.scss";
 
-
 const ManageStats = ({ authUser }) => {
   const { gameId } = useParams();
 
@@ -54,14 +53,26 @@ const ManageStats = ({ authUser }) => {
 
   if (game === null) {
     return (
-        <section className="background">
-          <Header />
-          <Nav />
-          <p>Loading...</p>
-          <Footer />
-        </section>
-      );
+      <section className="background">
+        <Header />
+        <Nav />
+        <p>Loading...</p>
+        <Footer />
+      </section>
+    );
   }
+
+  const skaterStatsTeamOne = (game, skaterStats) => {
+    return skaterStats.filter(
+      (skater) => skater.team_id === game.team1_team_id
+    );
+  };
+
+  const skaterStatsTeamTwo = (game, skaterStats) => {
+    return skaterStats.filter(
+      (skater) => skater.team_id === game.team2_team_id
+    );
+  };
 
   return (
     <section className="background">
@@ -80,7 +91,16 @@ const ManageStats = ({ authUser }) => {
           </Link>
         </section>
         <GameDetails game={game} />
-        <GameStats stats={skaterStats} />
+        <section className="manageStats__team-columns">
+          <GameStats
+            team={game.team1_team_id}
+            skaters={skaterStatsTeamOne(game, skaterStats)}
+          />
+          <GameStats
+            team={game.team2_team_id}
+            skaters={skaterStatsTeamTwo(game, skaterStats)}
+          />
+        </section>
       </main>
       <Footer />
     </section>

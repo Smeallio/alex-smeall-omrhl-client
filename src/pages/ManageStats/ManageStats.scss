@@ -29,4 +29,10 @@
       padding-right: 0.5rem;
     }
   }
+
+  &__team-columns {
+    @include desktop {
+        @include flexbox(space-between, flex-start, row, nowrap, 3rem);
+    }
+  }
 }
