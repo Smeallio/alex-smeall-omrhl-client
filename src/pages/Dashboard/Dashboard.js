@@ -67,6 +67,10 @@ const Dashboard = ({ authUser }) => {
               <Link className="dashboard__link" to="/admin/dashboard/games">
                 Scores & Schedule
               </Link>
+              <h2 className="dashboard__subtitle">Update Announcements</h2>
+              <Link className="dashboard__link" to="/admin/dashboard/games">
+                Announcements
+              </Link>
             </section>
             <section className="dashboard__flex-boxscores">
               <h2 className="dashboard__subtitle">Update Boxscores</h2>

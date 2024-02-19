@@ -63,15 +63,19 @@ const ManageStats = ({ authUser }) => {
   }
 
   const skaterStatsTeamOne = (game, skaterStats) => {
-    return skaterStats.filter(
-      (skater) => skater.team_id === game.team1_team_id
-    );
+    if (game !== null) {
+      return skaterStats.filter(
+        (skater) => skater.team_id === game.team1_team_id
+      );
+    }
   };
 
   const skaterStatsTeamTwo = (game, skaterStats) => {
-    return skaterStats.filter(
-      (skater) => skater.team_id === game.team2_team_id
-    );
+    if (game !== null) {
+      return skaterStats.filter(
+        (skater) => skater.team_id === game.team2_team_id
+      );
+    }
   };
 
   return (
