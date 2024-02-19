@@ -38,7 +38,7 @@ const ManageStats = ({ authUser }) => {
   useEffect(() => {
     fetchGame();
     fetchSkaterStats();
-  }, []);
+  }, [fetchGame, fetchSkaterStats]);
 
   if (authUser === false) {
     return (

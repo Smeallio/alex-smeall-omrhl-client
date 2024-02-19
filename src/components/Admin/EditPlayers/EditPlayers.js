@@ -100,7 +100,7 @@ const EditPlayers = ({ players, teamId, fetchPlayers }) => {
                         <input
                           type="number"
                           name="number"
-                          value={editablePlayer.number == 0 ? "" : editablePlayer.number}
+                          value={editablePlayer.number === 0 ? "" : editablePlayer.number}
                           onChange={handleInputChange}
                         />
                       </td>
@@ -136,7 +136,7 @@ const EditPlayers = ({ players, teamId, fetchPlayers }) => {
                         {player.name}
                       </td>
                       <td className="editPlayers__table-box editPlayers__table-box-number">
-                        {player.number == 0 ? "" : player.number}
+                        {player.number === 0 ? "" : player.number}
                       </td>
                       <td className="editPlayers__table-box editPlayers__table-position">
                         {player.position}

@@ -43,6 +43,17 @@ const ManageGames = ({ authUser }) => {
     }
   };
 
+  if (games === null) {
+    return (
+      <section className="background">
+        <Header />
+        <Nav />
+        <p>Loading...</p>
+        <Footer />
+      </section>
+    );
+  }
+
   console.log(games);
 
   if (authUser === false) {

@@ -2,9 +2,25 @@ import saintsLogo from "../../../assets/images/logos/Duck-Island-Saints-vector.p
 import krakenLogo from "../../../assets/images/logos/Kraken-Beers-vector.png";
 import lepLogo from "../../../assets/images/logos/Leprechauns-vector.png";
 import mooseLogo from "../../../assets/images/logos/Moose-vector.png";
+import axios from "axios";
+import { useState, useEffect } from "react";
+import { getStandings } from "../../../utils/api-utils";
 import "./Standings.scss";
 
 const Standings = ({ games }) => {
+  const [standings, setStandings] = useState(null);
+  const fetchStandings = async () => {
+    try {
+      const response = await axios.get(getStandings());
+      setStandings(response.data)
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchStandings();
+  }, []);
 
   const getImageByTeamName = (teamName) => {
     switch (teamName) {
@@ -36,48 +52,11 @@ const Standings = ({ games }) => {
     }
   }
 
-  if (games === null) {
+  if (standings === null) {
     return <p>Loading...</p>;
   }
-  
-  const teamResults = {};
-  
-  games.forEach((game) => {
-    if (!teamResults[game.team1_name]) {
-      teamResults[game.team1_name] = { win: 0, loss: 0, tie: 0 };
-    }
-  
-    if (game.team1_result === "win") {
-      teamResults[game.team1_name].win++;
-    } else if (game.team1_result === "loss") {
-      teamResults[game.team1_name].loss++;
-    } else if (game.team1_result === "tie") {
-      teamResults[game.team1_name].tie++;
-    }
 
-    if (!teamResults[game.team2_name]) {
-      teamResults[game.team2_name] = { win: 0, loss: 0, tie: 0 };
-    }
-  
-    if (game.team2_result === "win") {
-      teamResults[game.team2_name].win++;
-    } else if (game.team2_result === "loss") {
-      teamResults[game.team2_name].loss++;
-    } else if (game.team2_result === "tie") {
-      teamResults[game.team2_name].tie++;
-    }
-  });
-
-  const standingsArray = Object.keys(teamResults).map((teamName) => ({
-    name: teamName,
-    id: getIdByTeam(teamName),
-    wins: teamResults[teamName].win,
-    losses: teamResults[teamName].loss,
-    ties: teamResults[teamName].tie,
-    totalPoints: teamResults[teamName].win * 2 + teamResults[teamName].tie *1
-  }))
-
-  standingsArray.sort((a,b) => b.totalPoints - a.totalPoints);
+  standings.sort((a,b) => b.points - a.points);
 
   return (
     <article className="standings">
@@ -86,6 +65,7 @@ const Standings = ({ games }) => {
         <thead className="standings__table-headers">
           <tr>
             <th scope="col" colSpan="2">Team</th>
+            <th scope="col">GP</th>
             <th scope="col">W</th>
             <th scope="col">L</th>
             <th scope="col">T</th>
@@ -93,12 +73,13 @@ const Standings = ({ games }) => {
           </tr>
         </thead>
         <tbody>
-          {standingsArray.map((team) => (
-            <tr className="standings__table-row" key={team.id}>
+          {standings.map((team) => (
+            <tr className="standings__table-row" key={team.team_name}>
               <td className="standings__table-team" data-label="Team">
-                <img className="standings__table-img" src={getImageByTeamName(team.name)} alt={team.name} />
+                <img className="standings__table-img" src={getImageByTeamName(team.team_name)} alt={team.team_name} />
               </td>
-              <td className="standings__table-name" data-label="Team">{team.name}</td>
+              <td className="standings__table-name" data-label="Team">{team.team_name}</td>
+              <td className="standings__table-wltp" data-label="W">{team.games_played}</td>
               <td className="standings__table-wltp" data-label="W">{team.wins}</td>
               <td className="standings__table-wltp" data-label="L">{team.losses}</td>
               <td className="standings__table-wltp" data-label="T">{team.ties}</td>
