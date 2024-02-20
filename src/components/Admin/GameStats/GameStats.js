@@ -3,14 +3,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { updateSkaterStat } from "../../../utils/api-utils";
+import { updateSkaterStat, getSkaterStats } from "../../../utils/api-utils";
 import "./GameStats.scss";
 
-const GameStats = ({ team, skaters, fetchSkaterStats }) => {
+const GameStats = ({ team, skaters }) => {
   const { gameId } = useParams();
 
+  const [skaterStats, setSkaterStats] = useState(null);
   // const [confirmDelete, setConfirmDelete] = useState(null);
   const [editableSkater, setEditableSkater] = useState(0);
 
@@ -26,6 +27,33 @@ const GameStats = ({ team, skaters, fetchSkaterStats }) => {
         return "Kraken Beers";
       default:
         return null;
+    }
+  };
+
+  const fetchSkaterStats = async () => { 
+    try {
+      const response = await axios.get(getSkaterStats(gameId));
+      setSkaterStats(response.data);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchSkaterStats();
+  }, []);
+
+  if (skaterStats === null) {
+    return (
+        <p>Loading...</p>
+    )
+  }
+
+  const filterSkaterTeam = (team, skaterStats) => {
+    if (team && skaterStats) {
+      return skaterStats.filter(
+        (skater) => skater.team_id === team
+      );
     }
   };
 
@@ -53,7 +81,6 @@ const GameStats = ({ team, skaters, fetchSkaterStats }) => {
     const updatedSkaterStat = {
       player_id: editableSkater.player_id,
       team_id: editableSkater.team_id,
-      game_id: gameId,
       goals: editableSkater.goals,
       assists: editableSkater.assits
     };
@@ -72,8 +99,6 @@ const GameStats = ({ team, skaters, fetchSkaterStats }) => {
       [event.target.name]: event.target.value,
     }));
   };
-
-  console.log(skaters);
 
   return (
     <article className="editStats">
@@ -94,7 +119,7 @@ const GameStats = ({ team, skaters, fetchSkaterStats }) => {
               </tr>
             </thead>
             <tbody>
-              {skaters.map((skater) => (
+              {filterSkaterTeam(team, skaterStats).map((skater) => (
                 <tr className="editStats__table-row" key={skater.id}>
                   {editableSkater.id === skater.id ? (
                     <>

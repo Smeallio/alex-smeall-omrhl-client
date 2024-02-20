@@ -8,14 +8,13 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { getOneGame, getSkaterStats } from "../../utils/api-utils";
+import { getOneGame } from "../../utils/api-utils";
 import "./ManageStats.scss";
 
 const ManageStats = ({ authUser }) => {
   const { gameId } = useParams();
 
   const [game, setGame] = useState(null);
-  const [skaterStats, setSkaterStats] = useState(null);
 
   const fetchGame = async () => {
     try {
@@ -26,18 +25,8 @@ const ManageStats = ({ authUser }) => {
     }
   };
 
-  const fetchSkaterStats = async () => { //Should I move this down one level?
-    try {
-      const response = await axios.get(getSkaterStats(gameId));
-      setSkaterStats(response.data);
-    } catch (err) {
-      console.log(err.message);
-    }
-  };
-
   useEffect(() => {
     fetchGame();
-    fetchSkaterStats();
   }, []);
 
   if (authUser === false) {
@@ -51,7 +40,7 @@ const ManageStats = ({ authUser }) => {
     );
   }
 
-  if (skaterStats === null) {
+  if (game === null) {
     return (
       <section className="background">
         <Header />
@@ -61,22 +50,6 @@ const ManageStats = ({ authUser }) => {
       </section>
     );
   }
-
-  const skaterStatsTeamOne = (game, skaterStats) => {
-    if (game && skaterStats) {
-      return skaterStats.filter(
-        (skater) => skater.team_id === game.team1_team_id
-      );
-    }
-  };
-
-  const skaterStatsTeamTwo = (game, skaterStats) => {
-    if (game && skaterStats) {
-      return skaterStats.filter(
-        (skater) => skater.team_id === game.team2_team_id
-      );
-    }
-  };
 
   return (
     <section className="background">
@@ -98,13 +71,9 @@ const ManageStats = ({ authUser }) => {
         <section className="manageStats__team-columns">
           <GameStats
             team={game.team1_team_id}
-            skaters={skaterStatsTeamOne(game, skaterStats)}
-            fetchSkaterStats={fetchSkaterStats}
           />
           <GameStats
             team={game.team2_team_id}
-            skaters={skaterStatsTeamTwo(game, skaterStats)}
-            fetchSkaterStats={fetchSkaterStats}
           />
         </section>
       </main>
