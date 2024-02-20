@@ -5,15 +5,27 @@ import { faPenToSquare, faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import axios from "axios";
 import { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
-import { updateSkaterStat, getSkaterStats } from "../../../utils/api-utils";
-import "./GameStats.scss";
+import {
+  getSkaterStats,
+  getPlayersByTeam,
+  addSkaterStat,
+  updateSkaterStat,
+} from "../../../utils/api-utils";
+import "./SkaterStats.scss";
 
-const GameStats = ({ team, skaters }) => {
+const SkaterStats = ({ team }) => {
   const { gameId } = useParams();
 
   const [skaterStats, setSkaterStats] = useState(null);
-  // const [confirmDelete, setConfirmDelete] = useState(null);
+  const [newSkaterStat, setNewSkaterStat] = useState({
+    player_id: "",
+    goals: "",
+    assists: "",
+  });
+  const [players, setPlayers] = useState(null);
   const [editableSkater, setEditableSkater] = useState(0);
+  // const [confirmDelete, setConfirmDelete] = useState(null);
+  const [showAddStat, setShowAddStat] = useState(false);
 
   const getTeamById = (teamId) => {
     switch (teamId) {
@@ -30,7 +42,24 @@ const GameStats = ({ team, skaters }) => {
     }
   };
 
-  const fetchSkaterStats = useCallback(async () => { 
+  const fetchPlayers = useCallback(async () => {
+    try {
+      const response = await axios.get(getPlayersByTeam(team));
+      setPlayers(response.data);
+    } catch (err) {
+      console.log(err.message);
+    }
+  }, [team]);
+
+  useEffect(() => {
+    const fetchAndSetPlayers = async () => {
+      await fetchPlayers();
+    };
+
+    fetchAndSetPlayers();
+  }, [team, fetchPlayers]);
+
+  const fetchSkaterStats = useCallback(async () => {
     try {
       const response = await axios.get(getSkaterStats(gameId));
       setSkaterStats(response.data);
@@ -49,26 +78,22 @@ const GameStats = ({ team, skaters }) => {
   }, [gameId, fetchSkaterStats]);
 
   if (skaterStats === null) {
-    return (
-        <p>Loading...</p>
-    )
+    return <p>Loading...</p>;
   }
 
   const filterSkaterTeam = (team, skaterStats) => {
     if (team && skaterStats) {
-      return skaterStats.filter(
-        (skater) => skater.team_id === team
-      );
+      return skaterStats.filter((skater) => skater.team_id === team);
     }
   };
 
-//   const handleDeleteStat = async (skaterId) => {
-//     setConfirmDelete(skaterId);
-//   };
+  //   const handleDeleteStat = async (skaterId) => {
+  //     setConfirmDelete(skaterId);
+  //   };
 
-//   const cancelDelete = () => {
-//     setConfirmDelete(null);
-//   };
+  //   const cancelDelete = () => {
+  //     setConfirmDelete(null);
+  //   };
 
   // Delete API call
 
@@ -85,10 +110,11 @@ const GameStats = ({ team, skaters }) => {
     event.preventDefault();
     const updatedSkaterStat = {
       player_id: editableSkater.player_id,
-      team_id: editableSkater.team_id,
+      team_id: team,
       goals: editableSkater.goals,
-      assists: editableSkater.assits
+      assists: editableSkater.assists,
     };
+    console.log(updatedSkaterStat);
     try {
       await axios.put(updateSkaterStat(editableSkater.id), updatedSkaterStat);
       fetchSkaterStats();
@@ -98,9 +124,60 @@ const GameStats = ({ team, skaters }) => {
     setEditableSkater(0);
   };
 
-  const handleInputChange = (event) => {
+  const handleEditInputChange = (event) => {
     setEditableSkater((prevEditableSkater) => ({
       ...prevEditableSkater,
+      [event.target.name]: event.target.value,
+    }));
+  };
+
+  if (players === null) {
+    return <p>Loading...</p>;
+  }
+
+  const getPlayerNameById = (playerId) => {
+    const player = players.find((player) => player.id === playerId);
+    if (player) {
+      return player.name;
+    } else {
+      return "Player not found";
+    }
+  };
+
+  const handleAddStatClick = () => {
+    setShowAddStat(true);
+  };
+
+  const cancelAddSkaterStat = () => {
+    setShowAddStat(false);
+  };
+
+  const confirmAddSkaterStat = async (event) => {
+    event.preventDefault();
+    const newSkaterStatAdd = {
+      player_id: newSkaterStat.player_id,
+      team_id: team,
+      goals: newSkaterStat.goals,
+      assists: newSkaterStat.assists,
+    };
+    console.log(newSkaterStatAdd);
+    try {
+      await axios.put(addSkaterStat(gameId), newSkaterStatAdd);
+      fetchSkaterStats();
+      setNewSkaterStat({
+        player_id: "",
+        goals: "",
+        assists: "",
+      });
+    } catch (err) {
+      console.log("Error updating player: ", err);
+    }
+    setEditableSkater(0);
+  };
+
+  const handleAddInputChange = (event) => {
+    setNewSkaterStat((prevNewSkater) => ({
+      ...prevNewSkater,
       [event.target.name]: event.target.value,
     }));
   };
@@ -129,27 +206,32 @@ const GameStats = ({ team, skaters }) => {
                   {editableSkater.id === skater.id ? (
                     <>
                       <td className="editStats__table-box editStats__table-box-name">
-                        <input
-                          type="text"
-                          name="player_name"
-                          value={editableSkater.player_name}
-                          onChange={handleInputChange}
-                        />
+                        <select
+                          name="player_id"
+                          value={editableSkater.player_id}
+                          onChange={handleEditInputChange}
+                        >
+                          {players.map((player) => (
+                            <option key={player.id} value={player.id}>
+                              {getPlayerNameById(player.id)}
+                            </option>
+                          ))}
+                        </select>
                       </td>
                       <td className="editStats__table-box editStats__table-box-goals">
                         <input
-                          type="integer"
+                          type="number"
                           name="goals"
                           value={editableSkater.goals}
-                          onChange={handleInputChange}
+                          onChange={handleEditInputChange}
                         />
                       </td>
                       <td className="editStats__table-box editStats__table-box-assists">
                         <input
-                          type="integer"
+                          type="number"
                           name="assists"
                           value={editableSkater.assists}
-                          onChange={handleInputChange}
+                          onChange={handleEditInputChange}
                         />
                       </td>
                       <td className="editStats__table-box editStats__table-box-check">
@@ -189,7 +271,7 @@ const GameStats = ({ team, skaters }) => {
                         <FontAwesomeIcon
                           className="editStats__table-box-delete-icon"
                           icon={faTrashCan}
-                        //   onClick={() => handleDeleteStat(skater)}
+                          //   onClick={() => handleDeleteStat(skater)}
                         />
                       </td>
                     </>
@@ -197,11 +279,63 @@ const GameStats = ({ team, skaters }) => {
                 </tr>
               ))}
             </tbody>
+            {showAddStat && (
+              <tfoot>
+                <tr className="editStats__table-row">
+                  <td className="editStats__table-box editStats__table-box-name">
+                    <select
+                      name="player_id"
+                      value={newSkaterStat.player_id}
+                      onChange={handleAddInputChange}
+                    >
+                      {players.map((player) => (
+                        <option key={player.id} value={player.id}>
+                          {getPlayerNameById(player.id)}
+                        </option>
+                      ))}
+                    </select>
+                  </td>
+                  <td className="editStats__table-box editStats__table-box-goals">
+                    <input
+                      type="number"
+                      name="goals"
+                      value={newSkaterStat.goals}
+                      onChange={handleAddInputChange}
+                    />
+                  </td>
+                  <td className="editStats__table-box editStats__table-box-assists">
+                    <input
+                      type="number"
+                      name="assists"
+                      value={newSkaterStat.assists}
+                      onChange={handleAddInputChange}
+                    />
+                  </td>
+                  <td className="editStats__table-box editStats__table-box-check">
+                    <FontAwesomeIcon
+                      className="editStats__table-box-check-icon"
+                      icon={faCheck}
+                      onClick={confirmAddSkaterStat}
+                    />
+                  </td>
+                  <td className="editStats__table-box editStats__table-box-x">
+                    <FontAwesomeIcon
+                      className="editStats__table-box-x-icon"
+                      icon={faXmark}
+                      onClick={cancelAddSkaterStat}
+                    />
+                  </td>
+                </tr>
+              </tfoot>
+            )}
           </table>
         </form>
       </section>
+      <button className="editStats__button" onClick={handleAddStatClick}>
+        Add Statline
+      </button>
     </article>
   );
 };
 
-export default GameStats;
+export default SkaterStats;

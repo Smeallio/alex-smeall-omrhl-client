@@ -89,10 +89,17 @@
       select {
         @include input;
       }
-    }
 
-    &-number input {
-      width: 2rem;
+      &-goals input, &-assists input {
+        width: 2rem;
+        text-align: center;
+      } 
     }
+  }
+
+  &__button {
+    @include button;
+    float: right;
+    margin-top: 1rem;
   }
 }
