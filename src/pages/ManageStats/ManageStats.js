@@ -26,7 +26,7 @@ const ManageStats = ({ authUser }) => {
     }
   };
 
-  const fetchSkaterStats = async () => {
+  const fetchSkaterStats = async () => { //Should I move this down one level?
     try {
       const response = await axios.get(getSkaterStats(gameId));
       setSkaterStats(response.data);
@@ -38,7 +38,7 @@ const ManageStats = ({ authUser }) => {
   useEffect(() => {
     fetchGame();
     fetchSkaterStats();
-  }, [fetchGame, fetchSkaterStats]);
+  }, []);
 
   if (authUser === false) {
     return (
@@ -51,7 +51,7 @@ const ManageStats = ({ authUser }) => {
     );
   }
 
-  if (game === null) {
+  if (skaterStats === null) {
     return (
       <section className="background">
         <Header />
@@ -63,7 +63,7 @@ const ManageStats = ({ authUser }) => {
   }
 
   const skaterStatsTeamOne = (game, skaterStats) => {
-    if (game !== null) {
+    if (game && skaterStats) {
       return skaterStats.filter(
         (skater) => skater.team_id === game.team1_team_id
       );
@@ -71,7 +71,7 @@ const ManageStats = ({ authUser }) => {
   };
 
   const skaterStatsTeamTwo = (game, skaterStats) => {
-    if (game !== null) {
+    if (game && skaterStats) {
       return skaterStats.filter(
         (skater) => skater.team_id === game.team2_team_id
       );
@@ -99,10 +99,12 @@ const ManageStats = ({ authUser }) => {
           <GameStats
             team={game.team1_team_id}
             skaters={skaterStatsTeamOne(game, skaterStats)}
+            fetchSkaterStats={fetchSkaterStats}
           />
           <GameStats
             team={game.team2_team_id}
             skaters={skaterStatsTeamTwo(game, skaterStats)}
+            fetchSkaterStats={fetchSkaterStats}
           />
         </section>
       </main>
