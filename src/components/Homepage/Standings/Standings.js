@@ -37,21 +37,6 @@ const Standings = ({ games }) => {
     }
   };
 
-  const getIdByTeam = (teamName) => {
-    switch (teamName) {
-      case "Fogtown Leprechauns":
-        return 1;
-      case "Duck Island Saints":
-        return 2;
-      case "Mighty Moose":
-        return 3;
-      case "Kraken Beers":
-        return 4;
-      default:
-        return null;
-    }
-  }
-
   if (standings === null) {
     return <p>Loading...</p>;
   }

@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { updateSkaterStat, getSkaterStats } from "../../../utils/api-utils";
 import "./GameStats.scss";
@@ -30,18 +30,23 @@ const GameStats = ({ team, skaters }) => {
     }
   };
 
-  const fetchSkaterStats = async () => { 
+  const fetchSkaterStats = useCallback(async () => { 
     try {
       const response = await axios.get(getSkaterStats(gameId));
       setSkaterStats(response.data);
     } catch (err) {
       console.log(err.message);
     }
-  };
+  }, [gameId]);
 
   useEffect(() => {
+    // const fetchAndSetSkaterStats = async () => {
+    //   await fetchSkaterStats();
+    // };
+
+    // fetchAndSetSkaterStats();
     fetchSkaterStats();
-  }, []);
+  }, [gameId, fetchSkaterStats]);
 
   if (skaterStats === null) {
     return (

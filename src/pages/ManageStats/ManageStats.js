@@ -4,7 +4,7 @@ import GameDetails from "../../components/Admin/GameDetails/GameDetails";
 import GameStats from "../../components/Admin/GameStats/GameStats";
 import Footer from "../../components/Globals/Footer/Footer";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Link, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
@@ -16,18 +16,18 @@ const ManageStats = ({ authUser }) => {
 
   const [game, setGame] = useState(null);
 
-  const fetchGame = async () => {
+  const fetchGame = useCallback(async () => {
     try {
       const response = await axios.get(getOneGame(gameId));
       setGame(response.data);
     } catch (err) {
       console.log(err.message);
     }
-  };
+  }, [gameId]);
 
   useEffect(() => {
     fetchGame();
-  }, []);
+  }, [gameId, fetchGame]);
 
   if (authUser === false) {
     return (
@@ -50,6 +50,8 @@ const ManageStats = ({ authUser }) => {
       </section>
     );
   }
+
+  console.log(game);
 
   return (
     <section className="background">
