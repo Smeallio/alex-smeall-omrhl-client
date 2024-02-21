@@ -1,4 +1,4 @@
-// import ConfirmModal from "../../Globals/ConfirmModal/ConfirmModal";
+import ConfirmModal from "../../Globals/ConfirmModal/ConfirmModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-regular-svg-icons";
@@ -10,6 +10,7 @@ import {
   getPlayersByTeam,
   addSkaterStat,
   updateSkaterStat,
+  deleteSkaterStat,
 } from "../../../utils/api-utils";
 import "./SkaterStats.scss";
 
@@ -24,7 +25,7 @@ const SkaterStats = ({ team }) => {
   });
   const [players, setPlayers] = useState(null);
   const [editableSkater, setEditableSkater] = useState(0);
-  // const [confirmDelete, setConfirmDelete] = useState(null);
+  const [confirmDelete, setConfirmDelete] = useState(null);
   const [showAddStat, setShowAddStat] = useState(false);
 
   const getTeamById = (teamId) => {
@@ -87,15 +88,25 @@ const SkaterStats = ({ team }) => {
     }
   };
 
-  //   const handleDeleteStat = async (skaterId) => {
-  //     setConfirmDelete(skaterId);
-  //   };
+  const handleDeleteStat = async (skaterStatId) => {
+    setConfirmDelete(skaterStatId);
+  };
 
-  //   const cancelDelete = () => {
-  //     setConfirmDelete(null);
-  //   };
+  const cancelDelete = () => {
+    setConfirmDelete(null);
+  };
 
-  // Delete API call
+  const confirmDeleteSkaterStat = async () => {
+    try {
+      await axios.delete(deleteSkaterStat(confirmDelete));
+      console.log("Stat deleted successfully");
+      fetchSkaterStats();
+    } catch (err) {
+      console.log("Player delete failed ", err);
+    } finally {
+      setConfirmDelete(null);
+    }
+  };
 
   const handleEditClick = (skater) => {
     console.log("Edit clicked: ", skater);
@@ -131,19 +142,6 @@ const SkaterStats = ({ team }) => {
     }));
   };
 
-  if (players === null) {
-    return <p>Loading...</p>;
-  }
-
-  const getPlayerNameById = (playerId) => {
-    const player = players.find((player) => player.id === playerId);
-    if (player) {
-      return player.name;
-    } else {
-      return "Player not found";
-    }
-  };
-
   const handleAddStatClick = () => {
     setShowAddStat(true);
   };
@@ -162,7 +160,8 @@ const SkaterStats = ({ team }) => {
     };
     console.log(newSkaterStatAdd);
     try {
-      await axios.put(addSkaterStat(gameId), newSkaterStatAdd);
+      await axios.post(addSkaterStat(gameId), newSkaterStatAdd);
+      console.log(addSkaterStat(gameId));
       fetchSkaterStats();
       setNewSkaterStat({
         player_id: "",
@@ -213,7 +212,7 @@ const SkaterStats = ({ team }) => {
                         >
                           {players.map((player) => (
                             <option key={player.id} value={player.id}>
-                              {getPlayerNameById(player.id)}
+                              {player.name}
                             </option>
                           ))}
                         </select>
@@ -271,7 +270,7 @@ const SkaterStats = ({ team }) => {
                         <FontAwesomeIcon
                           className="editStats__table-box-delete-icon"
                           icon={faTrashCan}
-                          //   onClick={() => handleDeleteStat(skater)}
+                          onClick={() => handleDeleteStat(skater.id)}
                         />
                       </td>
                     </>
@@ -290,7 +289,7 @@ const SkaterStats = ({ team }) => {
                     >
                       {players.map((player) => (
                         <option key={player.id} value={player.id}>
-                          {getPlayerNameById(player.id)}
+                          {player.name}
                         </option>
                       ))}
                     </select>
@@ -334,6 +333,13 @@ const SkaterStats = ({ team }) => {
       <button className="editStats__button" onClick={handleAddStatClick}>
         Add Statline
       </button>
+      {confirmDelete && (
+        <ConfirmModal
+          message="Are you sure you want to delete this player? You will not be able to undo this."
+          cancel={cancelDelete}
+          confirm={confirmDeleteSkaterStat}
+        />
+      )}
     </article>
   );
 };

@@ -22,7 +22,7 @@ const EditPlayers = ({ players, teamId, fetchPlayers }) => {
   const confirmDeletePlayer = async () => {
     try {
       await axios.delete(deletePlayer(confirmDelete));
-      console.log("Played deleted successfully");
+      console.log("Player deleted successfully");
       fetchPlayers();
     } catch (err) {
       console.log("Player delete failed ", err);

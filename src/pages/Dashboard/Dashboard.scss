@@ -39,4 +39,9 @@
     font-size: 1.125rem;
     padding: 0.25rem 0;
   }
+
+  @include desktop {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
 }
