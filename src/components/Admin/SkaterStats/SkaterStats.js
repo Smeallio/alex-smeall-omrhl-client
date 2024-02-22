@@ -58,7 +58,7 @@ const SkaterStats = ({ team }) => {
     };
 
     fetchAndSetPlayers();
-  }, [team, fetchPlayers]);
+  }, [fetchPlayers]);
 
   const fetchSkaterStats = useCallback(async () => {
     try {
@@ -70,17 +70,19 @@ const SkaterStats = ({ team }) => {
   }, [gameId]);
 
   useEffect(() => {
-    // const fetchAndSetSkaterStats = async () => {
-    //   await fetchSkaterStats();
-    // };
+    const fetchAndSetSkaterStats = async () => {
+      await fetchSkaterStats();
+    };
 
-    // fetchAndSetSkaterStats();
-    fetchSkaterStats();
-  }, [gameId, fetchSkaterStats]);
+    fetchAndSetSkaterStats();
+  }, [fetchSkaterStats]);
 
   if (skaterStats === null) {
     return <p>Loading...</p>;
   }
+
+  console.log(skaterStats);
+  console.log(players);
 
   const filterSkaterTeam = (team, skaterStats) => {
     if (team && skaterStats) {
@@ -182,14 +184,14 @@ const SkaterStats = ({ team }) => {
   };
 
   return (
-    <article className="editStats">
-      <section className="editStats__block">
-        <form className="editStats__form">
-          <table className="editStats__table">
-            <caption className="editStats__table-title">{`${getTeamById(
+    <article className="editSkaterStats">
+      <section className="editSkaterStats__block">
+        <form className="editSkaterStats__form">
+          <table className="editSkaterStats__table">
+            <caption className="editSkaterStats__table-title">{`${getTeamById(
               team
             )} Skaters`}</caption>
-            <thead className="editStats__table-headers">
+            <thead className="editSkaterStats__table-headers">
               <tr>
                 <th scope="col">Name</th>
                 <th scope="col">Goals</th>
@@ -201,10 +203,10 @@ const SkaterStats = ({ team }) => {
             </thead>
             <tbody>
               {filterSkaterTeam(team, skaterStats).map((skater) => (
-                <tr className="editStats__table-row" key={skater.id}>
+                <tr className="editSkaterStats__table-row" key={skater.id}>
                   {editableSkater.id === skater.id ? (
                     <>
-                      <td className="editStats__table-box editStats__table-box-name">
+                      <td className="editSkaterStats__table-box editSkaterStats__table-box-name">
                         <select
                           name="player_id"
                           value={editableSkater.player_id}
@@ -217,7 +219,7 @@ const SkaterStats = ({ team }) => {
                           ))}
                         </select>
                       </td>
-                      <td className="editStats__table-box editStats__table-box-goals">
+                      <td className="editSkaterStats__table-box editSkaterStats__table-box-goals">
                         <input
                           type="number"
                           name="goals"
@@ -225,7 +227,7 @@ const SkaterStats = ({ team }) => {
                           onChange={handleEditInputChange}
                         />
                       </td>
-                      <td className="editStats__table-box editStats__table-box-assists">
+                      <td className="editSkaterStats__table-box editSkaterStats__table-box-assists">
                         <input
                           type="number"
                           name="assists"
@@ -233,16 +235,16 @@ const SkaterStats = ({ team }) => {
                           onChange={handleEditInputChange}
                         />
                       </td>
-                      <td className="editStats__table-box editStats__table-box-check">
+                      <td className="editSkaterStats__table-box editSkaterStats__table-box-check">
                         <FontAwesomeIcon
-                          className="editStats__table-box-check-icon"
+                          className="editSkaterStats__table-box-check-icon"
                           icon={faCheck}
                           onClick={confirmEditSkater}
                         />
                       </td>
-                      <td className="editStats__table-box editStats__table-box-x">
+                      <td className="editSkaterStats__table-box editSkaterStats__table-box-x">
                         <FontAwesomeIcon
-                          className="editStats__table-box-x-icon"
+                          className="editSkaterStats__table-box-x-icon"
                           icon={faXmark}
                           onClick={cancelEdit}
                         />
@@ -250,25 +252,25 @@ const SkaterStats = ({ team }) => {
                     </>
                   ) : (
                     <>
-                      <td className="editStats__table-box editStats__table-box-name">
+                      <td className="editSkaterStats__table-box editSkaterStats__table-box-name">
                         {skater.player_name}
                       </td>
-                      <td className="editStats__table-box editStats__table-box-goals">
+                      <td className="editSkaterStats__table-box editSkaterStats__table-box-goals">
                         {skater.goals}
                       </td>
-                      <td className="editStats__table-box editStats__table-box-assists">
+                      <td className="editSkaterStats__table-box editSkaterStats__table-box-assists">
                         {skater.assists}
                       </td>
-                      <td className="editStats__table-box editPlayers__table-box-edit">
+                      <td className="editSkaterStats__table-box editPlayers__table-box-edit">
                         <FontAwesomeIcon
-                          className="editStats__table-box-edit-icon"
+                          className="editSkaterStats__table-box-edit-icon"
                           icon={faPenToSquare}
                           onClick={() => handleEditClick(skater)}
                         />
                       </td>
-                      <td className="editStats__table-box editPlayers__table-box-delete">
+                      <td className="editSkaterStats__table-box editPlayers__table-box-delete">
                         <FontAwesomeIcon
-                          className="editStats__table-box-delete-icon"
+                          className="editSkaterStats__table-box-delete-icon"
                           icon={faTrashCan}
                           onClick={() => handleDeleteStat(skater.id)}
                         />
@@ -280,8 +282,8 @@ const SkaterStats = ({ team }) => {
             </tbody>
             {showAddStat && (
               <tfoot>
-                <tr className="editStats__table-row">
-                  <td className="editStats__table-box editStats__table-box-name">
+                <tr className="editSkaterStats__table-row">
+                  <td className="editSkaterStats__table-box editSkaterStats__table-box-name">
                     <select
                       name="player_id"
                       value={newSkaterStat.player_id}
@@ -294,7 +296,7 @@ const SkaterStats = ({ team }) => {
                       ))}
                     </select>
                   </td>
-                  <td className="editStats__table-box editStats__table-box-goals">
+                  <td className="editSkaterStats__table-box editSkaterStats__table-box-goals">
                     <input
                       type="number"
                       name="goals"
@@ -302,7 +304,7 @@ const SkaterStats = ({ team }) => {
                       onChange={handleAddInputChange}
                     />
                   </td>
-                  <td className="editStats__table-box editStats__table-box-assists">
+                  <td className="editSkaterStats__table-box editSkaterStats__table-box-assists">
                     <input
                       type="number"
                       name="assists"
@@ -310,16 +312,16 @@ const SkaterStats = ({ team }) => {
                       onChange={handleAddInputChange}
                     />
                   </td>
-                  <td className="editStats__table-box editStats__table-box-check">
+                  <td className="editSkaterStats__table-box editSkaterStats__table-box-check">
                     <FontAwesomeIcon
-                      className="editStats__table-box-check-icon"
+                      className="editSkaterStats__table-box-check-icon"
                       icon={faCheck}
                       onClick={confirmAddSkaterStat}
                     />
                   </td>
-                  <td className="editStats__table-box editStats__table-box-x">
+                  <td className="editSkaterStats__table-box editSkaterStats__table-box-x">
                     <FontAwesomeIcon
-                      className="editStats__table-box-x-icon"
+                      className="editSkaterStats__table-box-x-icon"
                       icon={faXmark}
                       onClick={cancelAddSkaterStat}
                     />
@@ -330,7 +332,7 @@ const SkaterStats = ({ team }) => {
           </table>
         </form>
       </section>
-      <button className="editStats__button" onClick={handleAddStatClick}>
+      <button className="editSkaterStats__button" onClick={handleAddStatClick}>
         Add Statline
       </button>
       {confirmDelete && (

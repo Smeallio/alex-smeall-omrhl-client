@@ -2,6 +2,7 @@ import Header from "../../components/Globals/Header/Header";
 import Nav from "../../components/Globals/Nav/Nav";
 import GameDetails from "../../components/Admin/GameDetails/GameDetails";
 import SkaterStats from "../../components/Admin/SkaterStats/SkaterStats";
+import GoalieStats from "../../components/Admin/GoalieStats/GoalieStats";
 import Footer from "../../components/Globals/Footer/Footer";
 import axios from "axios";
 import { useState, useEffect, useCallback } from "react";
@@ -69,12 +70,14 @@ const ManageStats = ({ authUser }) => {
         </section>
         <GameDetails game={game} />
         <section className="manageStats__team-columns">
-          <SkaterStats
-            team={game.team1_team_id}
-          />
-          <SkaterStats
-            team={game.team2_team_id}
-          />
+          <section className="manageStats__team-columns-team">
+            <SkaterStats team={game.team1_team_id} />
+            <GoalieStats team={game.team1_team_id} />
+          </section>
+          <section className="manageStats__team-columns-team">
+            <SkaterStats team={game.team2_team_id} />
+            <GoalieStats team={game.team1_team_id} />
+          </section>
         </section>
       </main>
       <Footer />
