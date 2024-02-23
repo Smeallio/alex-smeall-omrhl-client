@@ -3,27 +3,29 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import axios from "axios";
-import { useState, useEffect, useCallback } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import {
-  getSkaterStats,
-  getPlayersByTeam,
   addSkaterStat,
   updateSkaterStat,
   deleteSkaterStat,
 } from "../../../utils/api-utils";
 import "./SkaterStats.scss";
 
-const SkaterStats = ({ team }) => {
+const SkaterStats = ({ team, players, skaterStats, fetchSkaterStats }) => {
+
+console.log(team);
+console.log(players);
+console.log(skaterStats);
+
+
   const { gameId } = useParams();
 
-  const [skaterStats, setSkaterStats] = useState(null);
   const [newSkaterStat, setNewSkaterStat] = useState({
     player_id: "",
     goals: "",
     assists: "",
   });
-  const [players, setPlayers] = useState(null);
   const [editableSkater, setEditableSkater] = useState(0);
   const [confirmDelete, setConfirmDelete] = useState(null);
   const [showAddStat, setShowAddStat] = useState(false);
@@ -40,53 +42,6 @@ const SkaterStats = ({ team }) => {
         return "Kraken Beers";
       default:
         return null;
-    }
-  };
-
-  const fetchPlayers = useCallback(async () => {
-    try {
-      const response = await axios.get(getPlayersByTeam(team));
-      setPlayers(response.data);
-    } catch (err) {
-      console.log(err.message);
-    }
-  }, [team]);
-
-  useEffect(() => {
-    const fetchAndSetPlayers = async () => {
-      await fetchPlayers();
-    };
-
-    fetchAndSetPlayers();
-  }, [fetchPlayers]);
-
-  const fetchSkaterStats = useCallback(async () => {
-    try {
-      const response = await axios.get(getSkaterStats(gameId));
-      setSkaterStats(response.data);
-    } catch (err) {
-      console.log(err.message);
-    }
-  }, [gameId]);
-
-  useEffect(() => {
-    const fetchAndSetSkaterStats = async () => {
-      await fetchSkaterStats();
-    };
-
-    fetchAndSetSkaterStats();
-  }, [fetchSkaterStats]);
-
-  if (skaterStats === null) {
-    return <p>Loading...</p>;
-  }
-
-  console.log(skaterStats);
-  console.log(players);
-
-  const filterSkaterTeam = (team, skaterStats) => {
-    if (team && skaterStats) {
-      return skaterStats.filter((skater) => skater.team_id === team);
     }
   };
 
@@ -202,7 +157,7 @@ const SkaterStats = ({ team }) => {
               </tr>
             </thead>
             <tbody>
-              {filterSkaterTeam(team, skaterStats).map((skater) => (
+              {skaterStats.map((skater) => (
                 <tr className="editSkaterStats__table-row" key={skater.id}>
                   {editableSkater.id === skater.id ? (
                     <>
