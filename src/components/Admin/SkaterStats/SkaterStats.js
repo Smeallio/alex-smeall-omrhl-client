@@ -12,12 +12,7 @@ import {
 } from "../../../utils/api-utils";
 import "./SkaterStats.scss";
 
-const SkaterStats = ({ team, players, skaterStats, fetchSkaterStats }) => {
-
-console.log(team);
-console.log(players);
-console.log(skaterStats);
-
+const SkaterStats = ({ team, players, skaterStats, fetchStats }) => {
 
   const { gameId } = useParams();
 
@@ -57,7 +52,7 @@ console.log(skaterStats);
     try {
       await axios.delete(deleteSkaterStat(confirmDelete));
       console.log("Stat deleted successfully");
-      fetchSkaterStats();
+      fetchStats();
     } catch (err) {
       console.log("Player delete failed ", err);
     } finally {
@@ -82,10 +77,9 @@ console.log(skaterStats);
       goals: editableSkater.goals,
       assists: editableSkater.assists,
     };
-    console.log(updatedSkaterStat);
     try {
       await axios.put(updateSkaterStat(editableSkater.id), updatedSkaterStat);
-      fetchSkaterStats();
+      fetchStats();
     } catch (err) {
       console.log("Error updating player: ", err);
     }
@@ -115,11 +109,10 @@ console.log(skaterStats);
       goals: newSkaterStat.goals,
       assists: newSkaterStat.assists,
     };
-    console.log(newSkaterStatAdd);
     try {
       await axios.post(addSkaterStat(gameId), newSkaterStatAdd);
       console.log(addSkaterStat(gameId));
-      fetchSkaterStats();
+      fetchStats();
       setNewSkaterStat({
         player_id: "",
         goals: "",
@@ -288,7 +281,7 @@ console.log(skaterStats);
         </form>
       </section>
       <button className="editSkaterStats__button" onClick={handleAddStatClick}>
-        Add Statline
+        Add Player Statline
       </button>
       {confirmDelete && (
         <ConfirmModal

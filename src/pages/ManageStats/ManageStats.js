@@ -9,7 +9,12 @@ import { useState, useEffect, useCallback } from "react";
 import { Link, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { getOneGame, getSkaterStats, getPlayersByTeam } from "../../utils/api-utils";
+import {
+  getOneGame,
+  getSkaterStats,
+  getGoalieStats,
+  getPlayersByTeam,
+} from "../../utils/api-utils";
 import "./ManageStats.scss";
 
 const ManageStats = ({ authUser }) => {
@@ -17,8 +22,11 @@ const ManageStats = ({ authUser }) => {
 
   const [game, setGame] = useState(0);
   const [skaterStats, setSkaterStats] = useState(null);
+  const [goalieStats, setGoalieStats] = useState(null);
   const [playersTeamOne, setPlayersTeamOne] = useState(null);
   const [playersTeamTwo, setPlayersTeamTwo] = useState(null);
+
+  //   console.log(game);
 
   const fetchGame = useCallback(async () => {
     try {
@@ -28,10 +36,6 @@ const ManageStats = ({ authUser }) => {
       console.log(err.message);
     }
   }, [gameId]);
-
-  useEffect(() => {
-    fetchGame();
-  }, [gameId, fetchGame]);
 
   const fetchPlayers = useCallback(async () => {
     try {
@@ -44,30 +48,32 @@ const ManageStats = ({ authUser }) => {
     }
   }, [game]);
 
-  useEffect(() => {
-    const fetchAndSetPlayers = async () => {
-      await fetchPlayers();
-    };
-
-    fetchAndSetPlayers();
-  }, [fetchPlayers]);
-
-  const fetchSkaterStats = useCallback(async () => {
+  const fetchStats = useCallback(async () => {
     try {
-      const response = await axios.get(getSkaterStats(gameId));
-      setSkaterStats(response.data);
+      const skaterResponse = await axios.get(getSkaterStats(gameId));
+      setSkaterStats(skaterResponse.data);
+      const goalieResponse = await axios.get(getGoalieStats(gameId));
+      setGoalieStats(goalieResponse.data);
     } catch (err) {
       console.log(err.message);
     }
   }, [gameId]);
 
   useEffect(() => {
-    const fetchAndSetSkaterStats = async () => {
-      await fetchSkaterStats();
-    };
+    fetchGame();
+  }, [gameId, fetchGame]);
 
-    fetchAndSetSkaterStats();
-  }, [fetchSkaterStats]);
+  useEffect(() => {
+    if (game) {
+      fetchPlayers();
+    }
+  }, [gameId, fetchPlayers]);
+
+  useEffect(() => {
+    if (gameId) {
+        fetchStats();
+    }
+  }, [gameId, fetchStats])
 
   if (authUser === false) {
     return (
@@ -80,13 +86,22 @@ const ManageStats = ({ authUser }) => {
     );
   }
 
-  if (skaterStats === null) {
-    return <p>Loading...</p>
+  if (skaterStats === null || goalieStats === null) {
+    return <p>Loading...</p>;
   }
+
+//   console.log(goalieStats);
+//   console.log(skaterStats);
 
   const filterSkaterTeam = (team, skaterStats) => {
     if (team && skaterStats) {
       return skaterStats.filter((skater) => skater.team_id === team);
+    }
+  };
+
+  const filterGoalieTeam = (team, goalieStats) => {
+    if (team && goalieStats) {
+      return goalieStats.filter((goalie) => goalie.team_id === team);
     }
   };
 
@@ -109,12 +124,32 @@ const ManageStats = ({ authUser }) => {
         <GameDetails game={game} />
         <section className="manageStats__team-columns">
           <section className="manageStats__team-columns-team">
-            <SkaterStats team={game.team1_team_id} players={playersTeamOne} skaterStats={ filterSkaterTeam(game.team1_team_id, skaterStats) } fetchSkaterStats={fetchSkaterStats} />
-            <GoalieStats team={game.team1_team_id} players={playersTeamOne} />
+            <SkaterStats
+              team={game.team1_team_id}
+              players={playersTeamOne}
+              skaterStats={filterSkaterTeam(game.team1_team_id, skaterStats)}
+              fetchStats={fetchStats}
+            />
+            <GoalieStats
+              team={game.team1_team_id}
+              players={playersTeamOne}
+              goalieStats={filterGoalieTeam(game.team1_team_id, goalieStats)}
+              fetchStats={fetchStats}
+            />
           </section>
           <section className="manageStats__team-columns-team">
-            <SkaterStats team={game.team1_team_id} players={playersTeamTwo} skaterStats={ filterSkaterTeam(game.team2_team_id, skaterStats) } fetchSkaterStats={fetchSkaterStats} />
-            <GoalieStats team={game.team2_team_id} players={playersTeamTwo} />
+            <SkaterStats
+              team={game.team2_team_id}
+              players={playersTeamTwo}
+              skaterStats={filterSkaterTeam(game.team2_team_id, skaterStats)}
+              fetchStats={fetchStats}
+            />
+            <GoalieStats
+              team={game.team2_team_id}
+              players={playersTeamTwo}
+              goalieStats={filterGoalieTeam(game.team2_team_id, goalieStats)}
+              fetchStats={fetchStats}
+            />
           </section>
         </section>
       </main>
