@@ -1,7 +1,7 @@
 @use "../../../styles/variables" as *;
 @use "../../../styles/mixins" as *;
 
-.editSkaterStats {
+.editGoalieStats {
   width: 100%;
   overflow: hidden;
 
@@ -90,7 +90,7 @@
         @include input;
       }
 
-      &-goals input, &-assists input {
+      &-wins input, &-goalsAgainst input {
         width: 2rem;
         text-align: center;
       } 

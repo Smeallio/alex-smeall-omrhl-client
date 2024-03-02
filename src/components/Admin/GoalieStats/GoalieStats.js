@@ -1,27 +1,26 @@
 import ConfirmModal from "../../Globals/ConfirmModal/ConfirmModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { faPenToSquare, faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import axios from "axios";
+import { faPenToSquare, faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import {
-  addSkaterStat,
-  updateSkaterStat,
-  deleteSkaterStat,
+  addGoalieStat,
+  updateGoalieStat,
+  deleteGoalieStat,
 } from "../../../utils/api-utils";
-import "./SkaterStats.scss";
+import "./GoalieStats.scss";
 
-const SkaterStats = ({ team, players, skaterStats, fetchStats }) => {
-
+const GoalieStats = ({ team, players, goalieStats, fetchStats }) => {
   const { gameId } = useParams();
 
-  const [newSkaterStat, setNewSkaterStat] = useState({
+  const [newGoalieStat, setNewGoalieStat] = useState({
     player_id: "",
-    goals: "",
-    assists: "",
+    wins: "",
+    goalsAgainst: "",
   });
-  const [editableSkater, setEditableSkater] = useState(0);
+  const [editableGoalie, setEditableGoalie] = useState(0);
   const [confirmDelete, setConfirmDelete] = useState(null);
   const [showAddStat, setShowAddStat] = useState(false);
 
@@ -40,17 +39,17 @@ const SkaterStats = ({ team, players, skaterStats, fetchStats }) => {
     }
   };
 
-  const handleDeleteStat = async (skaterStatId) => {
-    setConfirmDelete(skaterStatId);
+  const handleDeleteStat = async (goalieStatId) => {
+    setConfirmDelete(goalieStatId);
   };
 
   const cancelDelete = () => {
     setConfirmDelete(null);
   };
 
-  const confirmDeleteSkaterStat = async () => {
+  const confirmDeleteGoalieStat = async () => {
     try {
-      await axios.delete(deleteSkaterStat(confirmDelete));
+      await axios.delete(deleteGoalieStat(confirmDelete));
       console.log("Stat deleted successfully");
       fetchStats();
     } catch (err) {
@@ -60,35 +59,35 @@ const SkaterStats = ({ team, players, skaterStats, fetchStats }) => {
     }
   };
 
-  const handleEditClick = (skater) => {
-    console.log("Edit clicked: ", skater);
-    setEditableSkater({ ...skater });
+  const handleEditClick = (goalie) => {
+    console.log("Edit clicked: ", goalie);
+    setEditableGoalie({ ...goalie });
   };
 
   const cancelEdit = () => {
-    setEditableSkater(0);
+    setEditableGoalie(0);
   };
 
   const confirmEditSkater = async (event) => {
     event.preventDefault();
     const updatedSkaterStat = {
-      player_id: editableSkater.player_id,
+      player_id: editableGoalie.player_id,
       team_id: team,
-      goals: editableSkater.goals,
-      assists: editableSkater.assists,
+      wins: editableGoalie.wins,
+      goalsAgainst: editableGoalie.goalsAgainst,
     };
     try {
-      await axios.put(updateSkaterStat(editableSkater.id), updatedSkaterStat);
+      await axios.put(updateGoalieStat(editableGoalie.id), updatedSkaterStat);
       fetchStats();
     } catch (err) {
       console.log("Error updating player: ", err);
     }
-    setEditableSkater(0);
+    setEditableGoalie(0);
   };
 
   const handleEditInputChange = (event) => {
-    setEditableSkater((prevEditableSkater) => ({
-      ...prevEditableSkater,
+    setEditableGoalie((prevEditableGoalie) => ({
+      ...prevEditableGoalie,
       [event.target.name]: event.target.value,
     }));
   };
@@ -97,67 +96,67 @@ const SkaterStats = ({ team, players, skaterStats, fetchStats }) => {
     setShowAddStat(true);
   };
 
-  const cancelAddSkaterStat = () => {
+  const cancelAddGoalieStat = () => {
     setShowAddStat(false);
   };
 
-  const confirmAddSkaterStat = async (event) => {
+  const confirmAddGoalieStat = async (event) => {
     event.preventDefault();
-    const newSkaterStatAdd = {
-      player_id: newSkaterStat.player_id,
+    const newGoalieStatAdd = {
+      player_id: newGoalieStat.player_id,
       team_id: team,
-      goals: newSkaterStat.goals,
-      assists: newSkaterStat.assists,
+      wins: newGoalieStat.wins,
+      goalsAgainst: newGoalieStat.goalsAgainst,
     };
+    console.log(newGoalieStatAdd);
     try {
-      await axios.post(addSkaterStat(gameId), newSkaterStatAdd);
-      console.log(addSkaterStat(gameId));
+      await axios.post(addGoalieStat(gameId), newGoalieStatAdd);
       fetchStats();
-      setNewSkaterStat({
+      setNewGoalieStat({
         player_id: "",
-        goals: "",
-        assists: "",
+        wins: "",
+        goalsAgainst: "",
       });
     } catch (err) {
       console.log("Error updating player: ", err);
     }
-    setEditableSkater(0);
+    setEditableGoalie(0);
   };
 
   const handleAddInputChange = (event) => {
-    setNewSkaterStat((prevNewSkater) => ({
-      ...prevNewSkater,
+    setNewGoalieStat((prevNewGoalie) => ({
+      ...prevNewGoalie,
       [event.target.name]: event.target.value,
     }));
   };
 
   return (
-    <article className="editSkaterStats">
-      <section className="editSkaterStats__block">
-        <form className="editSkaterStats__form">
-          <table className="editSkaterStats__table">
-            <caption className="editSkaterStats__table-title">{`${getTeamById(
+    <article className="editGoalieStats">
+      <section className="editGoalieStats__block">
+        <form className="editGoalieStats__form">
+          <table className="editGoalieStats__table">
+            <caption className="editGoalieStats__table-title">{`${getTeamById(
               team
-            )} Skaters`}</caption>
-            <thead className="editSkaterStats__table-headers">
+            )} Goalie`}</caption>
+            <thead className="editGoalieStats__table-headers">
               <tr>
                 <th scope="col">Name</th>
-                <th scope="col">Goals</th>
-                <th scope="col">Assists</th>
+                <th scope="col">Win?</th>
+                <th scope="col">Goals Against</th>
                 <th scope="col" colSpan="2">
                   Edit
                 </th>
               </tr>
             </thead>
             <tbody>
-              {skaterStats.map((skater) => (
-                <tr className="editSkaterStats__table-row" key={skater.id}>
-                  {editableSkater.id === skater.id ? (
+              {goalieStats.map((goalie) => (
+                <tr className="editGoalieStats__table-row" key={goalie.id}>
+                  {editableGoalie.id === goalie.id ? (
                     <>
-                      <td className="editSkaterStats__table-box editSkaterStats__table-box-name">
+                      <td className="editGoalieStats__table-box editGoalieStats__table-box-name">
                         <select
                           name="player_id"
-                          value={editableSkater.player_id}
+                          value={editableGoalie.player_id}
                           onChange={handleEditInputChange}
                         >
                           {players.map((player) => (
@@ -167,32 +166,32 @@ const SkaterStats = ({ team, players, skaterStats, fetchStats }) => {
                           ))}
                         </select>
                       </td>
-                      <td className="editSkaterStats__table-box editSkaterStats__table-box-goals">
+                      <td className="editGoalieStats__table-box editGoalieStats__table-box-wins">
                         <input
                           type="number"
-                          name="goals"
-                          value={editableSkater.goals}
+                          name="wins"
+                          value={editableGoalie.wins}
                           onChange={handleEditInputChange}
                         />
                       </td>
-                      <td className="editSkaterStats__table-box editSkaterStats__table-box-assists">
+                      <td className="editGoalieStats__table-box editGoalieStats__table-box-goalsAgainst">
                         <input
                           type="number"
-                          name="assists"
-                          value={editableSkater.assists}
+                          name="goalsAgainst"
+                          value={editableGoalie.goalsAgainst}
                           onChange={handleEditInputChange}
                         />
                       </td>
-                      <td className="editSkaterStats__table-box editSkaterStats__table-box-check">
+                      <td className="editGoalieStats__table-box editGoalieStats__table-box-check">
                         <FontAwesomeIcon
-                          className="editSkaterStats__table-box-check-icon"
+                          className="editGoalieStats__table-box-check-icon"
                           icon={faCheck}
                           onClick={confirmEditSkater}
                         />
                       </td>
-                      <td className="editSkaterStats__table-box editSkaterStats__table-box-x">
+                      <td className="editGoalieStats__table-box editGoalieStats__table-box-x">
                         <FontAwesomeIcon
-                          className="editSkaterStats__table-box-x-icon"
+                          className="editGoalieStats__table-box-x-icon"
                           icon={faXmark}
                           onClick={cancelEdit}
                         />
@@ -200,27 +199,27 @@ const SkaterStats = ({ team, players, skaterStats, fetchStats }) => {
                     </>
                   ) : (
                     <>
-                      <td className="editSkaterStats__table-box editSkaterStats__table-box-name">
-                        {skater.player_name}
+                      <td className="editGoalieStats__table-box editGoalieStats__table-box-name">
+                        {goalie.player_name}
                       </td>
-                      <td className="editSkaterStats__table-box editSkaterStats__table-box-goals">
-                        {skater.goals}
+                      <td className="editGoalieStats__table-box editGoalieStats__table-box-wins">
+                        {goalie.wins}
                       </td>
-                      <td className="editSkaterStats__table-box editSkaterStats__table-box-assists">
-                        {skater.assists}
+                      <td className="editGoalieStats__table-box editGoalieStats__table-box-goalsagainst">
+                        {goalie.goalsAgainst}
                       </td>
-                      <td className="editSkaterStats__table-box editPlayers__table-box-edit">
+                      <td className="editGoalieStats__table-box editPlayers__table-box-edit">
                         <FontAwesomeIcon
-                          className="editSkaterStats__table-box-edit-icon"
+                          className="editGoalieStats__table-box-edit-icon"
                           icon={faPenToSquare}
-                          onClick={() => handleEditClick(skater)}
+                          onClick={() => handleEditClick(goalie)}
                         />
                       </td>
-                      <td className="editSkaterStats__table-box editPlayers__table-box-delete">
+                      <td className="editGoalieStats__table-box editPlayers__table-box-delete">
                         <FontAwesomeIcon
-                          className="editSkaterStats__table-box-delete-icon"
+                          className="editGoalieStats__table-box-delete-icon"
                           icon={faTrashCan}
-                          onClick={() => handleDeleteStat(skater.id)}
+                          onClick={() => handleDeleteStat(goalie.id)}
                         />
                       </td>
                     </>
@@ -230,11 +229,11 @@ const SkaterStats = ({ team, players, skaterStats, fetchStats }) => {
             </tbody>
             {showAddStat && (
               <tfoot>
-                <tr className="editSkaterStats__table-row">
-                  <td className="editSkaterStats__table-box editSkaterStats__table-box-name">
+                <tr className="editGoalieStats__table-row">
+                  <td className="editGoalieStats__table-box editGoalieStats__table-box-name">
                     <select
                       name="player_id"
-                      value={newSkaterStat.player_id}
+                      value={newGoalieStat.player_id}
                       onChange={handleAddInputChange}
                     >
                       {players.map((player) => (
@@ -244,34 +243,34 @@ const SkaterStats = ({ team, players, skaterStats, fetchStats }) => {
                       ))}
                     </select>
                   </td>
-                  <td className="editSkaterStats__table-box editSkaterStats__table-box-goals">
+                  <td className="editGoalieStats__table-box editGoalieStats__table-box-wins">
                     <input
                       type="number"
-                      name="goals"
-                      value={newSkaterStat.goals}
+                      name="wins"
+                      value={newGoalieStat.wins}
                       onChange={handleAddInputChange}
                     />
                   </td>
-                  <td className="editSkaterStats__table-box editSkaterStats__table-box-assists">
+                  <td className="editGoalieStats__table-box editGoalieStats__table-box-goalsAgainst">
                     <input
                       type="number"
-                      name="assists"
-                      value={newSkaterStat.assists}
+                      name="goalsAgainst"
+                      value={newGoalieStat.goalsAgainst}
                       onChange={handleAddInputChange}
                     />
                   </td>
-                  <td className="editSkaterStats__table-box editSkaterStats__table-box-check">
+                  <td className="editGoalieStats__table-box editGoalieStats__table-box-check">
                     <FontAwesomeIcon
-                      className="editSkaterStats__table-box-check-icon"
+                      className="editGoalieStats__table-box-check-icon"
                       icon={faCheck}
-                      onClick={confirmAddSkaterStat}
+                      onClick={confirmAddGoalieStat}
                     />
                   </td>
-                  <td className="editSkaterStats__table-box editSkaterStats__table-box-x">
+                  <td className="editGoalieStats__table-box editGoalieStats__table-box-x">
                     <FontAwesomeIcon
-                      className="editSkaterStats__table-box-x-icon"
+                      className="editGoalieStats__table-box-x-icon"
                       icon={faXmark}
-                      onClick={cancelAddSkaterStat}
+                      onClick={cancelAddGoalieStat}
                     />
                   </td>
                 </tr>
@@ -281,17 +280,17 @@ const SkaterStats = ({ team, players, skaterStats, fetchStats }) => {
         </form>
       </section>
       <button className="editSkaterStats__button" onClick={handleAddStatClick}>
-        Add Player Statline
+        Add Goalie Statline
       </button>
       {confirmDelete && (
         <ConfirmModal
           message="Are you sure you want to delete this player? You will not be able to undo this."
           cancel={cancelDelete}
-          confirm={confirmDeleteSkaterStat}
+          confirm={confirmDeleteGoalieStat}
         />
       )}
     </article>
   );
 };
 
-export default SkaterStats;
+export default GoalieStats;

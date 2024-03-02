@@ -33,6 +33,10 @@
   &__team-columns {
     @include desktop {
         @include flexbox(space-between, flex-start, row, nowrap, 3rem);
+
+        &-team {
+            width: 100%;
+        }
     }
   }
 }

@@ -2,19 +2,31 @@ import Header from "../../components/Globals/Header/Header";
 import Nav from "../../components/Globals/Nav/Nav";
 import GameDetails from "../../components/Admin/GameDetails/GameDetails";
 import SkaterStats from "../../components/Admin/SkaterStats/SkaterStats";
+import GoalieStats from "../../components/Admin/GoalieStats/GoalieStats";
 import Footer from "../../components/Globals/Footer/Footer";
 import axios from "axios";
 import { useState, useEffect, useCallback } from "react";
 import { Link, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { getOneGame } from "../../utils/api-utils";
+import {
+  getOneGame,
+  getSkaterStats,
+  getGoalieStats,
+  getPlayersByTeam,
+} from "../../utils/api-utils";
 import "./ManageStats.scss";
 
 const ManageStats = ({ authUser }) => {
   const { gameId } = useParams();
 
-  const [game, setGame] = useState(null);
+  const [game, setGame] = useState(0);
+  const [skaterStats, setSkaterStats] = useState(null);
+  const [goalieStats, setGoalieStats] = useState(null);
+  const [playersTeamOne, setPlayersTeamOne] = useState(null);
+  const [playersTeamTwo, setPlayersTeamTwo] = useState(null);
+
+  //   console.log(game);
 
   const fetchGame = useCallback(async () => {
     try {
@@ -25,9 +37,43 @@ const ManageStats = ({ authUser }) => {
     }
   }, [gameId]);
 
+  const fetchPlayers = useCallback(async () => {
+    try {
+      const responseOne = await axios.get(getPlayersByTeam(game.team1_team_id));
+      setPlayersTeamOne(responseOne.data);
+      const responseTwo = await axios.get(getPlayersByTeam(game.team2_team_id));
+      setPlayersTeamTwo(responseTwo.data);
+    } catch (err) {
+      console.log(err.message);
+    }
+  }, [game]);
+
+  const fetchStats = useCallback(async () => {
+    try {
+      const skaterResponse = await axios.get(getSkaterStats(gameId));
+      setSkaterStats(skaterResponse.data);
+      const goalieResponse = await axios.get(getGoalieStats(gameId));
+      setGoalieStats(goalieResponse.data);
+    } catch (err) {
+      console.log(err.message);
+    }
+  }, [gameId]);
+
   useEffect(() => {
     fetchGame();
   }, [gameId, fetchGame]);
+
+  useEffect(() => {
+    if (game) {
+      fetchPlayers();
+    }
+  }, [game, fetchPlayers]);
+
+  useEffect(() => {
+    if (gameId) {
+        fetchStats();
+    }
+  }, [gameId, fetchStats])
 
   if (authUser === false) {
     return (
@@ -40,16 +86,24 @@ const ManageStats = ({ authUser }) => {
     );
   }
 
-  if (game === null) {
-    return (
-      <section className="background">
-        <Header />
-        <Nav />
-        <p>Loading...</p>
-        <Footer />
-      </section>
-    );
+  if (skaterStats === null || goalieStats === null) {
+    return <p>Loading...</p>;
   }
+
+//   console.log(goalieStats);
+//   console.log(skaterStats);
+
+  const filterSkaterTeam = (team, skaterStats) => {
+    if (team && skaterStats) {
+      return skaterStats.filter((skater) => skater.team_id === team);
+    }
+  };
+
+  const filterGoalieTeam = (team, goalieStats) => {
+    if (team && goalieStats) {
+      return goalieStats.filter((goalie) => goalie.team_id === team);
+    }
+  };
 
   return (
     <section className="background">
@@ -69,12 +123,34 @@ const ManageStats = ({ authUser }) => {
         </section>
         <GameDetails game={game} />
         <section className="manageStats__team-columns">
-          <SkaterStats
-            team={game.team1_team_id}
-          />
-          <SkaterStats
-            team={game.team2_team_id}
-          />
+          <section className="manageStats__team-columns-team">
+            <SkaterStats
+              team={game.team1_team_id}
+              players={playersTeamOne}
+              skaterStats={filterSkaterTeam(game.team1_team_id, skaterStats)}
+              fetchStats={fetchStats}
+            />
+            <GoalieStats
+              team={game.team1_team_id}
+              players={playersTeamOne}
+              goalieStats={filterGoalieTeam(game.team1_team_id, goalieStats)}
+              fetchStats={fetchStats}
+            />
+          </section>
+          <section className="manageStats__team-columns-team">
+            <SkaterStats
+              team={game.team2_team_id}
+              players={playersTeamTwo}
+              skaterStats={filterSkaterTeam(game.team2_team_id, skaterStats)}
+              fetchStats={fetchStats}
+            />
+            <GoalieStats
+              team={game.team2_team_id}
+              players={playersTeamTwo}
+              goalieStats={filterGoalieTeam(game.team2_team_id, goalieStats)}
+              fetchStats={fetchStats}
+            />
+          </section>
         </section>
       </main>
       <Footer />
