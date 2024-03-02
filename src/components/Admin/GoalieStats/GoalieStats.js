@@ -105,9 +105,10 @@ const GoalieStats = ({ team, players, goalieStats, fetchStats }) => {
     const newGoalieStatAdd = {
       player_id: newGoalieStat.player_id,
       team_id: team,
-      goals: newGoalieStat.goals,
-      assists: newGoalieStat.assists,
+      wins: newGoalieStat.wins,
+      goalsAgainst: newGoalieStat.goalsAgainst,
     };
+    console.log(newGoalieStatAdd);
     try {
       await axios.post(addGoalieStat(gameId), newGoalieStatAdd);
       fetchStats();
@@ -242,19 +243,19 @@ const GoalieStats = ({ team, players, goalieStats, fetchStats }) => {
                       ))}
                     </select>
                   </td>
-                  <td className="editGoalieStats__table-box editGoalieStats__table-box-goals">
+                  <td className="editGoalieStats__table-box editGoalieStats__table-box-wins">
                     <input
                       type="number"
-                      name="goals"
-                      value={newGoalieStat.goals}
+                      name="wins"
+                      value={newGoalieStat.wins}
                       onChange={handleAddInputChange}
                     />
                   </td>
-                  <td className="editGoalieStats__table-box editGoalieStats__table-box-assists">
+                  <td className="editGoalieStats__table-box editGoalieStats__table-box-goalsAgainst">
                     <input
                       type="number"
-                      name="assists"
-                      value={newGoalieStat.assists}
+                      name="goalsAgainst"
+                      value={newGoalieStat.goalsAgainst}
                       onChange={handleAddInputChange}
                     />
                   </td>

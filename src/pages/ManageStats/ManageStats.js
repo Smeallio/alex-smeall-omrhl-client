@@ -67,7 +67,7 @@ const ManageStats = ({ authUser }) => {
     if (game) {
       fetchPlayers();
     }
-  }, [gameId, fetchPlayers]);
+  }, [game, fetchPlayers]);
 
   useEffect(() => {
     if (gameId) {
