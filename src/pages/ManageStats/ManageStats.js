@@ -26,8 +26,6 @@ const ManageStats = ({ authUser }) => {
   const [playersTeamOne, setPlayersTeamOne] = useState(null);
   const [playersTeamTwo, setPlayersTeamTwo] = useState(null);
 
-  //   console.log(game);
-
   const fetchGame = useCallback(async () => {
     try {
       const response = await axios.get(getOneGame(gameId));
@@ -86,12 +84,9 @@ const ManageStats = ({ authUser }) => {
     );
   }
 
-  if (skaterStats === null || goalieStats === null) {
+  if (skaterStats === null || goalieStats === null || playersTeamOne === null || playersTeamTwo === null) {
     return <p>Loading...</p>;
   }
-
-//   console.log(goalieStats);
-//   console.log(skaterStats);
 
   const filterSkaterTeam = (team, skaterStats) => {
     if (team && skaterStats) {
@@ -104,6 +99,18 @@ const ManageStats = ({ authUser }) => {
       return goalieStats.filter((goalie) => goalie.team_id === team);
     }
   };
+
+  const filterSkaters = players => {
+    if (players) {
+      return players.filter((player) => player.position !== 'G')
+    }
+  }
+
+  const filterGoalies = players => {
+    if (players) {
+      return players.filter((player) => player.position === 'G')
+    }
+  }
 
   return (
     <section className="background">
@@ -126,13 +133,13 @@ const ManageStats = ({ authUser }) => {
           <section className="manageStats__team-columns-team">
             <SkaterStats
               team={game.team1_team_id}
-              players={playersTeamOne}
+              players={filterSkaters(playersTeamOne)}
               skaterStats={filterSkaterTeam(game.team1_team_id, skaterStats)}
               fetchStats={fetchStats}
             />
             <GoalieStats
               team={game.team1_team_id}
-              players={playersTeamOne}
+              players={filterGoalies(playersTeamOne)}
               goalieStats={filterGoalieTeam(game.team1_team_id, goalieStats)}
               fetchStats={fetchStats}
             />
@@ -140,13 +147,13 @@ const ManageStats = ({ authUser }) => {
           <section className="manageStats__team-columns-team">
             <SkaterStats
               team={game.team2_team_id}
-              players={playersTeamTwo}
+              players={filterSkaters(playersTeamTwo)}
               skaterStats={filterSkaterTeam(game.team2_team_id, skaterStats)}
               fetchStats={fetchStats}
             />
             <GoalieStats
               team={game.team2_team_id}
-              players={playersTeamTwo}
+              players={filterGoalies(playersTeamTwo)}
               goalieStats={filterGoalieTeam(game.team2_team_id, goalieStats)}
               fetchStats={fetchStats}
             />

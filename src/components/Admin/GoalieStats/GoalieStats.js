@@ -20,7 +20,7 @@ const GoalieStats = ({ team, players, goalieStats, fetchStats }) => {
     wins: "",
     goalsAgainst: "",
   });
-  const [editableGoalie, setEditableGoalie] = useState(0);
+  const [editableGoalie, setEditableGoalie] = useState({});
   const [confirmDelete, setConfirmDelete] = useState(null);
   const [showAddStat, setShowAddStat] = useState(false);
 
@@ -236,6 +236,7 @@ const GoalieStats = ({ team, players, goalieStats, fetchStats }) => {
                       value={newGoalieStat.player_id}
                       onChange={handleAddInputChange}
                     >
+                      <option value="0">Select goalie...</option>
                       {players.map((player) => (
                         <option key={player.id} value={player.id}>
                           {player.name}
@@ -279,9 +280,11 @@ const GoalieStats = ({ team, players, goalieStats, fetchStats }) => {
           </table>
         </form>
       </section>
+      {goalieStats.length < 1 && (
       <button className="editSkaterStats__button" onClick={handleAddStatClick}>
         Add Goalie Statline
       </button>
+      )}
       {confirmDelete && (
         <ConfirmModal
           message="Are you sure you want to delete this player? You will not be able to undo this."

@@ -13,7 +13,6 @@ import {
 import "./SkaterStats.scss";
 
 const SkaterStats = ({ team, players, skaterStats, fetchStats }) => {
-
   const { gameId } = useParams();
 
   const [newSkaterStat, setNewSkaterStat] = useState({
@@ -21,7 +20,7 @@ const SkaterStats = ({ team, players, skaterStats, fetchStats }) => {
     goals: "",
     assists: "",
   });
-  const [editableSkater, setEditableSkater] = useState(0);
+  const [editableSkater, setEditableSkater] = useState({});
   const [confirmDelete, setConfirmDelete] = useState(null);
   const [showAddStat, setShowAddStat] = useState(false);
 
@@ -109,6 +108,7 @@ const SkaterStats = ({ team, players, skaterStats, fetchStats }) => {
       goals: newSkaterStat.goals,
       assists: newSkaterStat.assists,
     };
+    console.log(newSkaterStatAdd);
     try {
       await axios.post(addSkaterStat(gameId), newSkaterStatAdd);
       console.log(addSkaterStat(gameId));
@@ -237,6 +237,7 @@ const SkaterStats = ({ team, players, skaterStats, fetchStats }) => {
                       value={newSkaterStat.player_id}
                       onChange={handleAddInputChange}
                     >
+                      <option value="0">Select player...</option>
                       {players.map((player) => (
                         <option key={player.id} value={player.id}>
                           {player.name}
@@ -280,9 +281,14 @@ const SkaterStats = ({ team, players, skaterStats, fetchStats }) => {
           </table>
         </form>
       </section>
-      <button className="editSkaterStats__button" onClick={handleAddStatClick}>
-        Add Player Statline
-      </button>
+      {skaterStats.length < 9 && (
+        <button
+          className="editSkaterStats__button"
+          onClick={handleAddStatClick}
+        >
+          Add Player Statline
+        </button>
+      )}
       {confirmDelete && (
         <ConfirmModal
           message="Are you sure you want to delete this player? You will not be able to undo this."
