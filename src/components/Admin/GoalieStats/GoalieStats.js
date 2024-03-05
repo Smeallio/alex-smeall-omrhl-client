@@ -97,6 +97,11 @@ const GoalieStats = ({ team, players, goalieStats, fetchStats }) => {
   };
 
   const cancelAddGoalieStat = () => {
+    setNewGoalieStat({
+      player_id: "",
+      wins: "",
+      goalsAgainst: "",
+    });
     setShowAddStat(false);
   };
 
@@ -112,13 +117,12 @@ const GoalieStats = ({ team, players, goalieStats, fetchStats }) => {
     try {
       await axios.post(addGoalieStat(gameId), newGoalieStatAdd);
       fetchStats();
-      if (goalieStats.length < 1) {
-        setNewGoalieStat({
-          player_id: "",
-          wins: "",
-          goalsAgainst: "",
-        });
-      } else {
+      setNewGoalieStat({
+        player_id: "",
+        wins: "",
+        goalsAgainst: "",
+      });
+      if (goalieStats.length >= 0) {
         setShowAddStat(false);
       }
     } catch (err) {

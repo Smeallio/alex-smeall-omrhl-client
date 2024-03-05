@@ -97,6 +97,11 @@ const SkaterStats = ({ team, players, skaterStats, fetchStats }) => {
   };
 
   const cancelAddSkaterStat = () => {
+    setNewSkaterStat({
+      player_id: "",
+      goals: "",
+      assists: "",
+    });
     setShowAddStat(false);
   };
 
@@ -113,13 +118,12 @@ const SkaterStats = ({ team, players, skaterStats, fetchStats }) => {
       await axios.post(addSkaterStat(gameId), newSkaterStatAdd);
       console.log(addSkaterStat(gameId));
       fetchStats();
-      if (skaterStats.length < 9) {
-        setNewSkaterStat({
-          player_id: "",
-          goals: "",
-          assists: "",
-        });
-      } else {
+      setNewSkaterStat({
+        player_id: "",
+        goals: "",
+        assists: "",
+      });
+      if (skaterStats.length >= 8) {
         setShowAddStat(false);
       }
     } catch (err) {
