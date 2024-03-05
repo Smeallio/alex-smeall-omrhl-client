@@ -112,15 +112,18 @@ const GoalieStats = ({ team, players, goalieStats, fetchStats }) => {
     try {
       await axios.post(addGoalieStat(gameId), newGoalieStatAdd);
       fetchStats();
-      setNewGoalieStat({
-        player_id: "",
-        wins: "",
-        goalsAgainst: "",
-      });
+      if (goalieStats.length < 1) {
+        setNewGoalieStat({
+          player_id: "",
+          wins: "",
+          goalsAgainst: "",
+        });
+      } else {
+        setShowAddStat(false);
+      }
     } catch (err) {
       console.log("Error updating player: ", err);
     }
-    setEditableGoalie(0);
   };
 
   const handleAddInputChange = (event) => {
@@ -281,9 +284,12 @@ const GoalieStats = ({ team, players, goalieStats, fetchStats }) => {
         </form>
       </section>
       {goalieStats.length < 1 && (
-      <button className="editSkaterStats__button" onClick={handleAddStatClick}>
-        Add Goalie Statline
-      </button>
+        <button
+          className="editSkaterStats__button"
+          onClick={handleAddStatClick}
+        >
+          Add Goalie Statline
+        </button>
       )}
       {confirmDelete && (
         <ConfirmModal

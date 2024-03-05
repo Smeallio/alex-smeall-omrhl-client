@@ -113,15 +113,18 @@ const SkaterStats = ({ team, players, skaterStats, fetchStats }) => {
       await axios.post(addSkaterStat(gameId), newSkaterStatAdd);
       console.log(addSkaterStat(gameId));
       fetchStats();
-      setNewSkaterStat({
-        player_id: "",
-        goals: "",
-        assists: "",
-      });
+      if (skaterStats.length < 9) {
+        setNewSkaterStat({
+          player_id: "",
+          goals: "",
+          assists: "",
+        });
+      } else {
+        setShowAddStat(false);
+      }
     } catch (err) {
       console.log("Error updating player: ", err);
     }
-    setEditableSkater(0);
   };
 
   const handleAddInputChange = (event) => {
