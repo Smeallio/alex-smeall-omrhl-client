@@ -288,14 +288,9 @@ const SkaterStats = ({ team, players, skaterStats, fetchStats }) => {
           </table>
         </form>
       </section>
-      {skaterStats.length < 9 && (
-        <button
-          className="editSkaterStats__button"
-          onClick={handleAddStatClick}
-        >
-          Add Player Statline
-        </button>
-      )}
+      <button className="editSkaterStats__button" onClick={handleAddStatClick}>
+        Add Player Statline
+      </button>
       {confirmDelete && (
         <ConfirmModal
           message="Are you sure you want to delete this player? You will not be able to undo this."
