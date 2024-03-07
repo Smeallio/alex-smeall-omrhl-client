@@ -1,5 +1,5 @@
-import { useParams } from "react-router-dom";
 import axios from "axios";
+import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getGames } from "../../../utils/api-utils";
 import "./TeamSked.scss";
@@ -90,22 +90,24 @@ const TeamSked = () => {
                   : game.team1_name}
               </td>
               <td className="schedule__table-res" data-label="Result">
-                {(game.complete &&
-                  game.team1_team_id === teamId &&
-                  toTitleCase(game.team1_result[0]) +
-                    ": " +
-                    game.team1_score +
-                    " - " +
-                    game.team2_score) ||
-                  ""}
-                {(game.complete &&
-                  game.team2_team_id === teamId &&
-                  toTitleCase(game.team2_result[0]) +
-                    ": " +
-                    game.team2_score +
-                    " - " +
-                    game.team1_score) ||
-                  ""}
+                <Link className="schedule__table-res-link" to={`/games/${game.id}`}>
+                  {(game.complete &&
+                    game.team1_team_id === teamId &&
+                    toTitleCase(game.team1_result[0]) +
+                      ": " +
+                      game.team1_score +
+                      " - " +
+                      game.team2_score) ||
+                    ""}
+                  {(game.complete &&
+                    game.team2_team_id === teamId &&
+                    toTitleCase(game.team2_result[0]) +
+                      ": " +
+                      game.team2_score +
+                      " - " +
+                      game.team1_score) ||
+                    ""}
+                </Link>
               </td>
             </tr>
           ))}
