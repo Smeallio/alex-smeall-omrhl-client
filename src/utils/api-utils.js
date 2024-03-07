@@ -17,6 +17,7 @@ export const deleteGame = (gameId) => API_URL + "/api/games/" + gameId;
 export const getStandings = () => API_URL + "/api/games/standings";
 
 export const getSkaterStats = (gameId) => API_URL + "/api/stats/skaters/" + gameId;
+export const getSkaterStatsByTeam = (teamId) => API_URL + "/api/stats/skaters/summary/" + teamId;
 export const addSkaterStat = (gameId) => API_URL + "/api/stats/skaters/" + gameId;
 export const updateSkaterStat = (skaterStatId) => API_URL + "/api/stats/skaters/" + skaterStatId;
 export const deleteSkaterStat = (skaterStatId) => API_URL + "/api/stats/skaters/" + skaterStatId;

@@ -1,14 +1,26 @@
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { getPlayersByTeam } from "../../../utils/api-utils";
+import {
+  getPlayersByTeam,
+  getSkaterStatsByTeam,
+} from "../../../utils/api-utils";
+import {
+  handleHeaderClick,
+  sortColumn,
+} from "../../../utils/sorting-functions.js";
 import "./TeamRoster.scss";
 
 const TeamRoster = () => {
   const { teamName } = useParams();
 
-  const [players, setPlayers] = useState(null);
+  const [players, setPlayers] = useState(null); // may not need this and all realted functions
+  const [skaterStats, setSkaterStats] = useState(null);
   const [teamId, setTeamId] = useState(null);
+  const [sort, setSort] = useState({
+    keyToSort: "total_points",
+    direction: "desc",
+  });
 
   useEffect(() => {
     let numTeamId;
@@ -45,16 +57,34 @@ const TeamRoster = () => {
         console.log(err.message);
       }
     };
-  
+
     const fetchAndSetPlayers = async () => {
       await fetchPlayers();
     };
-  
+
     fetchAndSetPlayers();
   }, [teamId]);
-  
 
-  if (players === null) {
+  useEffect(() => {
+    const fetchSkaterStats = async () => {
+      try {
+        if (teamId !== null) {
+          const response = await axios.get(getSkaterStatsByTeam(teamId));
+          setSkaterStats(response.data);
+        }
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+
+    const fetchAndSetSkaterStats = async () => {
+      await fetchSkaterStats();
+    };
+
+    fetchAndSetSkaterStats();
+  }, [teamId]);
+
+  if (players === null || skaterStats === null) {
     return <p>Loading...</p>;
   }
 
@@ -65,6 +95,17 @@ const TeamRoster = () => {
     (player) => player.team_id === teamId && player.position === "G"
   );
 
+  // console.log(sort);
+  // console.log(skaterStats);
+
+  const handleHeaderClickWrapper = header => {
+    handleHeaderClick(header, sort, setSort);
+  };
+
+  const sortColumnWrapper = stats => {
+    return sortColumn(stats, sort);
+  }
+
   return (
     <article className="roster">
       <table className="roster__table">
@@ -73,39 +114,56 @@ const TeamRoster = () => {
         </caption>
         <thead className="roster__table-headers">
           <tr>
-            <th scope="col">Name</th>
-            <th scope="col">No.</th>
-            <th scope="col">Pos.</th>
-            {/* <th scope="col">GP</th>
-            <th scope="col">G</th>
-            <th scope="col">A</th>
-            <th scope="col">P</th> */}
+            <th scope="col" onClick={() => handleHeaderClickWrapper("player_name")}>
+              Name
+            </th>
+            <th scope="col" onClick={() => handleHeaderClickWrapper("player_number")}>
+              No.
+            </th>
+            <th
+              scope="col"
+              onClick={() => handleHeaderClickWrapper("player_position")}
+            >
+              Pos.
+            </th>
+            <th scope="col" onClick={() => handleHeaderClickWrapper("games_played")}>
+              GP
+            </th>
+            <th scope="col" onClick={() => handleHeaderClickWrapper("total_goals")}>
+              G
+            </th>
+            <th scope="col" onClick={() => handleHeaderClickWrapper("total_assists")}>
+              A
+            </th>
+            <th scope="col" onClick={() => handleHeaderClickWrapper("total_points")}>
+              P
+            </th>
           </tr>
         </thead>
         <tbody>
-          {skaterData.map((player) => (
-            <tr className="roster__table-row" key={player.id}>
+          {sortColumnWrapper(skaterStats).map((player) => (
+            <tr className="roster__table-row" key={player.player_id}>
               <td className="roster__table-name" data-label="Name">
-                {player.name}
+                {player.player_name}
               </td>
               <td className="roster__table-no" data-label="No.">
-                {player.number}
+                {player.player_number === 0 ? "" : player.player_number}
               </td>
               <td className="roster__table-pos" data-label="Pos.">
-                {player.position}
+                {player.player_position}
               </td>
-              {/* <td className="roster__table-stat" data-label="GP">
-                {player.games}
+              <td className="roster__table-stat" data-label="GP">
+                {player.games_played}
               </td>
               <td className="roster__table-stat" data-label="G">
-                {player.goals}
+                {player.total_goals}
               </td>
               <td className="roster__table-stat" data-label="A">
-                {player.assists}
+                {player.total_assists}
               </td>
               <td className="roster__table-stat" data-label="P">
-                {player.goals + player.assists}
-              </td> */}
+                {player.total_points}
+              </td>
             </tr>
           ))}
         </tbody>
