@@ -2,8 +2,8 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import {
-  getPlayersByTeam,
   getSkaterStatsByTeam,
+  getGoalieStatsByTeam
 } from "../../../utils/api-utils";
 import {
   handleHeaderClick,
@@ -14,8 +14,8 @@ import "./TeamRoster.scss";
 const TeamRoster = () => {
   const { teamName } = useParams();
 
-  const [players, setPlayers] = useState(null); // may not need this and all realted functions
   const [skaterStats, setSkaterStats] = useState(null);
+  const [goalieStats, setGoalieStats] = useState(null);
   const [teamId, setTeamId] = useState(null);
   const [sort, setSort] = useState({
     keyToSort: "total_points",
@@ -47,30 +47,22 @@ const TeamRoster = () => {
   }, [teamName]);
 
   useEffect(() => {
-    const fetchPlayers = async () => {
+    const fetchSkaterStats = async () => {
       try {
         if (teamId !== null) {
-          const response = await axios.get(getPlayersByTeam(teamId));
-          setPlayers(response.data);
+          const skaterResponse = await axios.get(getSkaterStatsByTeam(teamId));
+          setSkaterStats(skaterResponse.data);
         }
       } catch (err) {
         console.log(err.message);
       }
     };
 
-    const fetchAndSetPlayers = async () => {
-      await fetchPlayers();
-    };
-
-    fetchAndSetPlayers();
-  }, [teamId]);
-
-  useEffect(() => {
-    const fetchSkaterStats = async () => {
+    const fetchGoalieStats = async () => {
       try {
         if (teamId !== null) {
-          const response = await axios.get(getSkaterStatsByTeam(teamId));
-          setSkaterStats(response.data);
+          const goalieResponse = await axios.get(getGoalieStatsByTeam(teamId));
+          setGoalieStats(goalieResponse.data);
         }
       } catch (err) {
         console.log(err.message);
@@ -81,22 +73,18 @@ const TeamRoster = () => {
       await fetchSkaterStats();
     };
 
+    const fetchAndSetGoalieStats = async () => {
+      await fetchGoalieStats();
+    };
+
+
     fetchAndSetSkaterStats();
+    fetchAndSetGoalieStats();
   }, [teamId]);
 
-  if (players === null || skaterStats === null) {
+  if (skaterStats === null || goalieStats === null) {
     return <p>Loading...</p>;
   }
-
-  const skaterData = players.filter(
-    (player) => player.team_id === teamId && player.position !== "G"
-  );
-  const goalieData = players.filter(
-    (player) => player.team_id === teamId && player.position === "G"
-  );
-
-  // console.log(sort);
-  // console.log(skaterStats);
 
   const handleHeaderClickWrapper = header => {
     handleHeaderClick(header, sort, setSort);
@@ -174,35 +162,35 @@ const TeamRoster = () => {
         </caption>
         <thead className="roster__table-headers">
           <tr>
-            <th scope="col">Name</th>
-            <th scope="col">No.</th>
-            <th scope="col">Pos.</th>
-            {/* <th scope="col">GP</th>
-            <th scope="col">W</th>
-            <th scope="col">GAA</th> */}
+            <th scope="col" onClick={() => handleHeaderClickWrapper("player_name")}>Name</th>
+            <th scope="col" onClick={() => handleHeaderClickWrapper("player_number")}>No.</th>
+            <th scope="col" onClick={() => handleHeaderClickWrapper("player_position")}>Pos.</th>
+            <th scope="col" onClick={() => handleHeaderClickWrapper("games_played")}>GP</th>
+            <th scope="col" onClick={() => handleHeaderClickWrapper("total_wins")}>W</th>
+            <th scope="col" onClick={() => handleHeaderClickWrapper("total_goalsAgainst")}>GAA</th>
           </tr>
         </thead>
         <tbody>
-          {goalieData.map((player) => (
+          {sortColumnWrapper(goalieStats).map((player) => (
             <tr className="roster__table-row" key={player.id}>
               <td className="roster__table-name" data-label="Name">
-                {player.name}
+                {player.player_name}
               </td>
               <td className="roster__table-no" data-label="No.">
-                {player.number}
+                {player.player_number === 0 ? "" : player.player_number}
               </td>
               <td className="roster__table-pos" data-label="Pos.">
-                {player.position}
+                {player.player_position}
               </td>
-              {/* <td className="roster__table-stat" data-label="GP">
-                {player.games}
+              <td className="roster__table-stat" data-label="GP">
+                {player.games_played}
               </td>
               <td className="roster__table-stat" data-label="W">
-                {player.wins}
+                {player.total_wins}
               </td>
               <td className="roster__table-stat" data-label="GAA">
-                {(player.goalsAgainst / player.games).toFixed(2)}
-              </td> */}
+                {(player.total_goalsAgainst / player.games_played).toFixed(2)}
+              </td>
             </tr>
           ))}
         </tbody>

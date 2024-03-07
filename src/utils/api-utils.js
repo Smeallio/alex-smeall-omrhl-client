@@ -23,6 +23,7 @@ export const updateSkaterStat = (skaterStatId) => API_URL + "/api/stats/skaters/
 export const deleteSkaterStat = (skaterStatId) => API_URL + "/api/stats/skaters/" + skaterStatId;
 
 export const getGoalieStats = (gameId) => API_URL + "/api/stats/goalies/" + gameId;
+export const getGoalieStatsByTeam = (teamId) => API_URL + "/api/stats/goalies/summary/" + teamId;
 export const addGoalieStat = (gameId) => API_URL + "/api/stats/goalies/" + gameId;
 export const updateGoalieStat = (goalieStatId) => API_URL + "/api/stats/goalies/" + goalieStatId;
 export const deleteGoalieStat = (goalieStatId) => API_URL + "/api/stats/goalies/" + goalieStatId;
