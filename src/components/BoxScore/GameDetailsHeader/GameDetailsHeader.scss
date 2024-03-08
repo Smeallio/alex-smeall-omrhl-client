@@ -1,0 +1,24 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
+.gdh {
+  padding-top: 2rem;
+
+  &__game-info {
+    &-block {
+      @include flexbox(center, center);
+    }
+    &-logo {
+      height: 3.25rem;
+    }
+
+    &-score {
+      @include h2;
+      padding: 0 1rem;
+    }
+
+    &-date-time {
+      @include h3;
+    }
+  }
+}

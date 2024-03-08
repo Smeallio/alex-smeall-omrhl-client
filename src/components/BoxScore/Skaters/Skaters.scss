@@ -1,0 +1,41 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
+.skaters {
+  margin: 1rem;
+
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    z-index: 1;
+
+    &-title {
+      @include tableHeader(1.25rem);
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+
+    &-headers {
+      background-color: $white;
+      height: 2rem;
+      position: sticky;
+      top: 2rem;
+      z-index: 2;
+    }
+
+    &-row {
+      height: 2rem;
+    }
+
+    &-row:nth-of-type(even) {
+      background-color: $white;
+    }
+
+    &-box {
+      text-align: center;
+      padding: 0.25rem;
+    }
+  }
+}
