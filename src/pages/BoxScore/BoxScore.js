@@ -138,15 +138,3 @@ const BoxScore = () => {
 };
 
 export default BoxScore;
-
-const getLogoByName = (teamName) => {
-  if (teamName === "Fogtown Leprechauns") {
-    return lepLogo;
-  } else if (teamName === "Duck Island Saints") {
-    return saintsLogo;
-  } else if (teamName === "Mighty Moose") {
-    return mooseLogo;
-  } else if (teamName === "Kraken Beers") {
-    return krakenLogo;
-  }
-};
