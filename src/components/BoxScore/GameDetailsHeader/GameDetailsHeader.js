@@ -1,22 +1,6 @@
-import saintsLogo from "../../../assets/images/logos/Duck-Island-Saints-vector.png";
-import krakenLogo from "../../../assets/images/logos/Kraken-Beers-vector.png";
-import lepLogo from "../../../assets/images/logos/Leprechauns-vector.png";
-import mooseLogo from "../../../assets/images/logos/Moose-vector.png";
 import "./GameDetailsHeader.scss";
 
-const GameDetailsHeader = ({ game }) => {
-
-  const getLogoByName = (teamName) => {
-    if (teamName === "Fogtown Leprechauns") {
-      return lepLogo;
-    } else if (teamName === "Duck Island Saints") {
-      return saintsLogo;
-    } else if (teamName === "Mighty Moose") {
-      return mooseLogo;
-    } else if (teamName === "Kraken Beers") {
-      return krakenLogo;
-    }
-  };
+const GameDetailsHeader = ({ game, getLogoByName }) => {
 
   //   const determineWinner = (game) => {
   //     if (game.team1_score > game.team2_score) {
@@ -38,7 +22,8 @@ const GameDetailsHeader = ({ game }) => {
 
   return (
     <article className="gdh">
-      <section className="gdh_game-info">
+      <section className="gdh__game-info">
+        <h1 className="gdh__game-info-title">Game Summary</h1>
         <section className="gdh__game-info-block">
           <img
             className="gdh__game-info-logo"

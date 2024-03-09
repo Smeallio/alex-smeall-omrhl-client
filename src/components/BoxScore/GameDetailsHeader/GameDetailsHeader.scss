@@ -2,9 +2,20 @@
 @use "../../../styles/mixins" as *;
 
 .gdh {
-  padding-top: 2rem;
+  padding-top: 1rem;
 
   &__game-info {
+    @include flexbox(center, center, column);
+
+    &-title {
+      @include h1;
+      margin: 1rem 0;
+
+      @include tablet {
+        margin: 1rem 0 0.5rem;;
+      }
+    }
+
     &-block {
       @include flexbox(center, center);
     }
@@ -15,10 +26,22 @@
     &-score {
       @include h2;
       padding: 0 1rem;
+
+      @include desktop {
+        margin: 0.75rem 0;
+      }
     }
 
     &-date-time {
       @include h3;
+
+      @include tablet {
+        margin: 0.5rem 0;
+      }
     }
+  }
+
+  @include tablet {
+    padding-bottom: 1rem;
   }
 }

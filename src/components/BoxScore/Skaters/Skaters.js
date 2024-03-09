@@ -1,13 +1,25 @@
 import "./Skaters.scss";
 
-const Skaters = ({ team, skaterStats }) => {
+const Skaters = ({ skaterStats }) => {
 
-console.log(skaterStats)
+  const calculateTotalGoalsAndAssists = (skaterStats) => {
+    let totalGoals = 0;
+    let totalAssists = 0;
+  
+    skaterStats.forEach((skater) => {
+      totalGoals += skater.goals;
+      totalAssists += skater.assists;
+    });
+  
+    return { totalGoals, totalAssists };
+  };
+
+  const { totalGoals, totalAssists } = calculateTotalGoalsAndAssists(skaterStats);
 
   return (
     <article className="skaters">
       <table className="skaters__table">
-        <caption className="skaters__table-title">{`${team} Skaters`}</caption>
+        <caption className="skaters__table-title">Skaters</caption>
         <thead className="skaters__table-headers">
           <tr className="skaters__table-headers-row">
             <th scope="col">Name</th>
@@ -37,7 +49,12 @@ console.log(skaterStats)
               </td>
             </tr>
           ))}
-        </tbody>
+          <tr className="skaters__table-row">
+            <td className="skaters__table-box" colSpan="3">Totals:</td>
+            <td className="skaters__table-box">{totalGoals}</td>
+            <td className="skaters__table-box">{totalAssists}</td>
+          </tr>
+          </tbody>
       </table>
     </article>
   );

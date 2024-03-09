@@ -2,7 +2,6 @@
 @use "../../../styles/mixins" as *;
 
 .skaters {
-  margin: 1rem;
 
   &__table {
     width: 100%;
@@ -12,7 +11,6 @@
 
     &-title {
       @include tableHeader(1.25rem);
-      position: sticky;
       top: 0;
       z-index: 2;
     }
@@ -20,7 +18,6 @@
     &-headers {
       background-color: $white;
       height: 2rem;
-      position: sticky;
       top: 2rem;
       z-index: 2;
     }
@@ -29,8 +26,12 @@
       height: 2rem;
     }
 
-    &-row:nth-of-type(even) {
-      background-color: $white;
+    &-row:nth-of-type(odd) {
+      background-color: $omr-grey;
+    }
+
+    &-row:last-of-type {
+      font-weight: 600;
     }
 
     &-box {

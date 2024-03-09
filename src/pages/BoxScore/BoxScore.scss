@@ -1,0 +1,56 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.background {
+  height: 90%;
+  min-height: 90vh;
+  padding-bottom: 20rem;
+  position: relative;
+}
+
+.boxscore {
+  background-color: #ffffff;
+
+  &__teams {
+    padding-bottom: 2rem;
+    @include tablet {
+        @include flexbox(center, flex-start);
+    }
+  }
+
+  &__teams-column {
+    margin: 0.5rem 1rem 0;
+
+    @include tablet {
+        margin: 0;
+        padding: 0rem 1.5rem;
+        width: 50%;
+    }
+
+    &-header {
+        @include flexbox(center);
+        padding: 0.5rem 0;
+    }
+
+    &-logo {
+        height: 2.25rem;
+        margin-right: 1rem;
+    }
+
+    &-teamname {
+        @include h3;
+        text-align: center;
+    }
+  }
+
+  &__teams-column:first-of-type {
+    border-top: 2px solid $omr-grey;
+    border-bottom: 2px solid $omr-grey;
+
+    @include tablet {
+        border-top: none;
+        border-bottom: none;
+        border-right: 2px solid $omr-grey;
+    }
+  }
+}

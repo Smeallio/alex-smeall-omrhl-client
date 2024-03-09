@@ -1,3 +1,7 @@
+import saintsLogo from "../../assets/images/logos/Duck-Island-Saints-vector.png";
+import krakenLogo from "../../assets/images/logos/Kraken-Beers-vector.png";
+import lepLogo from "../../assets/images/logos/Leprechauns-vector.png";
+import mooseLogo from "../../assets/images/logos/Moose-vector.png";
 import Header from "../../components/Globals/Header/Header";
 import Nav from "../../components/Globals/Nav/Nav";
 import TeamHeader from "../../components/TeamPage/TeamHeader/TeamHeader";
@@ -68,6 +72,18 @@ const BoxScore = () => {
     }
   };
 
+  const getLogoByName = (teamName) => {
+    if (teamName === "Fogtown Leprechauns") {
+      return lepLogo;
+    } else if (teamName === "Duck Island Saints") {
+      return saintsLogo;
+    } else if (teamName === "Mighty Moose") {
+      return mooseLogo;
+    } else if (teamName === "Kraken Beers") {
+      return krakenLogo;
+    }
+  };
+
   return (
     <section className="background">
       <Header />
@@ -75,26 +91,42 @@ const BoxScore = () => {
       <main className="boxscore">
         <TeamHeader />
         <section className="boxscore__game-info">
-          <GameDetailsHeader game={game} />
+          <GameDetailsHeader game={game} getLogoByName={getLogoByName} />
         </section>
         <section className="boxscore__teams">
           <section className="boxscore__teams-column">
+            <section className="boxscore__teams-column-header">
+              <img
+                className="boxscore__teams-column-logo"
+                src={getLogoByName(game.team1_name)}
+                alt={game.team1_name}
+              />
+              <h3 className="boxscore__teams-column-teamname">
+                {game.team1_name}
+              </h3>
+            </section>
             <Skaters
-              team={game.team1_name}
               skaterStats={filterSkaterTeam(game.team1_team_id, skaterStats)}
             />
             <Goalies
-              team={game.team1_name}
               goalieStats={filterGoalieTeam(game.team1_team_id, goalieStats)}
             />
           </section>
           <section className="boxscore__teams-column">
+            <section className="boxscore__teams-column-header">
+              <img
+                className="boxscore__teams-column-logo"
+                src={getLogoByName(game.team2_name)}
+                alt={game.team2_name}
+              />
+              <h3 className="boxscore__teams-column-teamname">
+                {game.team2_name}
+              </h3>
+            </section>
             <Skaters
-              team={game.team2_name}
               skaterStats={filterSkaterTeam(game.team2_team_id, skaterStats)}
             />
             <Goalies
-              team={game.team2_name}
               goalieStats={filterGoalieTeam(game.team2_team_id, goalieStats)}
             />
           </section>
@@ -106,3 +138,15 @@ const BoxScore = () => {
 };
 
 export default BoxScore;
+
+const getLogoByName = (teamName) => {
+  if (teamName === "Fogtown Leprechauns") {
+    return lepLogo;
+  } else if (teamName === "Duck Island Saints") {
+    return saintsLogo;
+  } else if (teamName === "Mighty Moose") {
+    return mooseLogo;
+  } else if (teamName === "Kraken Beers") {
+    return krakenLogo;
+  }
+};

@@ -61,11 +61,11 @@
 
 @mixin h1 {
   font-family: $Rubik;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: 600;
 
   @include tablet {
-    font-size: 1.75rem;
+    font-size: 2rem;
   }
 
   @include desktop {
@@ -75,11 +75,11 @@
 
 @mixin h2 {
   font-family: $Rubik;
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   font-weight: 600;
 
   @include tablet {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
   }
 
   @include desktop {
@@ -89,15 +89,15 @@
 
 @mixin h3 {
   font-family: $Rubik;
-  font-size: 0.9375rem;
+  font-size: 1rem;
   font-weight: 600;
 
   @include tablet {
-    font-size: 1.125rem;
+    font-size: 1.25rem;
   }
 
   @include desktop {
-    font-size: 1.375rem;
+    font-size: 1.5rem;
   }
 }
 
