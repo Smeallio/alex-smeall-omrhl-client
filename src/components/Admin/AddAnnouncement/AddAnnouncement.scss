@@ -1,72 +1,79 @@
 @use "../../../styles/variables" as *;
 @use "../../../styles/mixins" as *;
 
-.addGames {
+.addAnnouncement {
   &__header {
     @include h2;
     margin: 0.5rem 0 1.5rem;
   }
   &__form {
     @include flexbox(space-between, center, row, wrap);
+    @include biggerp;
 
     &-date {
-      @include flexbox;
-      width: 60%;
+      width: 100%;
 
       @include tablet {
         margin-bottom: 0;
+        width: 30%;
       }
 
       @include desktop {
-        width: 16%;
+        width: 26%;
       }
 
       & span {
+        vertical-align: top;
         margin-right: 0.75rem;
+
+        @include desktop {
+            margin-right: 0.8rem;
+        }
       }
     }
-    &-time {
-      width: 40%;
+    &-title {
+      width: 100%;
+      margin: 0.75rem 0;
 
       @include tablet {
         text-align: left;
-      }
-
-      @include desktop {
-        width: 12%;
-      }
-
-      &-input {
-        @include input;
-        margin-left: 0.75rem;
-        width: 50%;
-
-        @include tablet {
-          margin-right: 0.75rem;
-          width: 40%;
-        }
-
-        @include desktop {
-          width: 40%;
-        }
-      }
-    }
-    &-team {
-      width: 100%;
-      margin-top: 0.75rem;
-
-      & span {
-        margin-right: 0.75rem;
-      }
-
-      &-input {
-        @include input;
         width: 70%;
       }
 
-      @include desktop {
-        width: 27%;
-        margin-top: 0;
+      & span {
+        vertical-align: top;
+        margin-right: 0.9rem;
+      }
+
+      &-input {
+        @include input;
+        width: 80%;
+
+        @include tablet {
+          width: 71.5%;
+        }
+
+        @include desktop {
+            width: 71.8%;
+          }
+      }
+    }
+    &-body {
+      width: 100%;
+
+      &-input {
+        @include input;
+        width: 80%;
+        height: 5rem;
+      }
+
+      @include tablet {
+        width: 100%;
+      }
+
+      & span {
+        vertical-align: top;
+        margin-right: 0.55rem;
       }
     }
 
@@ -74,24 +81,25 @@
       @include button;
       margin: 0.75rem auto;
       width: 90%;
-      max-width: 10rem;
+      max-width: 15rem;
 
       @include tablet {
         width: 50%;
         margin-top: 0.75rem;
+        margin-left: 3.5rem;
       }
 
       @include desktop {
-        width: 15%;
+        margin-left: 3.85rem;
       }
     }
 
     @include tablet {
-      max-width: 300px;
+      max-width: 600px;
     }
 
     @include desktop {
-      max-width: 1200px;
+      max-width: 900px;
     }
   }
 }
@@ -100,6 +108,10 @@
   &__input-container input {
     @include input;
     width: 6.5rem;
+
+    @include desktop {
+        width: 10rem;
+    }
   }
   &-popper {
     z-index: 3 !important;

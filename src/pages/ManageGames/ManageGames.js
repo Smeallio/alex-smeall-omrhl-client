@@ -54,8 +54,6 @@ const ManageGames = ({ authUser }) => {
     );
   }
 
-  console.log(games);
-
   if (authUser === false) {
     return (
       <section className="background">

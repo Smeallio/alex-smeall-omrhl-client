@@ -144,3 +144,17 @@
     font-size: 1rem;
   }
 }
+
+@mixin biggerp {
+  font-family: $Rubik;
+  font-size: 1rem;
+  font-weight: 400;
+
+  @include tablet {
+    font-size: 1.125rem;
+  }
+
+  @include desktop {
+    font-size: 1.25rem;
+  }
+}

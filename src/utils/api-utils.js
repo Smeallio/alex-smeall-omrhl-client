@@ -27,3 +27,6 @@ export const getGoalieStatsByTeam = (teamId) => API_URL + "/api/stats/goalies/su
 export const addGoalieStat = (gameId) => API_URL + "/api/stats/goalies/" + gameId;
 export const updateGoalieStat = (goalieStatId) => API_URL + "/api/stats/goalies/" + goalieStatId;
 export const deleteGoalieStat = (goalieStatId) => API_URL + "/api/stats/goalies/" + goalieStatId;
+
+export const getAnnouncements = () => API_URL + '/api/announcements/';
+export const postAnnouncement = () => API_URL + '/api/announcements/';

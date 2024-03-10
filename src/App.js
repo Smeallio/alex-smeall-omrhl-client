@@ -6,13 +6,13 @@ import Login from "./pages/Login/Login";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import ManagePlayers from "./pages/ManagePlayers/ManagePlayers";
 import ManageGames from "./pages/ManageGames/ManageGames";
+import ManageAnnouncements from "./pages/ManageAnnouncements/ManageAnnouncements";
 import ManageStats from "./pages/ManageStats/ManageStats";
 import NotFound from "./pages/NotFound/NotFound";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { getUsers } from "./utils/api-utils"
 import "./App.scss";
-
 
 function App() {
   const [authUser, setAuthUser] = useState(false);
@@ -55,6 +55,7 @@ function App() {
         <Route path="/admin/dashboard" element={<Dashboard authUser={authUser}/>}></Route>
         <Route path="/admin/dashboard/:teamName" element={<ManagePlayers authUser={authUser} />}></Route>
         <Route path="/admin/dashboard/games" element={<ManageGames authUser={authUser} />}></Route>
+        <Route path="/admin/dashboard/announcements" element={<ManageAnnouncements authUser={authUser} />}></Route>
         <Route path="/admin/dashboard/games/:gameId" element={<ManageStats authUser={authUser} />}></Route>
         <Route path='*' element={<NotFound />} />
       </Routes>

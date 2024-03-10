@@ -11,18 +11,18 @@ const AddGames = ({ fetchGames, getIdByTeam }) => {
   const addGame = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
-    const dateOptions = { year: 'numeric', month: 'short', day: 'numeric' };
-    const formattedDate = newGame.date.toLocaleDateString('en-US', dateOptions);
+    const dateOptions = { year: "numeric", month: "short", day: "numeric" };
+    const formattedDate = newGame.date.toLocaleDateString("en-US", dateOptions);
     const game = {
       date: formattedDate,
-      time: formData.get('time'),
+      time: formData.get("time"),
       complete: 0,
-      team1_name: formData.get('team1_name'),
-      team1_team_id: getIdByTeam(formData.get('team1_name')),
+      team1_name: formData.get("team1_name"),
+      team1_team_id: getIdByTeam(formData.get("team1_name")),
       team1_score: null,
       team1_result: null,
-      team2_name: formData.get('team2_name'),
-      team2_team_id: getIdByTeam(formData.get('team2_name')),
+      team2_name: formData.get("team2_name"),
+      team2_team_id: getIdByTeam(formData.get("team2_name")),
       team2_score: null,
       team2_result: null,
     };
@@ -43,7 +43,7 @@ const AddGames = ({ fetchGames, getIdByTeam }) => {
 
   return (
     <article className="addGames">
-      <h3 className="addGames__header">Add Games</h3>
+      <h2 className="addGames__header">Add Games</h2>
       <form className="addGames__form" onSubmit={addGame} ref={formRef}>
         <label className="addGames__form-date">
           <span>Date:</span>

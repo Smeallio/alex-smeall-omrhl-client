@@ -5,6 +5,10 @@
   max-width: 100%;
   overflow: hidden;
 
+  &__header {
+    @include h2;
+  }
+
   &__block {
     max-height: 550px;
     position: relative;

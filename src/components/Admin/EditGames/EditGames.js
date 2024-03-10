@@ -115,7 +115,7 @@ const EditGames = ({ games, fetchGames, getIdByTeam }) => {
 
   return (
     <article className="editGames">
-      <h3 className="editGames__header">Edit Games</h3>
+      <h2 className="editGames__header">Edit Games</h2>
       <section className="editGames__block">
         <form className="editGames__form">
           <table className="editGames__table">

@@ -68,7 +68,7 @@ const Dashboard = ({ authUser }) => {
                 Scores & Schedule
               </Link>
               <h2 className="dashboard__subtitle">Update Announcements</h2>
-              <Link className="dashboard__link" to="/admin/dashboard/games">
+              <Link className="dashboard__link" to="/admin/dashboard/announcements">
                 Announcements
               </Link>
             </section>
