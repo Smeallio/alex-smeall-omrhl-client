@@ -30,3 +30,5 @@ export const deleteGoalieStat = (goalieStatId) => API_URL + "/api/stats/goalies/
 
 export const getAnnouncements = () => API_URL + '/api/announcements/';
 export const postAnnouncement = () => API_URL + '/api/announcements/';
+export const updateAnnouncement = (announcementId) => API_URL + '/api/announcements/' + announcementId;
+export const deleteAnnouncement = (announcementId) => API_URL + '/api/announcements/' + announcementId;

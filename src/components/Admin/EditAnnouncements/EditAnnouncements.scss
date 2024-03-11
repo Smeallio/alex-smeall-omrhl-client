@@ -1,0 +1,199 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
+.editAnnouncements {
+  max-width: 100%;
+  overflow: hidden;
+
+  &__header {
+    @include h2;
+  }
+
+  &__block {
+    max-height: 550px;
+    position: relative;
+    margin-top: 1.5rem;
+    overflow-x: auto;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    z-index: 1;
+
+    &-title {
+      @include tableHeader(1.25rem);
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+
+    &-headers {
+      background-color: $white;
+      height: 2rem;
+      position: sticky;
+      top: 2rem;
+      z-index: 2;
+
+      @include responsive-table {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+      }
+    }
+
+    &-row {
+      border-top: 1px solid $black;
+
+      @include responsive-table {
+        padding-top: 0.75rem;
+        @include flexbox(space-between, center, row, wrap);
+        margin-bottom: 0.625em;
+        font-size: 0.875rem;
+      }
+
+      @include desktop {
+        height: 2rem;
+      }
+    }
+
+    &-box {
+      @include bigp;
+      text-align: center;
+      padding: 0.25rem;
+
+      @include responsive-table {
+        text-align: right;
+
+        &::before {
+          content: attr(data-label);
+          float: left;
+          font-weight: bold;
+          text-transform: uppercase;
+          margin-right: 1.25rem;
+        }
+
+        &[data-label="Edit"]::before {
+          content: "";
+        }
+
+        &-title {
+          width: 100%;
+          text-align: left;
+
+          & input {
+            width: 75%;
+          }
+
+          @include tablet {
+            width: 60%;
+
+            & input {
+              width: 80%;
+            }
+          }
+        }
+
+        &-content {
+          @include flexbox(flex-start, flex-start, column);
+          text-align: left;
+          width: 100%;
+
+          & textarea {
+            width: 100%;
+            margin: 0.5rem 0;
+          }
+
+          & span {
+            margin: 0.5rem 0;
+          }
+        }
+      }
+
+      @include desktop {
+        &-date {
+          width: 10%;
+        }
+
+        &-title {
+          width: 15%;
+        }
+
+        &-content {
+          width: 65%;
+        }
+      }
+
+      &-icons {
+        width: 10%;
+        @include responsive-table {
+          @include flexbox(space-between);
+          width: 100%;
+        }
+      }
+
+      &-icon {
+        cursor: pointer;
+        @include responsive-table {
+          height: 1.5rem;
+          margin: 0 auto;
+        }
+
+        @include tablet {
+          height: 1.25rem;
+        }
+
+        &-edit,
+        &-check {
+          color: $omr-darkblue;
+          margin-right: 1.75rem;
+        }
+
+        &-delete,
+        &-x {
+          color: $omr-red;
+        }
+      }
+
+      & input,
+      textarea {
+        @include input;
+      }
+
+      & textarea {
+        height: 10rem;
+        font-family: $Rubik;
+
+        @include tablet {
+          height: 5rem;
+        }
+
+        @include desktop {
+            width: 100%;
+        }
+      }
+    }
+  }
+}
+
+.react-datepicker {
+  &__input-container input {
+    @include input;
+    width: 6.5rem;
+
+    @include desktop {
+      width: 10rem;
+    }
+  }
+  &-popper {
+    z-index: 3 !important;
+  }
+}

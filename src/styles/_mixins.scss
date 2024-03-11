@@ -55,6 +55,7 @@
 }
 
 @mixin input {
+  @include bigp;
   border: none;
   height: 1.5rem;
 }
