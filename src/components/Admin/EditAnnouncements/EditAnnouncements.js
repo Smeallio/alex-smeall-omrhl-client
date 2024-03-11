@@ -26,10 +26,10 @@ const EditAnnouncements = ({ announcements, fetchAnnouncements }) => {
   const confirmDeleteAnnouncement = async () => {
     try {
       await axios.delete(deleteAnnouncement(confirmDelete));
-      console.log("Played deleted successfully");
+      console.log("Announcement deleted successfully");
       fetchAnnouncements();
     } catch (err) {
-      console.log("Player delete failed ", err);
+      console.log("Announcement delete failed ", err);
     } finally {
       setConfirmDelete(null);
     }
@@ -46,8 +46,10 @@ const EditAnnouncements = ({ announcements, fetchAnnouncements }) => {
 
   const confirmEditAnnouncement = async (event) => {
     event.preventDefault();
+    const dateOptions = { year: "numeric", month: "short", day: "numeric" };
+    const formattedDate = new Date(editableAnnouncement.date).toLocaleDateString("en-US", dateOptions);
     const updatedAnnouncement = {
-      date: editableAnnouncement.date,
+      date: formattedDate,
       title: editableAnnouncement.title,
       body: editableAnnouncement.body,
     };
@@ -59,7 +61,7 @@ const EditAnnouncements = ({ announcements, fetchAnnouncements }) => {
       );
       fetchAnnouncements();
     } catch (err) {
-      console.log("Error updating game: ", err);
+      console.log("Error updating announcement: ", err);
     }
     setEditableAnnouncement(0);
   };
@@ -75,11 +77,6 @@ const EditAnnouncements = ({ announcements, fetchAnnouncements }) => {
 
   const handleDateChange = (date) => {
     setEditableAnnouncement({ ...editableAnnouncement, date });
-  };
-
-  const formatDate = (timestamp) => {
-    const options = { month: "short", day: "2-digit", year: "numeric" };
-    return new Date(timestamp).toLocaleDateString(undefined, options);
   };
 
   if (announcements === null) {
@@ -165,7 +162,7 @@ const EditAnnouncements = ({ announcements, fetchAnnouncements }) => {
                         className="editAnnouncements__table-box editAnnouncements__table-box-date"
                         data-label="Date"
                       >
-                        {formatDate(announcement.date)}
+                        {announcement.date}
                       </td>
                       <td
                         className="editAnnouncements__table-box editAnnouncements__table-box-title"

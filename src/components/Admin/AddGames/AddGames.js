@@ -12,7 +12,7 @@ const AddGames = ({ fetchGames, getIdByTeam }) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const dateOptions = { year: "numeric", month: "short", day: "numeric" };
-    const formattedDate = newGame.date.toLocaleDateString("en-US", dateOptions);
+    const formattedDate = new Date (newGame.date).toLocaleDateString("en-US", dateOptions);
     const game = {
       date: formattedDate,
       time: formData.get("time"),

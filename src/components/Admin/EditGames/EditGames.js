@@ -23,10 +23,10 @@ const EditGames = ({ games, fetchGames, getIdByTeam }) => {
   const confirmDeleteGame = async () => {
     try {
       await axios.delete(deleteGame(confirmDelete));
-      console.log("Played deleted successfully");
+      console.log("Game deleted successfully");
       fetchGames();
     } catch (err) {
-      console.log("Player delete failed ", err);
+      console.log("Game delete failed ", err);
     } finally {
       setConfirmDelete(null);
     }
@@ -73,8 +73,10 @@ const EditGames = ({ games, fetchGames, getIdByTeam }) => {
 
   const confirmEditGame = async (event) => {
     event.preventDefault();
+    const dateOptions = { year: "numeric", month: "short", day: "numeric" };
+    const formattedDate = new Date(editableGame.date).toLocaleDateString("en-US", dateOptions);
     const updatedGame = {
-      date: editableGame.date,
+      date: formattedDate,
       time: editableGame.time,
       complete: editableGame.complete,
       team1_name: editableGame.team1_name,

@@ -12,10 +12,7 @@ const AddAnnouncement = ({ fetchAnnouncements }) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const dateOptions = { year: "numeric", month: "short", day: "numeric" };
-    const formattedDate = newAnnouncement.date.toLocaleDateString(
-      "en-US",
-      dateOptions
-    );
+    const formattedDate = new Date (newAnnouncement.date).toLocaleDateString("en-US", dateOptions);
     const announcement = {
       title: formData.get("title"),
       date: formattedDate,

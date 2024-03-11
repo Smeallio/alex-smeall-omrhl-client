@@ -24,14 +24,7 @@ const Announcements = () => {
 
   announcements.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-  const formatDate = (timestamp) => {
-    const options = { month: "short", day: "2-digit", year: "numeric" };
-    return new Date(timestamp).toLocaleDateString(undefined, options);
-  };
-
   const sortedAndSlicedAnnouncements = announcements.slice(0, 2);
-
-  console.log(sortedAndSlicedAnnouncements);
 
   return (
     <article className="announcements">
@@ -42,7 +35,7 @@ const Announcements = () => {
             {announcement.title}
           </section>
           <section className="announcements__box-date">
-            {formatDate(announcement.date)}
+            {announcement.date}
           </section>
           <section className="announcements__box-body">
             {announcement.body}
