@@ -85,6 +85,18 @@
         }
       }
 
+      &-time input {
+        @include desktop {
+          width: 4rem;
+        }
+      }
+
+      &-team-score input {
+        @include desktop {
+          width: 3rem;
+        }
+      }
+
       &-icons {
         @include responsive-table {
           @include flexbox(space-between);

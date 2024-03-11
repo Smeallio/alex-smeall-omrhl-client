@@ -18,7 +18,7 @@
       }
 
       @include desktop {
-        width: 16%;
+        width: 20%;
       }
 
       & span {
@@ -100,6 +100,10 @@
   &__input-container input {
     @include input;
     width: 6.5rem;
+
+    @include desktop {
+      width: 10rem;
+    }
   }
   &-popper {
     z-index: 3 !important;
