@@ -1,0 +1,12 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.stat-leaders {
+    padding: 1rem;
+    background-color: $white;
+
+    &__header {
+        @include h1;
+        padding-bottom: 1.5rem;
+    }
+}

@@ -11,8 +11,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import {
   getOneGame,
-  getSkaterStats,
-  getGoalieStats,
+  getSkaterStatsByGame,
+  getGoalieStatsByGame,
   getPlayersByTeam,
 } from "../../utils/api-utils";
 import "./ManageStats.scss";
@@ -48,9 +48,9 @@ const ManageStats = ({ authUser }) => {
 
   const fetchStats = useCallback(async () => {
     try {
-      const skaterResponse = await axios.get(getSkaterStats(gameId));
+      const skaterResponse = await axios.get(getSkaterStatsByGame(gameId));
       setSkaterStats(skaterResponse.data);
-      const goalieResponse = await axios.get(getGoalieStats(gameId));
+      const goalieResponse = await axios.get(getGoalieStatsByGame(gameId));
       setGoalieStats(goalieResponse.data);
     } catch (err) {
       console.log(err.message);

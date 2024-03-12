@@ -1,0 +1,46 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
+.points-leaders {
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+    &-title {
+      @include tableHeader(1.25rem);
+    //   position: sticky;
+    }
+    &-headers th {
+      @include columnheader;
+      padding: 0.5rem 0;
+    //   position: sticky;
+      cursor: pointer;
+    }
+
+    &-row {
+      @include bigp;
+
+      &-players:nth-of-type(odd) {
+        background-color: $omr-grey;
+      }
+    }
+
+    &-box {
+      text-align: center;
+      &-team {
+        &-logo {
+          height: 1.5rem;
+          vertical-align: middle;
+          padding: 0.25rem 0;
+        }
+      }
+      &-position {
+        width: 2rem;
+      }
+      
+      &-games, &-goals, &-assists, &-points {
+        width: 1.75rem;
+      }
+
+    }
+  }
+}

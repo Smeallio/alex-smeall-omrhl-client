@@ -56,6 +56,11 @@
       @include tablet {
         text-align: center;
       }
+
+      &-link, &-link:visited {
+        color: $omr-darkblue;
+        text-decoration: none;
+      }
     }
   }
 

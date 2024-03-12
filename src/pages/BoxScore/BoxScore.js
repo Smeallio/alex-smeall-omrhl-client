@@ -14,8 +14,8 @@ import { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import {
   getOneGame,
-  getSkaterStats,
-  getGoalieStats,
+  getSkaterStatsByGame,
+  getGoalieStatsByGame,
 } from "../../utils/api-utils";
 import "./BoxScore.scss";
 
@@ -41,9 +41,9 @@ const BoxScore = () => {
 
   const fetchStats = useCallback(async () => {
     try {
-      const skaterResponse = await axios.get(getSkaterStats(gameId));
+      const skaterResponse = await axios.get(getSkaterStatsByGame(gameId));
       setSkaterStats(skaterResponse.data);
-      const goalieResponse = await axios.get(getGoalieStats(gameId));
+      const goalieResponse = await axios.get(getGoalieStatsByGame(gameId));
       setGoalieStats(goalieResponse.data);
     } catch (err) {
       console.log(err.message);
