@@ -1,7 +1,7 @@
 @use "../../../styles/variables" as *;
 @use "../../../styles/mixins" as *;
 
-.goal-leaders {
+.goalie-gaa-leaders {
   margin-bottom: 2.5rem;
   overflow-x: auto;
   max-height: 30rem;
@@ -43,7 +43,7 @@
 
       &-name {
         @include tablet {
-          width: 50%;
+          width: 40%;
         }
       }
 
@@ -67,7 +67,8 @@
       }
 
       &-games,
-      &-goals {
+      &-ga
+      &-gaa {
         width: 1.75rem;
 
         @include tablet {
@@ -82,7 +83,7 @@
   }
 
   @include desktop {
-    width: 27%;
+    width: 50%;
     max-height: 40rem;
   }
 }

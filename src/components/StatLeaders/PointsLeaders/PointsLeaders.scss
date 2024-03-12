@@ -81,4 +81,9 @@
   @include tablet {
     width: 100%;
   }
+
+  @include desktop {
+    width: 40%;
+    max-height: 40rem;
+  }
 }

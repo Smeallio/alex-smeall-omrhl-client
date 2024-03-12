@@ -20,7 +20,6 @@
     &-headers th {
       @include columnheader;
       padding: 0.5rem 0;
-      cursor: pointer;
       position: sticky;
       top: 2rem;
       background-color: $white;
@@ -41,32 +40,49 @@
 
     &-box {
       text-align: center;
+
+      &-name {
+        @include tablet {
+          width: 50%;
+        }
+      }
+
       &-team {
         &-logo {
           height: 1.5rem;
           vertical-align: middle;
           padding: 0.25rem 0;
         }
+
+        @include tablet {
+          width: 12.5%;
+        }
       }
       &-position {
         width: 2rem;
 
         @include tablet {
-            width: 2.5rem;
+          width: 12.5%;
         }
       }
 
       &-games,
       &-assists {
         width: 1.75rem;
+
+        @include tablet {
+          width: 12.5%;
+        }
       }
     }
-    // @include tablet {
-    //   width: 50%;
-    // }
   }
 
   @include tablet {
     width: 48%;
+  }
+
+  @include desktop {
+    width: 27%;
+    max-height: 40rem;
   }
 }

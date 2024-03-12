@@ -7,10 +7,33 @@
 
     &__header {
         @include h1;
-        padding-bottom: 1.5rem;
+        margin: 1.5rem 0;
+
+        @include desktop {
+            margin-left: 5%;
+        }
+    }
+
+    &__subheader {
+        @include h2;
+        margin: 1rem 0 1.5rem; 
+        width: 100%;
     }
 
     &__container {
         @include flexbox(space-between, flex-start, row, wrap);
+
+        @include desktop {
+            margin: 0 auto;
+            width: 90%
+        }
+    }
+
+    @include tablet {
+        padding: 1rem 2rem;
+    }
+
+    @include desktop {
+        padding: 1rem 0;
     }
 }

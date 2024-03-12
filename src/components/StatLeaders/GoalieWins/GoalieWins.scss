@@ -1,7 +1,7 @@
 @use "../../../styles/variables" as *;
 @use "../../../styles/mixins" as *;
 
-.goal-leaders {
+.goalie-wins-leaders {
   margin-bottom: 2.5rem;
   overflow-x: auto;
   max-height: 30rem;
@@ -67,7 +67,7 @@
       }
 
       &-games,
-      &-goals {
+      &-wins {
         width: 1.75rem;
 
         @include tablet {
@@ -82,7 +82,7 @@
   }
 
   @include desktop {
-    width: 27%;
+    width: 45%;
     max-height: 40rem;
   }
 }
