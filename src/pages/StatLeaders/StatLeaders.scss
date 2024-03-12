@@ -10,7 +10,9 @@
         margin: 1.5rem 0;
 
         @include desktop {
-            margin-left: 5%;
+            margin: 0 auto;
+            padding: 1.5rem 0;
+            max-width: 1280px;
         }
     }
 
@@ -25,7 +27,8 @@
 
         @include desktop {
             margin: 0 auto;
-            width: 90%
+            width: 90%;
+            max-width: 1280px;
         }
     }
 
