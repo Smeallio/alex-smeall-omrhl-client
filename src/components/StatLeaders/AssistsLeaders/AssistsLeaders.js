@@ -2,12 +2,12 @@ import saintsLogo from "../../../assets/images/logos/Duck-Island-Saints-vector.w
 import krakenLogo from "../../../assets/images/logos/Kraken-Beers-vector.webp";
 import lepLogo from "../../../assets/images/logos/Leprechauns-vector.webp";
 import mooseLogo from "../../../assets/images/logos/Moose-vector.webp";
-import "./GoalsLeaders.scss";
+import "./AssistsLeaders.scss";
 
-const GoalsLeaders = ({ skaterStats }) => {
+const AssistsLeaders = ({ skaterStats }) => {
 
-  const topTwentyFiveGoalScorers = (stats) => {
-    stats.sort((a, b) => b.total_goals - a.total_goals);
+  const topTwentyFiveAssistScorers = (stats) => {
+    stats.sort((a, b) => b.total_assists - a.total_assists);
     return stats.slice(0, 25);
   };
 
@@ -46,54 +46,54 @@ const GoalsLeaders = ({ skaterStats }) => {
   }
 
   return (
-    <article className="goal-leaders">
-      <table className="goal-leaders__table">
-        <caption className="goal-leaders__table-title">Goals - Top 25</caption>
-        <thead className="goal-leaders__table-headers">
-          <tr className="goal-leaders__table-row">
+    <article className="assist-leaders">
+      <table className="assist-leaders__table">
+        <caption className="assist-leaders__table-title">Assists - Top 25</caption>
+        <thead className="assist-leaders__table-headers">
+          <tr className="assist-leaders__table-row">
             <th scope="col">Name</th>
             <th scope="col">Team</th>
             <th scope="col">Pos</th>
             <th scope="col">GP</th>
-            <th scope="col">G</th>
+            <th scope="col">A</th>
           </tr>
         </thead>
         <tbody>
-          {topTwentyFiveGoalScorers(skaterStats).map((player) => (
-            <tr className="goal-leaders__table-row-players" key={player.player_id}>
+          {topTwentyFiveAssistScorers(skaterStats).map((player) => (
+            <tr className="assist-leaders__table-row-players" key={player.player_id}>
               <td
-                className="goal-leaders__table-box goal-leaders__table-box-name"
+                className="assist-leaders__table-box assist-leaders__table-box-name"
                 data-label="Name"
               >
                 {player.player_name}
               </td>
               <td
-                className="goal-leaders__table-box goal-leaders__table-box-team"
+                className="assist-leaders__table-box assist-leaders__table-box-team"
                 data-label="Team"
               >
                 <img
-                  className="goal-leaders__table-box-team-logo"
+                  className="assist-leaders__table-box-team-logo"
                   src={getImageByTeamID(player.player_teamId)}
                   alt={getNameByTeamID(player.player_teamId)}
                 />
               </td>
               <td
-                className="goal-leaders__table-box goal-leaders__table-box-position"
+                className="assist-leaders__table-box assist-leaders__table-box-position"
                 data-label="Pos"
               >
                 {player.player_position}
               </td>
               <td
-                className="goal-leaders__table-box goal-leaders__table-box-games"
+                className="assist-leaders__table-box assist-leaders__table-box-games"
                 data-label="GP"
               >
                 {player.games_played}
               </td>
               <td
-                className="goal-leaders__table-box goal-leaders__table-box-goals"
+                className="assist-leaders__table-box assist-leaders__table-box-assists"
                 data-label="G"
               >
-                {player.total_goals}
+                {player.total_assists}
               </td>
             </tr>
           ))}
@@ -103,4 +103,4 @@ const GoalsLeaders = ({ skaterStats }) => {
   );
 };
 
-export default GoalsLeaders;
+export default AssistsLeaders;

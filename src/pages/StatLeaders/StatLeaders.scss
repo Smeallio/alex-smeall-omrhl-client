@@ -9,4 +9,8 @@
         @include h1;
         padding-bottom: 1.5rem;
     }
+
+    &__container {
+        @include flexbox(space-between, flex-start, row, wrap);
+    }
 }
