@@ -1,7 +1,7 @@
-import saintsLogo from "../../../assets/images/logos/Duck-Island-Saints-vector.png";
-import krakenLogo from "../../../assets/images/logos/Kraken-Beers-vector.png";
-import lepLogo from "../../../assets/images/logos/Leprechauns-vector.png";
-import mooseLogo from "../../../assets/images/logos/Moose-vector.png";
+import saintsLogo from "../../../assets/images/logos/Duck-Island-Saints-vector.webp";
+import krakenLogo from "../../../assets/images/logos/Kraken-Beers-vector.webp";
+import lepLogo from "../../../assets/images/logos/Leprechauns-vector.webp";
+import mooseLogo from "../../../assets/images/logos/Moose-vector.webp";
 import { useParams, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
