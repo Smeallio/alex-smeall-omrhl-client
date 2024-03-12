@@ -31,8 +31,6 @@
     }
 
     &-row {
-      @include bigp;
-
       &-players:nth-of-type(odd) {
         background-color: $omr-grey;
       }
@@ -40,6 +38,7 @@
 
     &-box {
       text-align: center;
+      @include bigp;
 
       &-name {
         @include tablet {
