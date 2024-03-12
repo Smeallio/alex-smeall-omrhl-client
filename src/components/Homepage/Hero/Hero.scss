@@ -4,7 +4,7 @@
 .hero {
     @include flexbox(flex-end, flex-end);
     height: 22rem;
-    background: url(../../../assets/images/games/Odd-Man-Rush-Hockey-League-Action.jpg)
+    background: url(../../../assets/images/games/Odd-Man-Rush-Hockey-League-Action.webp)
       no-repeat center/cover;
 
   &__text {

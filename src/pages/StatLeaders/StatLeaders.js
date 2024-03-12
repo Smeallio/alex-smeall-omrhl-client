@@ -1,6 +1,7 @@
 import Header from "../../components/Globals/Header/Header";
 import Nav from "../../components/Globals/Nav/Nav";
 import PointsLeaders from "../../components/StatLeaders/PointsLeaders/PointsLeaders";
+import GoalsLeaders from "../../components/StatLeaders/GoalsLeaders/GoalsLeaders";
 import Footer from "../../components/Globals/Footer/Footer";
 import axios from "axios";
 import { useState, useEffect, useCallback } from "react";
@@ -39,6 +40,7 @@ const StatLeaders = () => {
       <main className="stat-leaders">
         <h1 className="stat-leaders__header">League Leaders</h1>
         <PointsLeaders skaterStats={skaterStats} />
+        <GoalsLeaders skaterStats={skaterStats} />
       </main>
       <Footer />
     </section>

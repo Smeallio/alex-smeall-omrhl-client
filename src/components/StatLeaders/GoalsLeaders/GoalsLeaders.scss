@@ -1,0 +1,58 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
+.goal-leaders {
+  margin-bottom: 2.5rem;
+  overflow-x: auto;
+  max-height: 30rem;
+  scrollbar-width: none;
+
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+    &-title {
+      @include tableHeader(1.25rem);
+      position: sticky;
+      top: 0;
+      z-index: 3;
+    }
+    &-headers th {
+      @include columnheader;
+      padding: 0.5rem 0;
+      cursor: pointer;
+      position: sticky;
+      top: 2rem;
+      background-color: $white;
+      z-index: 3;
+    }
+
+    &-row {
+      @include bigp;
+
+      &-players:nth-of-type(odd) {
+        background-color: $omr-grey;
+      }
+    }
+
+    &-box {
+      text-align: center;
+      &-team {
+        &-logo {
+          height: 1.5rem;
+          vertical-align: middle;
+          padding: 0.25rem 0;
+        }
+      }
+      &-position {
+        width: 2rem;
+      }
+
+      &-games,
+      &-goals,
+      &-assists,
+      &-points {
+        width: 1.75rem;
+      }
+    }
+  }
+}
