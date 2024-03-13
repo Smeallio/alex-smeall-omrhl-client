@@ -4,7 +4,6 @@ import lepLogo from "../../assets/images/logos/Leprechauns-vector.png";
 import mooseLogo from "../../assets/images/logos/Moose-vector.png";
 import Header from "../../components/Globals/Header/Header";
 import Nav from "../../components/Globals/Nav/Nav";
-import TeamHeader from "../../components/TeamPage/TeamHeader/TeamHeader";
 import GameDetailsHeader from "../../components/BoxScore/GameDetailsHeader/GameDetailsHeader";
 import Skaters from "../../components/BoxScore/Skaters/Skaters";
 import Goalies from "../../components/BoxScore/Goalies/Goalies";
@@ -89,7 +88,6 @@ const BoxScore = () => {
       <Header />
       <Nav />
       <main className="boxscore">
-        <TeamHeader />
         <section className="boxscore__game-info">
           <GameDetailsHeader game={game} getLogoByName={getLogoByName} />
         </section>
@@ -131,6 +129,7 @@ const BoxScore = () => {
             />
           </section>
         </section>
+        {skaterStats.length === 0 && <section className="boxscore__fill-bottom"></section>}
       </main>
       <Footer />
     </section>

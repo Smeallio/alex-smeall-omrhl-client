@@ -1,12 +1,11 @@
 import heroImage from "../../../assets/images/games/Odd-Man-Rush-Hockey-League-Action.webp";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import "./Hero.scss";
 
 const Hero = () => {
 
   return (
     <article className="hero">
-      <LazyLoadImage
+      <img
       src={heroImage}
       alt="Odd Man Rush Hockey League"
       className="hero__image"

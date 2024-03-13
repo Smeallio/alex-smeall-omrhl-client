@@ -39,6 +39,10 @@
         margin: 0.5rem 0;
       }
     }
+
+    &-text-notes {
+        @include bigp;
+    }
   }
 
   @include tablet {

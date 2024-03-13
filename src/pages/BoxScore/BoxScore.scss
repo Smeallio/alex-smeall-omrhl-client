@@ -11,10 +11,23 @@
 .boxscore {
   background-color: #ffffff;
 
+  &__game-info {
+    @include desktop {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+  }
+
   &__teams {
     padding-bottom: 2rem;
     @include tablet {
-        @include flexbox(center, flex-start);
+      @include flexbox(center, flex-start);
+    }
+
+    @include desktop {
+      width: 90%;
+      max-width: 1280px;
+      margin: 0 auto;
     }
   }
 
@@ -22,24 +35,24 @@
     margin: 0.5rem 1rem 0;
 
     @include tablet {
-        margin: 0;
-        padding: 0rem 1.5rem;
-        width: 50%;
+      margin: 0;
+      padding: 0rem 1.5rem;
+      width: 50%;
     }
 
     &-header {
-        @include flexbox(center);
-        padding: 0.5rem 0;
+      @include flexbox(center);
+      padding: 0.5rem 0;
     }
 
     &-logo {
-        height: 2.25rem;
-        margin-right: 1rem;
+      height: 2.25rem;
+      margin-right: 1rem;
     }
 
     &-teamname {
-        @include h3;
-        text-align: center;
+      @include h3;
+      text-align: center;
     }
   }
 
@@ -48,9 +61,29 @@
     border-bottom: 2px solid $omr-grey;
 
     @include tablet {
-        border-top: none;
-        border-bottom: none;
-        border-right: 2px solid $omr-grey;
+      border-top: none;
+      border-bottom: none;
+      border-right: 2px solid $omr-grey;
+    }
+
+    @include desktop {
+      padding-left: 0;
+    }
+  }
+
+  &__teams-column:last-of-type {
+    @include desktop {
+      padding-right: 0;
+    }
+  }
+
+  @include tablet {
+    padding-bottom: 2.5rem;
+  }
+
+  &__fill-bottom {
+    @include desktop {
+      height: 8rem;
     }
   }
 }

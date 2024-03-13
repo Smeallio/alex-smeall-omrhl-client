@@ -64,9 +64,9 @@ const GameDetailsHeader = ({ game, getLogoByName }) => {
         <section className="gdh__game-info-block">
           <p className="gdh__game-info-date-time">{`${game.date} @ ${game.time}`}</p>
         </section>
-        {/* <section className="gdh__block">
-        <p className="gdh__block-text-notes">{game.notes && `${game.notes}`}</p>
-      </section> */}
+        <section className="gdh__block">
+        <p className="gdh__game-info-text-notes">{game.notes && `${game.notes}`}</p>
+      </section>
       </section>
     </article>
   );

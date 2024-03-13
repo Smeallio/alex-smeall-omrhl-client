@@ -32,12 +32,18 @@ const ScoreBar = ({ games }) => {
 
   const sortedGames = games.sort((a, b) => a.date - b.date);
 
-  const completeGames = sortedGames
+  let completeGames = sortedGames
     .filter((game) => game.complete === 1)
     .slice(-2);
+
   const upcomingGames = sortedGames
     .filter((game) => game.complete === 0)
     .slice(0, 2);
+
+  if (upcomingGames.length === 0) {
+    completeGames = sortedGames.filter((game) => game.complete === 1).slice(-4);
+  }
+
   const closestGames = [...completeGames, ...upcomingGames];
 
   return (
@@ -61,7 +67,7 @@ const ScoreBar = ({ games }) => {
             <section className="scorebar__box-header">
               <p className="scorebar__box-header-text">{`${game.date} @ ${game.time}`}</p>
             </section>
-            { game.complete ? 
+            {game.complete ? (
               <section className="scorebar__box-body">
                 <img
                   className="scorebar__box-body-img"
@@ -95,7 +101,7 @@ const ScoreBar = ({ games }) => {
                   }
                 />
               </section>
-                :
+            ) : (
               <section className="scorebar__box-body">
                 <img
                   className="scorebar__box-body-img"
@@ -109,7 +115,7 @@ const ScoreBar = ({ games }) => {
                   alt={game.team2_name}
                 />
               </section>
-            }
+            )}
           </section>
         ))}
       </section>
