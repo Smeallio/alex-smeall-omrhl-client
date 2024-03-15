@@ -172,7 +172,7 @@ const TeamRoster = () => {
         </thead>
         <tbody>
           {sortColumnWrapper(goalieStats).map((player) => (
-            <tr className="roster__table-row" key={player.id}>
+            <tr className="roster__table-row" key={player.player_id}>
               <td className="roster__table-name" data-label="Name">
                 {player.player_name}
               </td>

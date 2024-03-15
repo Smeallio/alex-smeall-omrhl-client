@@ -26,6 +26,10 @@ const [games, setGames] = useState(null);
     fetchGames();
   }, []);
 
+  useEffect(() => {
+    document.title = "Odd Man Rush Hockey League";
+  }, []);
+
   return (
     <section className="background">
       <Header />
