@@ -50,6 +50,7 @@ const ScoreSked = () => {
       <Nav />
       <main className="scoreSked">
         <article className="scoreSked__regszn">
+            <h1 className="scoreSked__regszn-header">Scores & Schedule</h1>
           <section className="scorSsked__regszn-block">
             <table className="scoreSked__regszn-table">
               <caption className="scoreSked__regszn-table-title">
@@ -79,12 +80,14 @@ const ScoreSked = () => {
                       className="scoreSked__regszn-table-box scoreSked__regszn-table-res"
                       data-label="Result"
                     >
-                      <Link
-                        className="scoreSked__regszn-table-res-link"
-                        to={`/games/${game.id}`}
-                      >
-                        {game.complete ? determineWinner(game) : " "}
-                      </Link>
+                      {game.complete && (
+                        <Link
+                          className="scoreSked__regszn-table-res-link"
+                          to={`/games/${game.id}`}
+                        >
+                          {determineWinner(game)}
+                        </Link>
+                      )}
                     </td>
                   </tr>
                 ))}

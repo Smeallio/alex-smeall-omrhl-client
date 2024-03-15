@@ -12,9 +12,14 @@
   background-color: $white;
   max-width: 100%;
   overflow: hidden;
-  padding: 1rem;
+  padding: 0rem 1rem 2rem;
 
   &__regszn {
+
+    &-header {
+        @include h1;
+    }
+
     &-block {
       max-height: 550px;
       position: relative;
@@ -61,7 +66,7 @@
 
         @include responsive-table {
           @include flexbox(flex-start, flex-start, row, wrap);
-          padding: 0.75rem 0;
+          padding: 0.75rem;
           font-size: 0.875rem;
         }
 
@@ -81,16 +86,23 @@
 
         @include responsive-table {
           //   text-align: right;
+          display: grid;
+          grid-template-columns: auto 1fr;
+          width: 100%;
 
           &::before {
             content: attr(data-label);
+            width: 4rem;
             float: left;
             font-weight: bold;
             text-transform: uppercase;
             margin-right: 1.25rem;
+
+            @include tablet {
+              width: 6rem;
+            }
           }
         }
-
         @include desktop {
           text-align: center;
         }
@@ -104,5 +116,9 @@
         }
       }
     }
+  }
+
+  @include tablet {
+    padding: 0rem 2rem 2rem;
   }
 }
