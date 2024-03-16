@@ -5,6 +5,7 @@ import mooseLogo from "../../../assets/images/logos/Moose-vector.webp";
 import chevLeft from "../../../assets/images/icons/chevron-left-icon.png";
 import chevRight from "../../../assets/images/icons/chevron-right-icon.png";
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 import "./ScoreBar.scss";
 
 const ScoreBar = ({ games }) => {
@@ -46,6 +47,8 @@ const ScoreBar = ({ games }) => {
 
   const closestGames = [...completeGames, ...upcomingGames];
 
+  console.log(closestGames);
+
   return (
     <article className="scorebar" id="scorebar">
       <button
@@ -63,60 +66,65 @@ const ScoreBar = ({ games }) => {
       </button>
       <section className="scorebar__container" ref={sliderRef}>
         {closestGames.map((game) => (
-          <section className="scorebar__box" key={game.id}>
-            <section className="scorebar__box-header">
-              <p className="scorebar__box-header-text">{`${game.date} @ ${game.time}`}</p>
+          <Link className="scorebar__link" to={`/games/${game.id}`}>
+            <section className="scorebar__box" key={game.id}>
+              <section className="scorebar__box-header">
+                <p className="scorebar__box-header-text">{`${game.date} @ ${game.time}`}</p>
+              </section>
+              {game.complete ? (
+                <section className="scorebar__box-body">
+                  <img
+                    className="scorebar__box-body-img"
+                    src={
+                      game.team1_score >= game.team2_score
+                        ? getImageByTeamId(game.team1_team_id)
+                        : getImageByTeamId(game.team2_team_id)
+                    }
+                    alt={
+                      game.team1_score >= game.team2_score
+                        ? game.team1_name
+                        : game.team2_name
+                    }
+                  />
+                  <p className="scorebar__box-body-text">
+                    {game.team1_score >= game.team2_score
+                      ? `${game.team1_score} - ${game.team2_score}`
+                      : `${game.team2_score} - ${game.team1_score}`}
+                  </p>
+                  <img
+                    className="scorebar__box-body-img"
+                    src={
+                      game.team1_score >= game.team2_score
+                        ? getImageByTeamId(game.team2_team_id)
+                        : getImageByTeamId(game.team1_team_id)
+                    }
+                    alt={
+                      game.team1_score >= game.team2_score
+                        ? game.team2_name
+                        : game.team1_name
+                    }
+                  />
+                </section>
+              ) : (
+                <section className="scorebar__box-body">
+                  <img
+                    className="scorebar__box-body-img"
+                    src={getImageByTeamId(game.team1_team_id)}
+                    alt={game.team1_name}
+                  />
+                  <p className="scorebar__box-body-text">&nbsp;vs&nbsp;</p>
+                  <img
+                    className="scorebar__box-body-img"
+                    src={getImageByTeamId(game.team2_team_id)}
+                    alt={game.team2_name}
+                  />
+                </section>
+              )}
+              {game.game_type === "Playoffs" && (
+                <section className="scorebar__box-playoff">&#9733; PLAYOFFS &#9733;</section>
+              )}
             </section>
-            {game.complete ? (
-              <section className="scorebar__box-body">
-                <img
-                  className="scorebar__box-body-img"
-                  src={
-                    game.team1_score >= game.team2_score
-                      ? getImageByTeamId(game.team1_team_id)
-                      : getImageByTeamId(game.team2_team_id)
-                  }
-                  alt={
-                    game.team1_score >= game.team2_score
-                      ? game.team1_name
-                      : game.team2_name
-                  }
-                />
-                <p className="scorebar__box-body-text">
-                  {game.team1_score >= game.team2_score
-                    ? `${game.team1_score} - ${game.team2_score}`
-                    : `${game.team2_score} - ${game.team1_score}`}
-                </p>
-                <img
-                  className="scorebar__box-body-img"
-                  src={
-                    game.team1_score >= game.team2_score
-                      ? getImageByTeamId(game.team2_team_id)
-                      : getImageByTeamId(game.team1_team_id)
-                  }
-                  alt={
-                    game.team1_score >= game.team2_score
-                      ? game.team2_name
-                      : game.team1_name
-                  }
-                />
-              </section>
-            ) : (
-              <section className="scorebar__box-body">
-                <img
-                  className="scorebar__box-body-img"
-                  src={getImageByTeamId(game.team1_team_id)}
-                  alt={game.team1_name}
-                />
-                <p className="scorebar__box-body-text">&nbsp;vs&nbsp;</p>
-                <img
-                  className="scorebar__box-body-img"
-                  src={getImageByTeamId(game.team2_team_id)}
-                  alt={game.team2_name}
-                />
-              </section>
-            )}
-          </section>
+          </Link>
         ))}
       </section>
       <button

@@ -5,12 +5,16 @@ const Nav = () => {
   return (
     <nav className="nav">
       <ul className="nav__links">
-        <Link className="nav__links-link" to="/league-leaders">
-          <li className="nav__links-text">League Leaders</li>
-        </Link>
-        <Link className="nav__links-link" to="/scores-and-schedule">
-          <li className="nav__link">Scores & Schedule</li>
-        </Link>
+        <li className="nav__links-text">
+          <Link className="nav__links-link" to="/league-leaders">
+            League Leaders
+          </Link>
+        </li>
+        <li className="nav__links-text">
+          <Link className="nav__links-link" to="/scores-and-schedule">
+            Scores & Schedule
+          </Link>
+        </li>
       </ul>
     </nav>
   );

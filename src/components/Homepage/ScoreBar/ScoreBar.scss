@@ -3,7 +3,7 @@
 
 .scorebar {
   @include flexbox(center);
-  height: 7.5rem;
+  height: 8.5rem;
   background-color: $omr-darkblue;
 
   &__button {
@@ -27,33 +27,40 @@
     white-space: nowrap;
     scrollbar-width: none;
     border-radius: 5px;
-    height: 6rem;
-    padding: 0 0.5rem; 
+    height: 7rem;
+    padding: 0 0.5rem;
 
     &::-webkit-scrollbar {
       display: none;
     }
 
     @include tablet {
-        @include flexbox(space-between, center, row, nowrap, 4vw);
-        padding: 0;
+      @include flexbox(space-between, center, row, nowrap, 1vw);
+      padding: 0;
     }
 
     @include desktop {
-        @include flexbox(space-between, center, row, nowrap, 7.5vw);
-        padding: 0;
-        height: 6.75rem;
+      @include flexbox(space-around, center, row, nowrap, 4vw);
+      padding: 0;
+      height: 6.75rem;
     }
   }
 
+  &__link {
+    text-decoration: none;
+    cursor: pointer;
+    margin: 0 0.75rem;
+  }
+
   &__box {
+    @include flexbox(center, center, column);
     flex: 1 0 auto;
+    position: relative;
     scroll-snap-align: center;
     background-color: $white;
-    height: 100%;
-    min-width: 9rem;
-    margin: 0 0.75rem;
-    border-radius: 5px;
+    height: 7rem;
+    min-width: 10rem;
+    border-radius: 8px;
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.65) inset;
 
     &:first-of-type {
@@ -67,47 +74,67 @@
     &-header {
       @include flexbox(center);
       @include tableHeader(0.875rem, 1.25rem);
-      box-shadow: 0 0px 8px rgba(0,0,0,0.65);
+      flex: 0 0 auto;
+      width: 100%;
+      padding: 0.25rem 0;
+      border-radius: 8px 8px 0 0;
+      box-shadow: 0 0px 8px rgba(0, 0, 0, 0.65);
 
       @include desktop {
         @include tableHeader(1rem, 1.375rem);
+        border-radius: 8px 8px 0 0;
+        padding: 0.25rem 0;
       }
     }
 
     &-body {
-      @include flexbox(center);
-      height: 4rem;
+      @include flexbox(center, center);
+      flex: 1 1 auto;
 
       &-img {
-        height: 2rem;
-
-        @include desktop {
-            height: 2.5rem;
-        }
+        height: 2.25rem;
       }
 
       &-text {
-        @include bigp;
+        @include biggerp;
         margin: 0.5rem;
+        color: $black;
 
         @include desktop {
-            font-size: 1.25rem;
-            margin: 0.75rem;
+          font-size: 1.25rem;
+          margin: 0.75rem;
         }
       }
 
       @include desktop {
-        height: 4.75rem;
+        height: 100%;
       }
     }
 
+    &-playoff {
+      @include flexbox(center, center);
+      @include bigp;
+      font-weight: 600;
+      position: relative;
+      margin-top: auto;
+      background-color: $omr-lightblue;
+      color: $white;
+      text-align: center;
+      min-height: 1.5rem;
+      width: 100%;
+      padding-bottom: 0.12rem;
+      text-decoration: none;
+      border-radius: 0 0 8px 8px;
+      box-shadow: 0 0px 8px rgba(0, 0, 0, 0.65);
+    }
+
     @include tablet {
-        margin: auto;
-        flex-grow: 1;
+      margin: auto;
+      flex-grow: 1;
     }
 
     @include desktop {
-        min-width: 12rem;
+      min-width: 12rem;
     }
   }
 
@@ -116,7 +143,7 @@
     width: 100%;
   }
 
-  @include desktop{
+  @include desktop {
     height: 8.5rem;
   }
 }
