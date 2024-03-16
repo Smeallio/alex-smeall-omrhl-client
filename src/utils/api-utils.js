@@ -9,6 +9,8 @@ export const getUsers = () => API_URL + "/api/users/";
 export const logInUser = () => API_URL + "/api/users/login";
 
 export const getGames = () => API_URL + "/api/games/";
+export const getRegSeasonGames = () => API_URL + "/api/games/season";
+export const getPlayoffGames = () => API_URL + "/api/games/playoffs";
 export const postGame = () => API_URL + "/api/games/";
 export const getOneGame = (gameId) => API_URL + "/api/games/" + gameId;
 export const updateGame = (gameId) => API_URL + "/api/games/" + gameId;

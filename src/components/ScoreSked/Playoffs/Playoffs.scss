@@ -1,0 +1,110 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
+.playoff {
+
+    padding-top: 2rem;
+
+    &__block {
+      max-height: 800px;
+      position: relative;
+      margin-top: 1.5rem;
+      overflow-x: auto;
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+
+    &__table {
+      width: 100%;
+      border-collapse: collapse;
+      border-spacing: 0;
+      z-index: 1;
+
+      &-title {
+        @include tableHeader(1.25rem);
+        position: sticky;
+        top: 0;
+        z-index: 2;
+      }
+
+      &-headers {
+        background-color: $white;
+        height: 2rem;
+        position: sticky;
+        top: 2rem;
+        z-index: 2;
+
+        @include responsive-table {
+          border: none;
+          clip: rect(0 0 0 0);
+          height: 1px;
+          margin: -1px;
+          overflow: hidden;
+          padding: 0;
+          position: absolute;
+          width: 1px;
+        }
+      }
+
+      &-row {
+        border-top: 1px solid $black;
+
+        @include responsive-table {
+          @include flexbox(flex-start, flex-start, row, wrap);
+          padding: 0.75rem;
+          font-size: 0.875rem;
+        }
+
+        @include desktop {
+          height: 2rem;
+        }
+
+        &:nth-of-type(odd) {
+          background-color: $omr-grey;
+        }
+      }
+
+      &-box {
+        // text-align: center;
+        @include bigp;
+        padding: 0.25rem;
+
+        @include responsive-table {
+          //   text-align: right;
+          display: grid;
+          grid-template-columns: auto 1fr;
+          width: 100%;
+
+          &::before {
+            content: attr(data-label);
+            width: 4rem;
+            float: left;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-right: 1.25rem;
+
+            @include tablet {
+              width: 6rem;
+            }
+          }
+        }
+        @include desktop {
+          text-align: center;
+        }
+      }
+
+      &-res {
+        &-link,
+        &-link:visited {
+          color: $omr-darkblue;
+          text-decoration: none;
+        }
+      }
+    }
+
+    @include desktop {
+        width: 90%;
+        margin: 0 auto;
+        max-width: 1280px;
+    }
+  }

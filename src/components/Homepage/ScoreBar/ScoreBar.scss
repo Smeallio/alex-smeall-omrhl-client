@@ -42,7 +42,7 @@
     @include desktop {
       @include flexbox(space-around, center, row, nowrap, 4vw);
       padding: 0;
-      height: 6.75rem;
+      height: 8rem;
     }
   }
 
@@ -126,6 +126,10 @@
       text-decoration: none;
       border-radius: 0 0 8px 8px;
       box-shadow: 0 0px 8px rgba(0, 0, 0, 0.65);
+
+      @include desktop {
+        padding-bottom: 0;
+      }
     }
 
     @include tablet {
@@ -144,6 +148,6 @@
   }
 
   @include desktop {
-    height: 8.5rem;
+    height: 9rem;
   }
 }
