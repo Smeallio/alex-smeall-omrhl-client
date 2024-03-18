@@ -8,14 +8,14 @@ const Footer = () => {
     <footer className="footer">
       <section className="footer__container">
         <section className="footer__about">
-          <h4 className="footer__header">About Us</h4>
+          <h2 className="footer__header">About Us</h2>
           <p className="footer__text">
             Established in 2023, The Odd Man Rush Hockey League is a 3 on 3
             recreational hockey league located in St. John's, Newfoundland.
           </p>
         </section>
         <section className="footer__socials">
-        <h4 className="footer__header">Follow Us</h4>
+        <h2 className="footer__header">Follow Us</h2>
           <Link
             className="footer__socials-link"
             to="https://www.facebook.com/profile.php?id=61550747964046"

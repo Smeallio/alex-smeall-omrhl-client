@@ -1,0 +1,13 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.background {
+  height: 90%;
+  min-height: 90vh;
+  padding-bottom: 20rem;
+  position: relative;
+}
+
+.announcements-page {
+    background-color: $white;
+}
