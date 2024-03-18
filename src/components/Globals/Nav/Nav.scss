@@ -84,14 +84,13 @@
       }
 
       &:hover {
-        color: $omr-red;
-        box-shadow: inset 0 -3rem 0 0 #ffffff;
-        overflow: visible;
-        z-index: 2;
         @include tablet {
+          color: $omr-red;
           box-shadow: inset 0 -3rem 0 0 #ffffff;
+          overflow: visible;
           margin-left: -2px;
           margin-right: -2px;
+          z-index: 2;
         }
       }
     }
