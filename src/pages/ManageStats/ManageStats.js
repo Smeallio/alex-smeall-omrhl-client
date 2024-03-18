@@ -26,6 +26,10 @@ const ManageStats = ({ authUser }) => {
   const [playersTeamOne, setPlayersTeamOne] = useState(null);
   const [playersTeamTwo, setPlayersTeamTwo] = useState(null);
 
+  useEffect(() => {
+    document.title = "Odd Man Rush Hockey League - Stats Dashboard";
+  }, []);
+
   const fetchGame = useCallback(async () => {
     try {
       const response = await axios.get(getOneGame(gameId));

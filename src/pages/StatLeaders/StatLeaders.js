@@ -15,6 +15,10 @@ const StatLeaders = () => {
   const [skaterStats, setSkaterStats] = useState(null);
   const [goalieStats, setGoalieStats] = useState(null);
 
+  useEffect(() => {
+    document.title = "Odd Man Rush Hockey League - League Leaders";
+  }, []);
+
   const fetchStats = useCallback(async () => {
     try {
       const skaterResponse = await axios.get(getAllSkaterStats());

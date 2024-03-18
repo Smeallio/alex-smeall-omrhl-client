@@ -16,6 +16,10 @@ const ManagePlayers = ({ authUser }) => {
   const [players, setPlayers] = useState(null);
   const [teamId, setTeamId] = useState(null);
 
+  useEffect(() => {
+    document.title = "Odd Man Rush Hockey League - Players Dashboard";
+  }, []);
+
   const fetchPlayers = useCallback(async () => {
     try {
       if (teamId !== null) {

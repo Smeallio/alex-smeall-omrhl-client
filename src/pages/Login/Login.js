@@ -12,6 +12,10 @@ const Login = ({ authUser, setAuthUser }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    document.title = "Odd Man Rush Hockey League - Login";
+  }, []);
+
+  useEffect(() => {
     if (authUser) {
       navigate("/admin/dashboard/");
     }

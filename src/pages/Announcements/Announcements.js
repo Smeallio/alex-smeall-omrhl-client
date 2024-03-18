@@ -9,6 +9,10 @@ import "./Announcements.scss";
 const Announcements = () => {
   const [announcements, setAnnouncements] = useState(null);
 
+  useEffect(() => {
+    document.title = "Odd Man Rush Hockey League - Announcements";
+  }, []);
+
   const fetchAnnouncements = async () => {
     try {
       const response = await axios.get(getAnnouncements());
@@ -25,8 +29,6 @@ const Announcements = () => {
   if (announcements === null) {
     return <p>Loading...</p>;
   }
-
-  console.log(announcements);
 
   return (
     <section className="background">

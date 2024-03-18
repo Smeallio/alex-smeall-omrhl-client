@@ -27,6 +27,10 @@ const ManageAnnouncements = ({ authUser }) => {
     fetchAnnouncements();
   }, [fetchAnnouncements]);
 
+  useEffect(() => {
+    document.title = "Odd Man Rush Hockey League - Announcements Dashboard";
+  }, []);
+
   if (authUser === false) {
     return (
       <section className="background">

@@ -47,8 +47,6 @@ const ScoreBar = ({ games }) => {
 
   const closestGames = [...completeGames, ...upcomingGames];
 
-  console.log(closestGames);
-
   return (
     <article className="scorebar" id="scorebar">
       <button
@@ -66,8 +64,8 @@ const ScoreBar = ({ games }) => {
       </button>
       <section className="scorebar__container" ref={sliderRef}>
         {closestGames.map((game) => (
-          <Link className="scorebar__link" to={`/games/${game.id}`}>
-            <section className="scorebar__box" key={game.id}>
+          <Link className="scorebar__link" to={`/games/${game.id}`} key={game.id}>
+            <section className="scorebar__box">
               <section className="scorebar__box-header">
                 <p className="scorebar__box-header-text">{`${game.date} @ ${game.time}`}</p>
               </section>

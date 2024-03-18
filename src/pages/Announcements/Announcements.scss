@@ -41,6 +41,10 @@
     &-title {
       @include biggerp;
       font-weight: 600;
+
+      @include tablet {
+        margin: 0;
+      }
     }
 
     &-date {
@@ -58,6 +62,12 @@
 
     &-content {
       @include bigp;
+      margin: 0;
+      padding: 0.75rem 0;
+    }
+
+    @include tablet {
+        padding: 1rem 0;
     }
 
     @include desktop {

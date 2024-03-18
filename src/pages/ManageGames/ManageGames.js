@@ -14,6 +14,10 @@ import "./ManageGames.scss";
 const ManageGames = ({ authUser }) => {
   const [games, setGames] = useState(null);
 
+  useEffect(() => {
+    document.title = "Odd Man Rush Hockey League - Games Dashboard";
+  }, []);
+
   const fetchGames = async () => {
     try {
       const response = await axios.get(getGames());

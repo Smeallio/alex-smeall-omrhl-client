@@ -14,37 +14,41 @@ import ManageStats from "./pages/ManageStats/ManageStats";
 import NotFound from "./pages/NotFound/NotFound";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { getUsers } from "./utils/api-utils"
+import { getUsers } from "./utils/api-utils";
 import "./App.scss";
+import ReactGA from "react-ga4";
 
 function App() {
+  const TRACKING_ID = "G-YEHXV0HQZ7";
+  ReactGA.initialize(TRACKING_ID);
+
   const [authUser, setAuthUser] = useState(false);
 
   useEffect(() => {
-  const token = sessionStorage.getItem('token');
+    const token = sessionStorage.getItem("token");
 
-  if (!token) {
-    setAuthUser(false)
-  }
+    if (!token) {
+      setAuthUser(false);
+    }
 
-  const authorizeUser = async () => {
-    try {
-      const response = await axios.get(getUsers(), {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        }
-      });
+    const authorizeUser = async () => {
+      try {
+        const response = await axios.get(getUsers(), {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         if (response.status === 200) {
           setAuthUser(true);
         } else {
           setAuthUser(false);
         }
-      } catch(err) {
+      } catch (err) {
         console.error(`Error validating token: ${err}`);
         setAuthUser(false);
       }
-    }
+    };
     authorizeUser();
   }, []);
 
@@ -57,13 +61,31 @@ function App() {
         <Route path="/league-leaders" element={<StatLeaders />}></Route>
         <Route path="/scores-and-schedule" element={<ScoreSked />}></Route>
         <Route path="/announcements" element={<Announcements />}></Route>
-        <Route path="/admin" element={<Login authUser={authUser} setAuthUser={setAuthUser} />}></Route>
-        <Route path="/admin/dashboard" element={<Dashboard authUser={authUser}/>}></Route>
-        <Route path="/admin/dashboard/:teamName" element={<ManagePlayers authUser={authUser} />}></Route>
-        <Route path="/admin/dashboard/games" element={<ManageGames authUser={authUser} />}></Route>
-        <Route path="/admin/dashboard/announcements" element={<ManageAnnouncements authUser={authUser} />}></Route>
-        <Route path="/admin/dashboard/games/:gameId" element={<ManageStats authUser={authUser} />}></Route>
-        <Route path='*' element={<NotFound />} />
+        <Route
+          path="/admin"
+          element={<Login authUser={authUser} setAuthUser={setAuthUser} />}
+        ></Route>
+        <Route
+          path="/admin/dashboard"
+          element={<Dashboard authUser={authUser} />}
+        ></Route>
+        <Route
+          path="/admin/dashboard/:teamName"
+          element={<ManagePlayers authUser={authUser} />}
+        ></Route>
+        <Route
+          path="/admin/dashboard/games"
+          element={<ManageGames authUser={authUser} />}
+        ></Route>
+        <Route
+          path="/admin/dashboard/announcements"
+          element={<ManageAnnouncements authUser={authUser} />}
+        ></Route>
+        <Route
+          path="/admin/dashboard/games/:gameId"
+          element={<ManageStats authUser={authUser} />}
+        ></Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

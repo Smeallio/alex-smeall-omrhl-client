@@ -23,6 +23,10 @@ const Dashboard = ({ authUser }) => {
     fetchGames();
   }, []);
 
+  useEffect(() => {
+    document.title = "Odd Man Rush Hockey League - Admin Dashboard";
+  }, []);
+
   if (authUser === false) {
     return (
       <section className="background">

@@ -55,9 +55,17 @@ const BoxScore = () => {
     }
   }, [gameId, fetchStats]);
 
+  useEffect(() => {
+    if (game !== null) {
+    document.title = `Odd Man Rush Hockey League - Boxscore for ${game.date} @ ${game.time}`;
+    }
+  }, [game]);
+
   if (game === null || skaterStats === null || goalieStats === null) {
     return <p>Loading...</p>;
   }
+
+
 
   const filterSkaterTeam = (team, skaterStats) => {
     if (team && skaterStats) {
