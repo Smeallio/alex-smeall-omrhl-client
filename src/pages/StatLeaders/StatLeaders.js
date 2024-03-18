@@ -34,8 +34,6 @@ const StatLeaders = () => {
     fetchStats();
   }, [fetchStats]);
 
-  console.log(goalieStats);
-
   return (
     <section className="background">
       <Header />
