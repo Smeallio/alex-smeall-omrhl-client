@@ -9,5 +9,65 @@
 }
 
 .announcements-page {
-    background-color: $white;
+  background-color: $white;
+  padding: 1rem;
+
+  &__header {
+    @include h1;
+
+    @include desktop {
+      margin: 1.5rem auto;
+      padding-bottom: 1rem;
+      width: 90%;
+      max-width: 1280px;
+    }
+  }
+
+  &__feed {
+    padding-bottom: 2rem;
+  }
+
+  &__block {
+    @include flexbox(space-between, flex-start, column);
+    border-top: 2px solid $omr-grey;
+
+    &-row {
+      @include tablet {
+        @include flexbox(space-between, baseline, row);
+        width: 100%;
+      }
+    }
+
+    &-title {
+      @include biggerp;
+      font-weight: 600;
+    }
+
+    &-date {
+      @include bigp;
+      margin: 0;
+      padding: 0.5rem 0;
+
+      @include tablet {
+        font-weight: 600;
+        margin-right: 1rem;
+        width: 8rem;
+        text-align: right;
+      }
+    }
+
+    &-content {
+      @include bigp;
+    }
+
+    @include desktop {
+      margin: 0 auto;
+      width: 90%;
+      max-width: 1280px;
+    }
+  }
+
+  @include tablet {
+    padding: 1rem 2rem;
+  }
 }

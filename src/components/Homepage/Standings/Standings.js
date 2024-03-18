@@ -46,7 +46,7 @@ const Standings = ({ games }) => {
   return (
     <article className="standings">
       <table className="standings__table">
-        <caption className="standings__table-title">Standings</caption>
+        <caption className="standings__table-title">Regular Season Standings</caption>
         <thead className="standings__table-headers">
           <tr>
             <th scope="col" colSpan="2">Team</th>

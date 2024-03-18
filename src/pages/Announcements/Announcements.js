@@ -36,10 +36,21 @@ const Announcements = () => {
         <h1 className="announcements-page__header">Latest News & Updates</h1>
         <section className="announcements-page__feed">
           {announcements.map((announcement) => (
-            <section className="announcements-page__block" key={announcement.id}>
-              <p className="announcements-page__title">{announcement.title}</p>
-              <p className="announcements-page__date">{announcement.date}</p>
-              <p className="announcements-page__content">{announcement.body}</p>
+            <section
+              className="announcements-page__block"
+              key={announcement.id}
+            >
+              <section className="announcements-page__block-row">
+                <p className="announcements-page__block-title">
+                  {announcement.title}
+                </p>
+                <p className="announcements-page__block-date">
+                  {announcement.date}
+                </p>
+              </section>
+              <p className="announcements-page__block-content">
+                {announcement.body}
+              </p>
             </section>
           ))}
         </section>

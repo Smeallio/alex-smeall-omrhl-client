@@ -22,14 +22,12 @@ const Announcements = () => {
     return <p>Loading...</p>;
   }
 
-  announcements.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-  const sortedAndSlicedAnnouncements = announcements.slice(0, 2);
+  const slicedAnnouncements = announcements.slice(0, 2);
 
   return (
     <article className="announcements">
       <section className="announcements__title">Latest Announcements</section>
-      {sortedAndSlicedAnnouncements.map((announcement) => (
+      {slicedAnnouncements.map((announcement) => (
         <section className="announcements__box" key={announcement.id}>
           <section className="announcements__box-title">
             {announcement.title}
