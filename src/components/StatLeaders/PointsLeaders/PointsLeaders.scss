@@ -4,7 +4,7 @@
 .points-leaders {
   margin-bottom: 2.5rem;
   overflow-x: auto;
-  max-height: 30rem;
+  max-height: 25rem;
   scrollbar-width: none;
   width: 100%;
 
@@ -84,6 +84,5 @@
 
   @include desktop {
     width: 40%;
-    max-height: 40rem;
   }
 }

@@ -44,17 +44,17 @@ const Nav = () => {
       />
         <ul className={`nav__links ${menuOpen ? "visible" : ""}`}>
           <li className="nav__links-text">
-            <Link className="nav__links-link" to="/league-leaders">
+            <Link className="nav__links-link nav__links-link-ll" to="/league-leaders">
               League Leaders
             </Link>
           </li>
           <li className="nav__links-text">
-            <Link className="nav__links-link" to="/scores-and-schedule">
+            <Link className="nav__links-link nav__links-link-ss" to="/scores-and-schedule">
               Scores & Schedule
             </Link>
           </li>
           <li className="nav__links-text">
-            <Link className="nav__links-link" to="/announcements">
+            <Link className="nav__links-link nav__links-link-a" to="/announcements">
               Announcements
             </Link>
           </li>
