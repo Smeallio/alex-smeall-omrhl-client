@@ -19,6 +19,7 @@ export const deleteGame = (gameId) => API_URL + "/api/games/" + gameId;
 export const getStandings = () => API_URL + "/api/games/standings";
 
 export const getAllSkaterStats = () => API_URL + "/api/stats/skaters/summary/";
+export const getAllPlayoffSkaterStats = () => API_URL + "/api/stats/skaters/summary/playoffs";
 export const getSkaterStatsByGame = (gameId) => API_URL + "/api/stats/skaters/" + gameId;
 export const getSkaterStatsByTeam = (teamId) => API_URL + "/api/stats/skaters/summary/" + teamId;
 export const addSkaterStat = (gameId) => API_URL + "/api/stats/skaters/" + gameId;
@@ -26,6 +27,7 @@ export const updateSkaterStat = (skaterStatId) => API_URL + "/api/stats/skaters/
 export const deleteSkaterStat = (skaterStatId) => API_URL + "/api/stats/skaters/" + skaterStatId;
 
 export const getAllGoalieStats = () => API_URL + "/api/stats/goalies/summary/"
+export const getAllPlayoffGoalieStats = () => API_URL + "/api/stats/goalies/summary/playoffs";
 export const getGoalieStatsByGame = (gameId) => API_URL + "/api/stats/goalies/" + gameId;
 export const getGoalieStatsByTeam = (teamId) => API_URL + "/api/stats/goalies/summary/" + teamId;
 export const addGoalieStat = (gameId) => API_URL + "/api/stats/goalies/" + gameId;

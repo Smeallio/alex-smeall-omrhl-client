@@ -2,49 +2,72 @@
 @use "../../styles/mixins" as *;
 
 .background {
-    height: 90%;
-    min-height: 90vh;
-    padding-bottom: 20rem;
-    position: relative;
-  }
+  height: 90%;
+  min-height: 90vh;
+  padding-bottom: 20rem;
+  position: relative;
+}
 
 .stat-leaders {
-    padding: 1rem;
-    background-color: $white;
+  padding: 1rem;
+  background-color: $white;
 
-    &__header {
-        @include h1;
-        margin: 1.5rem 0;
-
-        @include desktop {
-            margin: 0 auto;
-            padding: 1.5rem 0;
-            width: 90%;
-            max-width: 1280px;
-        }
-    }
-
-    &__subheader {
-        @include h2;
-        margin: 1rem 0 1.5rem; 
-        width: 100%;
-    }
-
-    &__container {
-        @include flexbox(space-between, flex-start, row, wrap);
-
-        @include desktop {
-            margin: 0 auto;
-            width: 90%;
-            max-width: 1280px;
-        }
-    }
+  &__header {
+    @include flexbox(space-between, flex-start, column);
 
     @include tablet {
-        padding: 1rem 2rem;
+      @include flexbox(space-between, center, row);
+      margin: 0;
     }
 
     @include desktop {
-        padding: 1rem 0;
+      margin: 0 auto;
+      padding: 1.5rem 0;
+      width: 90%;
+      max-width: 1280px;
     }
+
+    &-text {
+      @include h1;
+    }
+
+    &-button {
+      @include button;
+      margin: 0.5rem 0 1rem;
+
+      @include tablet {
+        margin: 0;
+      }
+    }
+  }
+
+  &__subheader {
+    @include h2;
+    margin: 1rem 0 1.5rem;
+    width: 100%;
+
+    @include tablet {
+        &:first-of-type {
+            margin: 0 0 1.5rem;
+        }
+    }
+  }
+
+  &__container {
+    @include flexbox(space-between, flex-start, row, wrap);
+
+    @include desktop {
+      margin: 0 auto;
+      width: 90%;
+      max-width: 1280px;
+    }
+  }
+
+  @include tablet {
+    padding: 1rem 2rem;
+  }
+
+  @include desktop {
+    padding: 1rem 0;
+  }
 }
