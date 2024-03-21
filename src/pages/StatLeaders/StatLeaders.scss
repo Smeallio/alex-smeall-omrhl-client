@@ -47,9 +47,9 @@
     width: 100%;
 
     @include tablet {
-        &:first-of-type {
-            margin: 0 0 1.5rem;
-        }
+      &:first-of-type {
+        margin: 0 0 1.5rem;
+      }
     }
   }
 
