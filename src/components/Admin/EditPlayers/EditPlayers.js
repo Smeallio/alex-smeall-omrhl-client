@@ -32,7 +32,6 @@ const EditPlayers = ({ players, teamId, fetchPlayers }) => {
   };
 
   const handleEditClick = (player) => {
-    console.log("Edit clicked: ", player);
     setEditablePlayer({ ...player });
   };
 

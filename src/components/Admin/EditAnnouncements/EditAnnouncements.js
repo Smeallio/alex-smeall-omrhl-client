@@ -36,7 +36,6 @@ const EditAnnouncements = ({ announcements, fetchAnnouncements }) => {
   };
 
   const handleEditClick = (announcement) => {
-    console.log("Edit clicked: ", announcement);
     setEditableAnnouncement({ ...announcement });
   };
 
@@ -53,7 +52,6 @@ const EditAnnouncements = ({ announcements, fetchAnnouncements }) => {
       title: editableAnnouncement.title,
       body: editableAnnouncement.body,
     };
-    console.log(updatedAnnouncement);
     try {
       await axios.put(
         updateAnnouncement(editableAnnouncement.id),

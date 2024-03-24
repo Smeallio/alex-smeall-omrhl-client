@@ -33,7 +33,6 @@ const EditGames = ({ games, fetchGames, getIdByTeam }) => {
   };
 
   const handleEditClick = (game) => {
-    console.log("Edit clicked: ", game);
     setEditableGame({ ...game });
   };
 
@@ -88,7 +87,6 @@ const EditGames = ({ games, fetchGames, getIdByTeam }) => {
       team2_score: editableGame.team2_score || " ",
       team2_result: determineTeamTwoResult(editableGame) || " ",
     };
-    console.log(updatedGame);
     try {
       await axios.put(updateGame(editableGame.id), updatedGame);
       fetchGames();

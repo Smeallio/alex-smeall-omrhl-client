@@ -60,7 +60,6 @@ const SkaterStats = ({ team, players, skaterStats, fetchStats }) => {
   };
 
   const handleEditClick = (skater) => {
-    console.log("Edit clicked: ", skater);
     setEditableSkater({ ...skater });
   };
 
@@ -113,10 +112,8 @@ const SkaterStats = ({ team, players, skaterStats, fetchStats }) => {
       goals: newSkaterStat.goals,
       assists: newSkaterStat.assists,
     };
-    console.log(newSkaterStatAdd);
     try {
       await axios.post(addSkaterStat(gameId), newSkaterStatAdd);
-      console.log(addSkaterStat(gameId));
       fetchStats();
       setNewSkaterStat({
         player_id: "",

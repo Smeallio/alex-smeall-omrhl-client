@@ -26,7 +26,6 @@ const AddGames = ({ fetchGames, getIdByTeam }) => {
       team2_score: null,
       team2_result: null,
     };
-    console.log(game);
     try {
       await axios.post(postGame(), game);
       fetchGames();
@@ -37,7 +36,6 @@ const AddGames = ({ fetchGames, getIdByTeam }) => {
   };
 
   const handleDateChange = (date) => {
-    console.log("Selected date:", date);
     setNewGame({ ...newGame, date });
   };
 

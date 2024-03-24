@@ -18,7 +18,6 @@ const AddAnnouncement = ({ fetchAnnouncements }) => {
       date: formattedDate,
       body: formData.get("body"),
     };
-    console.log(announcement);
     try {
       await axios.post(postAnnouncement(), announcement);
       fetchAnnouncements();
@@ -29,7 +28,6 @@ const AddAnnouncement = ({ fetchAnnouncements }) => {
   };
 
   const handleDateChange = (date) => {
-    console.log("Selected date:", date);
     setNewAnnouncement({ ...newAnnouncement, date });
   };
 

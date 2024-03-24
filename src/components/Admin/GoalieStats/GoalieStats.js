@@ -60,7 +60,6 @@ const GoalieStats = ({ team, players, goalieStats, fetchStats }) => {
   };
 
   const handleEditClick = (goalie) => {
-    console.log("Edit clicked: ", goalie);
     setEditableGoalie({ ...goalie });
   };
 
@@ -113,7 +112,6 @@ const GoalieStats = ({ team, players, goalieStats, fetchStats }) => {
       wins: newGoalieStat.wins,
       goalsAgainst: newGoalieStat.goalsAgainst,
     };
-    console.log(newGoalieStatAdd);
     try {
       await axios.post(addGoalieStat(gameId), newGoalieStatAdd);
       fetchStats();
