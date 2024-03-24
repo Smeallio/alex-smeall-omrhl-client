@@ -23,11 +23,22 @@
   }
 
   &__cancel {
-    @include button($omr-red);
+    @include button;
+    background-color: $omr-red;
+    box-shadow: none;
     margin-right: 1rem;
+
+    &:hover {
+      background-color: $omr-red;
+    }
   }
 
   &__confirm {
     @include button;
+    box-shadow: none;
+
+    &:hover {
+      background-color: $omr-lightblue;
+    }
   }
 }

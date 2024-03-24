@@ -4,7 +4,11 @@
 .addPlayers {
   &__form {
     @include flexbox(space-between, center, row, wrap);
-    max-width: 750px;
+    max-width: 850px;
+
+    @include desktop {
+      @include flexbox(flex-start, center, row, nowrap);
+    }
 
     &-name {
       @include flexbox;
@@ -28,6 +32,10 @@
         @include tablet {
           margin-right: 0.75rem;
         }
+
+        @include desktop {
+          margin-right: 1.75rem;
+        }
       }
     }
     &-number {
@@ -36,6 +44,10 @@
       @include tablet {
         width: 22.5%;
         text-align: left;
+      }
+
+      @include desktop {
+        width: 20%;
       }
 
       &-input {
@@ -49,7 +61,7 @@
         }
 
         @include desktop {
-            width: 40%;
+            width: 35%;
         }
       }
     }
@@ -61,13 +73,17 @@
         text-align: left;
       }
 
+      @include desktop{
+        width: 17.5%;
+      }
+
       &-input {
         @include input;
         margin-left: 0.75rem;
         width: 30%;
 
         @include desktop {
-            width: 40%;
+            width: 35%;
         }
       }
     }
@@ -81,10 +97,6 @@
       @include tablet {
         width: 20%;
         margin: 0 0 0 1rem;
-      }
-
-      @include desktop {
-        width: 15%;
       }
     }
   }
