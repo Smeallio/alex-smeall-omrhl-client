@@ -1,10 +1,10 @@
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { getGames } from "../../../utils/api-utils";
+import { getRegSeasonGames, getPlayoffGames } from "../../../utils/api-utils";
 import "./TeamSked.scss";
 
-const TeamSked = () => {
+const TeamSked = ({ seasonType }) => {
   const { teamName } = useParams();
 
   const [games, setGames] = useState(null);
@@ -38,11 +38,14 @@ const TeamSked = () => {
     const fetchGamesByTeam = async () => {
       try {
         if (teamId !== null) {
-          const response = await axios.get(getGames());
-          const allGames = response.data;
-          const gamesByTeam = allGames.filter(
-            (game) =>
-              game.team1_team_id === teamId || game.team2_team_id === teamId
+          let gamesResponse;
+            if (seasonType === "regular") {
+              gamesResponse = await axios.get(getRegSeasonGames());
+            } else if (seasonType === "playoffs") {
+              gamesResponse = await axios.get(getPlayoffGames());
+            }
+            const gamesByTeam = gamesResponse.data.filter((game) => 
+            game.team1_team_id === teamId || game.team2_team_id ===teamId
           );
           setGames(gamesByTeam);
         }
@@ -56,7 +59,7 @@ const TeamSked = () => {
     };
 
     fetchAndSetGames();
-  }, [teamId]);
+  }, [teamId, seasonType]);
 
   const toTitleCase = (string) => {
     return string.replace(/\b\w/g, (match) => match.toUpperCase());
@@ -65,6 +68,8 @@ const TeamSked = () => {
   if (games === null) {
     return <p>Loading...</p>;
   }
+
+  console.log(games);
 
   return (
     <article className="schedule">
@@ -90,7 +95,10 @@ const TeamSked = () => {
                   : game.team1_name}
               </td>
               <td className="schedule__table-res" data-label="Result">
-                <Link className="schedule__table-res-link" to={`/games/${game.id}`}>
+                <Link
+                  className="schedule__table-res-link"
+                  to={`/games/${game.id}`}
+                >
                   {(game.complete &&
                     game.team1_team_id === teamId &&
                     toTitleCase(game.team1_result[0]) +

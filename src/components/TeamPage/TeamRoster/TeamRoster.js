@@ -1,9 +1,11 @@
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
   getSkaterStatsByTeam,
-  getGoalieStatsByTeam
+  getGoalieStatsByTeam,
+  getPlayoffSkaterStatsByTeam,
+  getPlayoffGoalieStatsByTeam
 } from "../../../utils/api-utils";
 import {
   handleHeaderClick,
@@ -11,7 +13,7 @@ import {
 } from "../../../utils/sorting-functions.js";
 import "./TeamRoster.scss";
 
-const TeamRoster = () => {
+const TeamRoster = ( {seasonType} ) => {
   const { teamName } = useParams();
 
   const [skaterStats, setSkaterStats] = useState(null);
@@ -46,41 +48,26 @@ const TeamRoster = () => {
     setTeamId(numTeamId);
   }, [teamName]);
 
+  const fetchStats = useCallback(async () => {
+    try {
+      let skaterResponse, goalieResponse;
+      if (seasonType === "regular") {
+        skaterResponse = await axios.get(getSkaterStatsByTeam(teamId));
+        goalieResponse = await axios.get(getGoalieStatsByTeam(teamId));
+      } else if (seasonType === "playoffs") {
+        skaterResponse = await axios.get(getPlayoffSkaterStatsByTeam(teamId));
+        goalieResponse = await axios.get(getPlayoffGoalieStatsByTeam(teamId));
+      }
+      setSkaterStats(skaterResponse.data);
+      setGoalieStats(goalieResponse.data);
+    } catch (err) {
+      console.log(err.message);
+    }
+  }, [seasonType]);
+
   useEffect(() => {
-    const fetchSkaterStats = async () => {
-      try {
-        if (teamId !== null) {
-          const skaterResponse = await axios.get(getSkaterStatsByTeam(teamId));
-          setSkaterStats(skaterResponse.data);
-        }
-      } catch (err) {
-        console.log(err.message);
-      }
-    };
-
-    const fetchGoalieStats = async () => {
-      try {
-        if (teamId !== null) {
-          const goalieResponse = await axios.get(getGoalieStatsByTeam(teamId));
-          setGoalieStats(goalieResponse.data);
-        }
-      } catch (err) {
-        console.log(err.message);
-      }
-    };
-
-    const fetchAndSetSkaterStats = async () => {
-      await fetchSkaterStats();
-    };
-
-    const fetchAndSetGoalieStats = async () => {
-      await fetchGoalieStats();
-    };
-
-
-    fetchAndSetSkaterStats();
-    fetchAndSetGoalieStats();
-  }, [teamId]);
+    fetchStats();
+  }, [fetchStats]);
 
   if (skaterStats === null || goalieStats === null) {
     return <p>Loading...</p>;

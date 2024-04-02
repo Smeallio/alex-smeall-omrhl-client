@@ -12,6 +12,7 @@ const TeamPage = () => {
   const { teamName } = useParams();
 
   const [fullTeamName, setFullTeamName] = useState(null);
+  const [seasonType, setSeasonType] = useState("regular");
 
   useEffect(() => {
     let formattedTeamName;
@@ -39,19 +40,41 @@ const TeamPage = () => {
 
   useEffect(() => {
     if (fullTeamName !== null) {
-    document.title = `Odd Man Rush Hockey League - ${fullTeamName}`;
+      document.title = `Odd Man Rush Hockey League - ${fullTeamName}`;
     }
   }, [fullTeamName]);
+
+  const toggleSeasonType = (type) => {
+    setSeasonType(type);
+  };
 
   return (
     <section className="background">
       <Header />
       <Nav />
       <main className="team-main">
-        <TeamHeader />
+        <section className="team-main__header">
+          <TeamHeader />
+          {seasonType === "regular" && (
+            <button
+              className="team-main__header-button"
+              onClick={() => toggleSeasonType("playoffs")}
+            >
+              View Playoffs
+            </button>
+          )}
+          {seasonType === "playoffs" && (
+            <button
+              className="team-main__header-button"
+              onClick={() => toggleSeasonType("regular")}
+            >
+              View Regular Season
+            </button>
+          )}
+        </section>
         <section className="team-main__ros-sked">
-          <TeamRoster />
-          <TeamSked />
+          <TeamRoster seasonType={seasonType} />
+          <TeamSked seasonType={seasonType} />
         </section>
       </main>
       <Footer />
