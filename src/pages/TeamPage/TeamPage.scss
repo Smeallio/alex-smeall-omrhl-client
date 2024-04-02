@@ -19,6 +19,7 @@
 
     @include desktop {
       max-width: 1280px;
+      width: 90%;
       margin: 0 auto;
     }
     &-button {
@@ -32,9 +33,11 @@
   }
 
   @include desktop {
+    padding: 0;
     &__ros-sked {
       @include flexbox(space-between, flex-start);
       max-width: 1280px;
+      width: 90%;
       margin: 0 auto;
     }
   }
