@@ -54,6 +54,10 @@
     }
   }
 
+  @include tablet {
+    padding: 0.75rem 0;
+  }
+
   @include desktop {
     padding: 0.75rem;
     width: 50%;

@@ -2,27 +2,22 @@
 @use "../../../styles/mixins" as *;
 
 .teamHeader {
-    padding: 0.75rem 0.875rem 0;
+  padding: 0.75rem 0.875rem 0;
 
-    &__title {
-        @include flexbox;
+  &__title {
+    @include flexbox;
 
-        &-logo {
-            height: 4rem;
-        }
-
-        &-teamname {
-            @include teamh1;
-            margin: 1.5rem 0 1.5rem 1rem;
-        }
+    &-logo {
+      height: 4rem;
     }
 
-    @include tablet {
-        padding: 0.75rem 2.25rem 0;
+    &-teamname {
+      @include teamh1;
+      margin: 1.5rem 0 1.5rem 1rem;
     }
+  }
 
-    @include desktop {
-        max-width: 1400px;
-        margin: 0 auto;
-    }
+  @include tablet {
+    padding: 1.5rem 0;
+  }
 }
