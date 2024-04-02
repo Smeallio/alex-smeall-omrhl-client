@@ -50,6 +50,7 @@ const TeamRoster = ( {seasonType} ) => {
 
   const fetchStats = useCallback(async () => {
     try {
+      if (teamId !== null) {
       let skaterResponse, goalieResponse;
       if (seasonType === "regular") {
         skaterResponse = await axios.get(getSkaterStatsByTeam(teamId));
@@ -60,14 +61,15 @@ const TeamRoster = ( {seasonType} ) => {
       }
       setSkaterStats(skaterResponse.data);
       setGoalieStats(goalieResponse.data);
+    }
     } catch (err) {
       console.log(err.message);
     }
-  }, [seasonType]);
+  }, [seasonType, teamId]);
 
   useEffect(() => {
     fetchStats();
-  }, [fetchStats]);
+  }, [fetchStats, seasonType]);
 
   if (skaterStats === null || goalieStats === null) {
     return <p>Loading...</p>;

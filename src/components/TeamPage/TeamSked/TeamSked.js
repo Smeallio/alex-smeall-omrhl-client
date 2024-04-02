@@ -69,8 +69,6 @@ const TeamSked = ({ seasonType }) => {
     return <p>Loading...</p>;
   }
 
-  console.log(games);
-
   return (
     <article className="schedule">
       <table className="schedule__table">
