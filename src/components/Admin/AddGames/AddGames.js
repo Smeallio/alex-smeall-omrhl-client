@@ -12,7 +12,10 @@ const AddGames = ({ fetchGames, getIdByTeam }) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const dateOptions = { year: "numeric", month: "short", day: "numeric" };
-    const formattedDate = new Date (newGame.date).toLocaleDateString("en-US", dateOptions);
+    const formattedDate = new Date(newGame.date).toLocaleDateString(
+      "en-US",
+      dateOptions
+    );
     const game = {
       date: formattedDate,
       time: formData.get("time"),
@@ -25,6 +28,8 @@ const AddGames = ({ fetchGames, getIdByTeam }) => {
       team2_team_id: getIdByTeam(formData.get("team2_name")),
       team2_score: null,
       team2_result: null,
+      notes: formData.get("notes"),
+      game_type: formData.get("game_type")
     };
     try {
       await axios.post(postGame(), game);
@@ -77,6 +82,19 @@ const AddGames = ({ fetchGames, getIdByTeam }) => {
             <option value="Mighty Moose">Mighty Moose</option>
             <option value="Kraken Beers">Kraken Beers</option>
           </select>
+        </label>
+        <label className="addGames__form-type">
+          <span>Type:</span>
+          <select className="addGames__form-type-input" name="game_type">
+            <option value="none">Pick one...</option>
+            <option value="Regular Season">Regular Season</option>
+            <option value="Playoffs">Playoffs</option>
+          </select>
+        </label>
+        <label className="addGames__form-notes">
+          <span>Notes:</span>
+          <textarea className="addGames__form-notes-input" name="notes">
+          </textarea>
         </label>
         <button className="addGames__form-button" type="submit">
           ADD GAME

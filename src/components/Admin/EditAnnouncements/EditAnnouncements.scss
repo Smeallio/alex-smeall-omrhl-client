@@ -189,8 +189,8 @@
     @include input;
     width: 6.5rem;
 
-    @include desktop {
-      width: 10rem;
+    @include tablet {
+      width: 9rem;
     }
   }
   &-popper {

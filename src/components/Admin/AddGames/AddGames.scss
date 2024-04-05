@@ -8,46 +8,48 @@
   }
   &__form {
     @include flexbox(space-between, center, row, wrap);
+    @include biggerp;
 
     &-date {
       @include flexbox;
       width: 60%;
+      max-width: 15rem;
 
       @include tablet {
+        width: 60%;
         margin-bottom: 0;
       }
 
-      @include desktop {
-        width: 20%;
-      }
-
       & span {
-        margin-right: 0.75rem;
+        width: 33.3%;
+        max-width: 4.25rem;
+
+        @include tablet {
+          width: 40%;
+          max-width: 5rem;
+        }
       }
     }
     &-time {
       width: 40%;
 
       @include tablet {
-        text-align: left;
-      }
-
-      @include desktop {
-        width: 12%;
+        width: 37.5%;
       }
 
       &-input {
         @include input;
-        margin-left: 0.75rem;
-        width: 50%;
+        width: 52%;
+      }
+
+      & span {
+        display: inline-block;
+        width: 40%;
+        max-width: 5rem;
 
         @include tablet {
-          margin-right: 0.75rem;
           width: 40%;
-        }
-
-        @include desktop {
-          width: 40%;
+          max-width: 7rem;
         }
       }
     }
@@ -56,17 +58,64 @@
       margin-top: 0.75rem;
 
       & span {
-        margin-right: 0.75rem;
+        display: inline-block;
+        width: 20%;
+        max-width: 4.25rem;
+
+        @include tablet {
+          max-width: 5rem;
+        }
       }
 
       &-input {
         @include input;
-        width: 70%;
+        width: 78%;
+      }
+    }
+
+    &-type {
+      width: 100%;
+      margin-top: 0.75rem;
+
+      & span {
+        display: inline-block;
+        width: 20%;
+        max-width: 4.25rem;
+
+        @include tablet {
+          max-width: 5rem;
+        }
       }
 
-      @include desktop {
-        width: 27%;
-        margin-top: 0;
+      &-input {
+        @include input;
+        width: 78%;
+      }
+    }
+
+    &-notes {
+      width: 100%;
+      margin-top: 0.75rem;
+
+      &-input {
+        @include input;
+        width: 77%;
+        height: 5rem;
+      }
+
+      @include tablet {
+        width: 100%;
+      }
+
+      & span {
+        display: inline-block;
+        vertical-align: top;
+        width: 20%;
+        max-width: 4.25rem;
+
+        @include tablet {
+          max-width: 5rem;
+        }
       }
     }
 
@@ -74,24 +123,16 @@
       @include button;
       margin: 0.75rem auto;
       width: 90%;
-      max-width: 10rem;
+      max-width: 15rem;
 
       @include tablet {
-        width: 50%;
+        width: 60%;
         margin-top: 0.75rem;
-      }
-
-      @include desktop {
-        width: 15%;
       }
     }
 
     @include tablet {
-      max-width: 300px;
-    }
-
-    @include desktop {
-      max-width: 1200px;
+      max-width: 400px;
     }
   }
 }
@@ -101,8 +142,8 @@
     @include input;
     width: 6.5rem;
 
-    @include desktop {
-      width: 10rem;
+    @include tablet {
+      width: 9rem;
     }
   }
   &-popper {

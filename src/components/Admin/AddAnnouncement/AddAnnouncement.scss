@@ -15,7 +15,7 @@
 
       @include tablet {
         margin-bottom: 0;
-        width: 30%;
+        width: 40%;
       }
 
       @include desktop {
@@ -37,7 +37,7 @@
 
       @include tablet {
         text-align: left;
-        width: 70%;
+        width: 60%;
       }
 
       & span {
@@ -65,6 +65,10 @@
         @include input;
         width: 80%;
         height: 5rem;
+
+        @include tablet {
+          width: 82.75%;
+        }
       }
 
       @include tablet {
@@ -109,8 +113,8 @@
     @include input;
     width: 6.5rem;
 
-    @include desktop {
-        width: 10rem;
+    @include tablet {
+      width: 9rem;
     }
   }
   &-popper {
