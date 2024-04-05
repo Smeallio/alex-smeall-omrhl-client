@@ -73,11 +73,15 @@ const EditGames = ({ games, fetchGames, getIdByTeam }) => {
   const confirmEditGame = async (event) => {
     event.preventDefault();
     const dateOptions = { year: "numeric", month: "short", day: "numeric" };
-    const formattedDate = new Date(editableGame.date).toLocaleDateString("en-US", dateOptions);
+    const formattedDate = new Date(editableGame.date).toLocaleDateString(
+      "en-US",
+      dateOptions
+    );
     const updatedGame = {
       date: formattedDate,
       time: editableGame.time,
       complete: editableGame.complete,
+      game_type: editableGame.game_type,
       team1_name: editableGame.team1_name,
       team1_team_id: getIdByTeam(editableGame.team1_name),
       team1_score: editableGame.team1_score || " ",
@@ -86,6 +90,7 @@ const EditGames = ({ games, fetchGames, getIdByTeam }) => {
       team2_team_id: getIdByTeam(editableGame.team2_name),
       team2_score: editableGame.team2_score || " ",
       team2_result: determineTeamTwoResult(editableGame) || " ",
+      notes: editableGame.notes,
     };
     try {
       await axios.put(updateGame(editableGame.id), updatedGame);
@@ -124,11 +129,13 @@ const EditGames = ({ games, fetchGames, getIdByTeam }) => {
               <tr className="editGames__table-row">
                 <th scope="col">Date</th>
                 <th scope="col">Time</th>
-                <th scope="col">Complete?</th>
+                <th scope="col">Played?</th>
+                <th scope="col">Type</th>
                 <th scope="col">Team 1</th>
-                <th scope="col">Team 1 Score</th>
+                <th scope="col">Score</th>
                 <th scope="col">Team 2</th>
-                <th scope="col">Team 2 Score</th>
+                <th scope="col">Score</th>
+                <th scope="col">Notes</th>
                 <th scope="col">Result</th>
                 <th scope="col" colSpan="2">
                   Edit
@@ -162,7 +169,7 @@ const EditGames = ({ games, fetchGames, getIdByTeam }) => {
                       </td>
                       <td
                         className="editGames__table-box editGames__table-box-complete"
-                        data-label="Complete?"
+                        data-label="Played?"
                       >
                         <input
                           type="checkbox"
@@ -171,6 +178,34 @@ const EditGames = ({ games, fetchGames, getIdByTeam }) => {
                           checked={editableGame.complete}
                           onChange={handleInputChange}
                         ></input>
+                      </td>
+                      <td
+                        className="editGames__table-box editGames__table-box-type"
+                        data-label="Type"
+                      >
+                        <select
+                          name="type"
+                          value={editableGame.game_type}
+                          onChange={handleInputChange}
+                        >
+                          <option value="none">Pick one...</option>
+                          <option
+                            value="Regular Season"
+                            selected={
+                              editableGame.type === "Regular Season"
+                            }
+                          >
+                            Regular Season
+                          </option>
+                          <option
+                            value="Playoffs"
+                            selected={
+                              editableGame.type === "Playoffs"
+                            }
+                          >
+                            Playoffs
+                          </option>
+                        </select>
                       </td>
                       <td
                         className="editGames__table-box editGames__table-box-team"
@@ -283,6 +318,16 @@ const EditGames = ({ games, fetchGames, getIdByTeam }) => {
                         ></input>
                       </td>
                       <td
+                        className="editGames__table-box editGames__table-box-notes"
+                        data-label="Notes"
+                      >
+                        <textarea
+                          name="notes"
+                          value={editableGame.notes}
+                          onChange={handleInputChange}
+                        ></textarea>
+                      </td>
+                      <td
                         className="editGames__table-box editGames__table-box-result"
                         data-label="Result"
                       >
@@ -306,69 +351,81 @@ const EditGames = ({ games, fetchGames, getIdByTeam }) => {
                     </>
                   ) : (
                     <>
-                        <td
-                          className="editGames__table-box editGames__table-box-date"
-                          data-label="Date"
-                        >
-                          {game.date}
-                        </td>
-                        <td
-                          className="editGames__table-box editGames__table-box-time"
-                          data-label="Time"
-                        >
-                          {game.time}
-                        </td>
-                        <td
-                          className="editGames__table-box editGames__table-box-complete"
-                          data-label="Complete?"
-                        >
-                          {game.complete ? "Yes" : "No"}
-                        </td>
-                        <td
-                          className="editGames__table-box editGames__table-box-team"
-                          data-label="Team 1"
-                        >
-                          {game.team1_name}
-                        </td>
-                        <td
-                          className="editGames__table-box editGames__table-box-team-score"
-                          data-label="Score"
-                        >
-                          {game.team1_score ? game.team1_score : " "}
-                        </td>
-                        <td
-                          className="editGames__table-box editGames__table-box-team"
-                          data-label="Team 2"
-                        >
-                          {game.team2_name}
-                        </td>
-                        <td
-                          className="editGames__table-box editGames__table-box-team-score"
-                          data-label="Score"
-                        >
-                          {game.team2_score ? game.team2_score : " "}
-                        </td>
-                        <td
-                          className="editGames__table-box editGames__table-box-result"
-                          data-label="Result"
-                        >
-                          {game.complete ? determineWinner(game) : " "}
-                        </td>
-                        <td
-                          className="editGames__table-box editGames__table-box-icons"
-                          data-label="Edit"
-                        >
-                          <FontAwesomeIcon
-                            className="editGames__table-box-icon editGames__table-box-icon-edit"
-                            icon={faPenToSquare}
-                            onClick={() => handleEditClick(game)}
-                          />
-                          <FontAwesomeIcon
-                            className="editGames__table-box-icon editGames__table-box-icon-delete"
-                            icon={faTrashCan}
-                            onClick={() => handleDeleteGame(game.id)}
-                          />
-                        </td>
+                      <td
+                        className="editGames__table-box editGames__table-box-date"
+                        data-label="Date"
+                      >
+                        {game.date}
+                      </td>
+                      <td
+                        className="editGames__table-box editGames__table-box-time"
+                        data-label="Time"
+                      >
+                        {game.time}
+                      </td>
+                      <td
+                        className="editGames__table-box editGames__table-box-complete"
+                        data-label="Played?"
+                      >
+                        {game.complete ? "Yes" : "No"}
+                      </td>
+                      <td
+                        className="editGames__table-box editGames__table-box-type"
+                        data-label="Type"
+                      >
+                        {game.game_type}
+                      </td>
+                      <td
+                        className="editGames__table-box editGames__table-box-team"
+                        data-label="Team 1"
+                      >
+                        {game.team1_name}
+                      </td>
+                      <td
+                        className="editGames__table-box editGames__table-box-team-score"
+                        data-label="Score"
+                      >
+                        {game.team1_score ? game.team1_score : " "}
+                      </td>
+                      <td
+                        className="editGames__table-box editGames__table-box-team"
+                        data-label="Team 2"
+                      >
+                        {game.team2_name}
+                      </td>
+                      <td
+                        className="editGames__table-box editGames__table-box-team-score"
+                        data-label="Score"
+                      >
+                        {game.team2_score ? game.team2_score : " "}
+                      </td>
+                      <td
+                        className="editGames__table-box editGames__table-box-notes"
+                        data-label="Notes"
+                      >
+                        <span>{game.notes}</span>
+                      </td>
+                      <td
+                        className="editGames__table-box editGames__table-box-result"
+                        data-label="Result"
+                      >
+                        {game.complete ? determineWinner(game) : " "}
+                      </td>
+                      <td
+                        className="editGames__table-box editGames__table-box-icons"
+                        data-label="Edit"
+                      >
+                        <FontAwesomeIcon
+                          className="editGames__table-box-icon editGames__table-box-icon-edit"
+                          icon={faPenToSquare}
+                          onClick={() => handleEditClick(game)}
+                        />
+                        <FontAwesomeIcon
+                          className="editGames__table-box-icon editGames__table-box-icon-delete"
+                          icon={faTrashCan}
+                          onClick={() => handleDeleteGame(game.id)}
+                        />
+                      </td>
                     </>
                   )}
                 </tr>

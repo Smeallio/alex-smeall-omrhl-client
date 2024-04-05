@@ -19,7 +19,7 @@
       }
 
       @include desktop {
-        width: 26%;
+        width: 35%;
       }
 
       & span {
@@ -100,10 +100,6 @@
 
     @include tablet {
       max-width: 600px;
-    }
-
-    @include desktop {
-      max-width: 900px;
     }
   }
 }

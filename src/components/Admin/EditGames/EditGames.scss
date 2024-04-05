@@ -66,41 +66,160 @@
     }
 
     &-box {
-      text-align: center;
+      text-align: left;
       padding: 0.25rem;
+      @include bigp;
 
       @include responsive-table {
-        text-align: right;
+        @include flexbox(flex-start, flex-start);
 
         &::before {
           content: attr(data-label);
           float: left;
           font-weight: bold;
           text-transform: uppercase;
-          margin-right: 1.25rem;
+          width: 6rem;
+          flex-shrink: 0;
+          white-space: nowrap;
         }
 
         &[data-label="Edit"]::before {
           content: "";
+          width: 0;
         }
       }
 
-      &-time input {
+      &-date {
+        width: 100%;
+
+        @include tablet {
+          width: 50%;
+        }
+
         @include desktop {
-          width: 4rem;
+          width: 10%;
+          text-align: center;
         }
       }
 
-      &-team-score input {
+      &-time {
+        width: 100%;
+        & input {
+          @include tablet {
+            width: 4rem;
+          }
+        }
+
+        @include tablet {
+          width: 45%;
+        }
+
         @include desktop {
-          width: 3rem;
+          width: 5%;
+          text-align: center;
+        }
+      }
+
+      &-complete {
+        width: 100%;
+
+        @include tablet {
+          width: 50%;
+        }
+
+        @include desktop {
+          width: 5%;
+          text-align: center;
+        }
+      }
+
+      &-type {
+        width: 100%;
+
+        @include tablet {
+          width: 45%;
+        }
+
+        @include desktop {
+          width: 10%;
+          text-align: center;
+        }
+      }
+
+      &-team {
+        width: 100%;
+
+        & input {
+          @include desktop {
+            width: 10rem;
+          }
+        }
+        &-score {
+          width: 100%;
+          & input {
+            @include tablet {
+              width: 3rem;
+            }
+            @include desktop {
+              width: 2rem;
+            }
+          }
+          @include tablet {
+            width: 45%;
+          }
+          @include desktop {
+            width: 7.5%;
+            text-align: center;
+          }
+        }
+        @include tablet {
+          width: 50%;
+        }
+
+        @include desktop {
+          width: 10%;
+          text-align: center;
+        }
+      }
+
+      &-notes {
+        width: 100%;
+
+        & textarea {
+          @include input;
+          height: 5rem;
+
+          @include tablet {
+            width: 100%;
+            height: 3rem;
+          }
+        }
+
+        @include desktop {
+          text-align: center;
+          width: 15%;
+        }
+      }
+
+      &-result {
+        width: 100%;
+
+        @include desktop {
+          width: 10%;
+          text-align: center;
         }
       }
 
       &-icons {
         @include responsive-table {
           @include flexbox(space-between);
+          padding-top: 0.75rem;
           width: 100%;
+        }
+
+        @include desktop {
+          width: 10%;
+          text-align: center;
         }
       }
 
@@ -112,7 +231,7 @@
         }
 
         @include tablet {
-            height: 1.25rem;
+          height: 1.25rem;
         }
 
         &-edit,
