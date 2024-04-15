@@ -41,10 +41,6 @@ const ScoreBar = ({ games }) => {
     .filter((game) => game.complete === 1)
     .slice(-(4 - upcomingGames.length));
 
-  if (upcomingGames.length === 0) {
-    completeGames = sortedGames.filter((game) => game.complete === 1).slice(-4);
-  }
-
   const closestGames = [...completeGames, ...upcomingGames];
 
   return (
