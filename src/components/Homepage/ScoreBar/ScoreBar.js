@@ -33,13 +33,13 @@ const ScoreBar = ({ games }) => {
 
   const sortedGames = games.sort((a, b) => a.date - b.date);
 
-  let completeGames = sortedGames
-    .filter((game) => game.complete === 1)
-    .slice(-2);
-
   const upcomingGames = sortedGames
     .filter((game) => game.complete === 0)
     .slice(0, 2);
+
+  let completeGames = sortedGames
+    .filter((game) => game.complete === 1)
+    .slice(-(4 - upcomingGames.length));
 
   if (upcomingGames.length === 0) {
     completeGames = sortedGames.filter((game) => game.complete === 1).slice(-4);
@@ -64,7 +64,11 @@ const ScoreBar = ({ games }) => {
       </button>
       <section className="scorebar__container" ref={sliderRef}>
         {closestGames.map((game) => (
-          <Link className="scorebar__link" to={`/games/${game.id}`} key={game.id}>
+          <Link
+            className="scorebar__link"
+            to={`/games/${game.id}`}
+            key={game.id}
+          >
             <section className="scorebar__box">
               <section className="scorebar__box-header">
                 <p className="scorebar__box-header-text">{`${game.date} @ ${game.time}`}</p>
@@ -119,7 +123,9 @@ const ScoreBar = ({ games }) => {
                 </section>
               )}
               {game.game_type === "Playoffs" && (
-                <section className="scorebar__box-playoff">&#9733; PLAYOFFS &#9733;</section>
+                <section className="scorebar__box-playoff">
+                  &#9733; PLAYOFFS &#9733;
+                </section>
               )}
             </section>
           </Link>
