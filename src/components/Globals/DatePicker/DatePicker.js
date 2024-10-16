@@ -1,5 +1,5 @@
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const CustomDatePicker = ({ selectedDate, handleDateChange }) => {
   return (

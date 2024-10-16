@@ -5,7 +5,7 @@ import {
   getSkaterStatsByTeam,
   getGoalieStatsByTeam,
   getPlayoffSkaterStatsByTeam,
-  getPlayoffGoalieStatsByTeam
+  getPlayoffGoalieStatsByTeam,
 } from "../../../utils/api-utils";
 import {
   handleHeaderClick,
@@ -13,7 +13,7 @@ import {
 } from "../../../utils/sorting-functions.js";
 import "./TeamRoster.scss";
 
-const TeamRoster = ( {seasonType} ) => {
+const TeamRoster = ({ seasonType }) => {
   const { teamName } = useParams();
 
   const [skaterStats, setSkaterStats] = useState(null);
@@ -40,6 +40,12 @@ const TeamRoster = ( {seasonType} ) => {
       case "kraken":
         numTeamId = 4;
         break;
+      case "bears":
+        numTeamId = 5;
+        break;
+      case "liners":
+        numTeamId = 6;
+        break;
       default:
         alert("Invalid team name");
         break;
@@ -51,17 +57,17 @@ const TeamRoster = ( {seasonType} ) => {
   const fetchStats = useCallback(async () => {
     try {
       if (teamId !== null) {
-      let skaterResponse, goalieResponse;
-      if (seasonType === "regular") {
-        skaterResponse = await axios.get(getSkaterStatsByTeam(teamId));
-        goalieResponse = await axios.get(getGoalieStatsByTeam(teamId));
-      } else if (seasonType === "playoffs") {
-        skaterResponse = await axios.get(getPlayoffSkaterStatsByTeam(teamId));
-        goalieResponse = await axios.get(getPlayoffGoalieStatsByTeam(teamId));
+        let skaterResponse, goalieResponse;
+        if (seasonType === "regular") {
+          skaterResponse = await axios.get(getSkaterStatsByTeam(teamId));
+          goalieResponse = await axios.get(getGoalieStatsByTeam(teamId));
+        } else if (seasonType === "playoffs") {
+          skaterResponse = await axios.get(getPlayoffSkaterStatsByTeam(teamId));
+          goalieResponse = await axios.get(getPlayoffGoalieStatsByTeam(teamId));
+        }
+        setSkaterStats(skaterResponse.data);
+        setGoalieStats(goalieResponse.data);
       }
-      setSkaterStats(skaterResponse.data);
-      setGoalieStats(goalieResponse.data);
-    }
     } catch (err) {
       console.log(err.message);
     }
@@ -75,13 +81,13 @@ const TeamRoster = ( {seasonType} ) => {
     return <p>Loading...</p>;
   }
 
-  const handleHeaderClickWrapper = header => {
+  const handleHeaderClickWrapper = (header) => {
     handleHeaderClick(header, sort, setSort);
   };
 
-  const sortColumnWrapper = stats => {
+  const sortColumnWrapper = (stats) => {
     return sortColumn(stats, sort);
-  }
+  };
 
   return (
     <article className="roster">
@@ -91,10 +97,16 @@ const TeamRoster = ( {seasonType} ) => {
         </caption>
         <thead className="roster__table-headers">
           <tr>
-            <th scope="col" onClick={() => handleHeaderClickWrapper("player_name")}>
+            <th
+              scope="col"
+              onClick={() => handleHeaderClickWrapper("player_name")}
+            >
               Name
             </th>
-            <th scope="col" onClick={() => handleHeaderClickWrapper("player_number")}>
+            <th
+              scope="col"
+              onClick={() => handleHeaderClickWrapper("player_number")}
+            >
               No.
             </th>
             <th
@@ -103,16 +115,28 @@ const TeamRoster = ( {seasonType} ) => {
             >
               Pos.
             </th>
-            <th scope="col" onClick={() => handleHeaderClickWrapper("games_played")}>
+            <th
+              scope="col"
+              onClick={() => handleHeaderClickWrapper("games_played")}
+            >
               GP
             </th>
-            <th scope="col" onClick={() => handleHeaderClickWrapper("total_goals")}>
+            <th
+              scope="col"
+              onClick={() => handleHeaderClickWrapper("total_goals")}
+            >
               G
             </th>
-            <th scope="col" onClick={() => handleHeaderClickWrapper("total_assists")}>
+            <th
+              scope="col"
+              onClick={() => handleHeaderClickWrapper("total_assists")}
+            >
               A
             </th>
-            <th scope="col" onClick={() => handleHeaderClickWrapper("total_points")}>
+            <th
+              scope="col"
+              onClick={() => handleHeaderClickWrapper("total_points")}
+            >
               P
             </th>
           </tr>
@@ -151,12 +175,42 @@ const TeamRoster = ( {seasonType} ) => {
         </caption>
         <thead className="roster__table-headers">
           <tr>
-            <th scope="col" onClick={() => handleHeaderClickWrapper("player_name")}>Name</th>
-            <th scope="col" onClick={() => handleHeaderClickWrapper("player_number")}>No.</th>
-            <th scope="col" onClick={() => handleHeaderClickWrapper("player_position")}>Pos.</th>
-            <th scope="col" onClick={() => handleHeaderClickWrapper("games_played")}>GP</th>
-            <th scope="col" onClick={() => handleHeaderClickWrapper("total_wins")}>W</th>
-            <th scope="col" onClick={() => handleHeaderClickWrapper("total_goalsAgainst")}>GAA</th>
+            <th
+              scope="col"
+              onClick={() => handleHeaderClickWrapper("player_name")}
+            >
+              Name
+            </th>
+            <th
+              scope="col"
+              onClick={() => handleHeaderClickWrapper("player_number")}
+            >
+              No.
+            </th>
+            <th
+              scope="col"
+              onClick={() => handleHeaderClickWrapper("player_position")}
+            >
+              Pos.
+            </th>
+            <th
+              scope="col"
+              onClick={() => handleHeaderClickWrapper("games_played")}
+            >
+              GP
+            </th>
+            <th
+              scope="col"
+              onClick={() => handleHeaderClickWrapper("total_wins")}
+            >
+              W
+            </th>
+            <th
+              scope="col"
+              onClick={() => handleHeaderClickWrapper("total_goalsAgainst")}
+            >
+              GAA
+            </th>
           </tr>
         </thead>
         <tbody>

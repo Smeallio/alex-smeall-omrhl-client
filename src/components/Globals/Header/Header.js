@@ -58,6 +58,22 @@ const Header = () => {
       bears = bearsLogo;
       liners = linersLogo;
       break;
+    case "bears":
+      saints = saintsLogoGrey;
+      kraken = krakenLogoGrey;
+      leprechauns = lepLogoGrey;
+      moose = mooseLogo;
+      bears = bearsLogo;
+      liners = linersLogo;
+      break;
+    case "liners":
+      saints = saintsLogoGrey;
+      kraken = krakenLogoGrey;
+      leprechauns = lepLogoGrey;
+      moose = mooseLogo;
+      bears = bearsLogo;
+      liners = linersLogo;
+      break;
     default:
       return null;
   }

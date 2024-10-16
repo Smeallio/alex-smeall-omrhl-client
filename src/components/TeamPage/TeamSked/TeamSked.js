@@ -26,6 +26,12 @@ const TeamSked = ({ seasonType }) => {
       case "kraken":
         numTeamId = 4;
         break;
+      case "bears":
+        numTeamId = 5;
+        break;
+      case "liners":
+        numTeamId = 6;
+        break;
       default:
         alert("Invalid team name");
         break;
@@ -39,13 +45,14 @@ const TeamSked = ({ seasonType }) => {
       try {
         if (teamId !== null) {
           let gamesResponse;
-            if (seasonType === "regular") {
-              gamesResponse = await axios.get(getRegSeasonGames());
-            } else if (seasonType === "playoffs") {
-              gamesResponse = await axios.get(getPlayoffGames());
-            }
-            const gamesByTeam = gamesResponse.data.filter((game) => 
-            game.team1_team_id === teamId || game.team2_team_id ===teamId
+          if (seasonType === "regular") {
+            gamesResponse = await axios.get(getRegSeasonGames());
+          } else if (seasonType === "playoffs") {
+            gamesResponse = await axios.get(getPlayoffGames());
+          }
+          const gamesByTeam = gamesResponse.data.filter(
+            (game) =>
+              game.team1_team_id === teamId || game.team2_team_id === teamId
           );
           setGames(gamesByTeam);
         }
