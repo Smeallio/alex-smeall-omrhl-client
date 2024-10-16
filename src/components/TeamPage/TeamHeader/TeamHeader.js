@@ -2,6 +2,8 @@ import saintsLogo from "../../../assets/images/logos/Duck-Island-Saints-vector.w
 import krakenLogo from "../../../assets/images/logos/Kraken-Beers-vector.webp";
 import lepLogo from "../../../assets/images/logos/Leprechauns-vector.webp";
 import mooseLogo from "../../../assets/images/logos/Moose-vector.webp";
+import bearsLogo from "../../../assets/images/logos/Quidi-Vidi-Bears-vector.webp";
+import linersLogo from "../../../assets/images/logos/Quidi-Vidi-Bears-vector.webp";
 import { useParams } from "react-router-dom";
 import "./TeamHeader.scss";
 
@@ -27,8 +29,16 @@ const TeamHeader = () => {
       teamLogo = mooseLogo;
       fullTeamName = "Mighty Moose";
       break;
+    case "bears":
+      teamLogo = bearsLogo;
+      fullTeamName = "Quidi Vidi Bears";
+      break;
+    case "liners":
+      teamLogo = linersLogo;
+      fullTeamName = "Witless Bay Liners";
+      break;
     default:
-        return null;
+      return null;
   }
 
   return (

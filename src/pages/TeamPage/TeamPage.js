@@ -30,6 +30,12 @@ const TeamPage = () => {
       case "kraken":
         formattedTeamName = "Kraken Beers";
         break;
+      case "bears":
+        formattedTeamName = "Quidi Vidi Bears";
+        break;
+      case "liners":
+        formattedTeamName = "Witless Bay Liners";
+        break;
       default:
         alert("Invalid team name");
         break;

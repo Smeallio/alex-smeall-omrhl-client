@@ -21,11 +21,11 @@
 
   &__league-logo {
     @include flexbox(center);
-    height: 7.5rem;
+    height: 9rem;
     width: 100%;
 
     &-img {
-      height: 6rem;
+      height: 7.5rem;
     }
 
     @include tablet {
@@ -48,7 +48,7 @@
     @include tablet {
       border-radius: 5px;
       box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.65) inset;
-      max-width: 25rem;
+      max-width: 35rem;
 
       &-img {
         height: 3.5rem;
