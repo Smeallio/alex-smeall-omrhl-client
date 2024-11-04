@@ -2,6 +2,8 @@ import saintsLogo from "../../../assets/images/logos/Duck-Island-Saints-vector.w
 import krakenLogo from "../../../assets/images/logos/Kraken-Beers-vector.webp";
 import lepLogo from "../../../assets/images/logos/Leprechauns-vector.webp";
 import mooseLogo from "../../../assets/images/logos/Moose-vector.webp";
+import bearsLogo from "../../../assets/images/logos/Quidi-Vidi-Bears-vector.webp";
+import linersLogo from "../../../assets/images/logos/Witless-Bay-Liners-Vector.webp";
 import { useParams, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
@@ -29,18 +31,26 @@ const TeamHeaderAdmin = () => {
       teamLogo = mooseLogo;
       fullTeamName = "Mighty Moose";
       break;
+    case "bears":
+      teamLogo = bearsLogo;
+      fullTeamName = "Quidi Vidi Bears";
+      break;
+    case "liners":
+      teamLogo = linersLogo;
+      fullTeamName = "Witless Bay Liners";
+      break;
     default:
-        return null;
+      return null;
   }
 
   return (
     <article className="teamHeaderAdmin">
       <section className="teamHeaderAdmin__title">
-      <Link className="teamHeaderAdmin__link" to="/admin/dashboard/">
-        <FontAwesomeIcon
-          className="teamHeaderAdmin__link-back-icon"
-          icon={faArrowLeft}
-        />
+        <Link className="teamHeaderAdmin__link" to="/admin/dashboard/">
+          <FontAwesomeIcon
+            className="teamHeaderAdmin__link-back-icon"
+            icon={faArrowLeft}
+          />
         </Link>
         <img
           className="teamHeaderAdmin__title-logo"

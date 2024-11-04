@@ -52,27 +52,36 @@ const Dashboard = ({ authUser }) => {
           <section className="dashboard__flex">
             <section className="dashboard__flex-teams-games">
               <h2 className="dashboard__subtitle">Update Teams</h2>
+              <Link className="dashboard__link" to="/admin/dashboard/saints">
+                Duck Island Saints
+              </Link>
+              <Link className="dashboard__link" to="/admin/dashboard/kraken">
+                Kraken Beers
+              </Link>
               <Link
                 className="dashboard__link"
                 to="/admin/dashboard/leprechauns"
               >
                 Fogtown Leprechauns
               </Link>
-              <Link className="dashboard__link" to="/admin/dashboard/saints">
-                Duck Island Saints
-              </Link>
               <Link className="dashboard__link" to="/admin/dashboard/moose">
                 Mighty Moose
               </Link>
-              <Link className="dashboard__link" to="/admin/dashboard/kraken">
-                Kraken Beers
+              <Link className="dashboard__link" to="/admin/dashboard/bears">
+                Quidi Vidi Bears
+              </Link>
+              <Link className="dashboard__link" to="/admin/dashboard/liners">
+                The Witless Bay Liners
               </Link>
               <h2 className="dashboard__subtitle">Update Games</h2>
               <Link className="dashboard__link" to="/admin/dashboard/games">
                 Scores & Schedule
               </Link>
               <h2 className="dashboard__subtitle">Update Announcements</h2>
-              <Link className="dashboard__link" to="/admin/dashboard/announcements">
+              <Link
+                className="dashboard__link"
+                to="/admin/dashboard/announcements"
+              >
                 Announcements
               </Link>
             </section>

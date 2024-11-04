@@ -3,7 +3,7 @@ import krakenLogo from "../../../assets/images/logos/Kraken-Beers-vector.webp";
 import lepLogo from "../../../assets/images/logos/Leprechauns-vector.webp";
 import mooseLogo from "../../../assets/images/logos/Moose-vector.webp";
 import bearsLogo from "../../../assets/images/logos/Quidi-Vidi-Bears-vector.webp";
-import linersLogo from "../../../assets/images/logos/Quidi-Vidi-Bears-vector.webp";
+import linersLogo from "../../../assets/images/logos/Witless-Bay-Liners-Vector.webp";
 import { useParams } from "react-router-dom";
 import "./TeamHeader.scss";
 

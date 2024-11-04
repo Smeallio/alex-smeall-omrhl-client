@@ -47,6 +47,12 @@ const ManagePlayers = ({ authUser }) => {
       case "kraken":
         numTeamId = 4;
         break;
+      case "liners":
+        numTeamId = 5;
+        break;
+      case "bears":
+        numTeamId = 6;
+        break;
       default:
         alert("Invalid team name");
         break;
