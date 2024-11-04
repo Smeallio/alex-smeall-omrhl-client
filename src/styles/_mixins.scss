@@ -53,8 +53,7 @@
   font-family: $Rubik;
   font-size: 0.875rem;
   font-weight: 600;
-  box-shadow: 5px 5px #0560AD;
-  
+  box-shadow: 5px 5px #0560ad;
 
   @include tablet {
     font-size: 1rem;
@@ -65,12 +64,12 @@
   }
 
   &:hover {
-    background-color: #2095F8;
+    background-color: #2095f8;
     cursor: pointer;
   }
 
   &:active {
-    box-shadow: 0 0 #0560AD;
+    box-shadow: 0 0 #0560ad;
     transform: translateY(5px) translateX(5px);
   }
 }
@@ -79,6 +78,50 @@
   @include bigp;
   border: none;
   height: 1.5rem;
+}
+
+@mixin dropdown {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  border: 2px solid black;
+  height: 1.5rem;
+  padding: 0.5rem;
+
+  &-select {
+    @include flexbox(space-between);
+    @include bigp;
+  }
+
+  &-text {
+    white-space: nowrap;
+    padding: 0 0.5rem;
+  }
+
+  &-icon {
+    flex-shrink: 0;
+    padding-left: 0.75rem;
+  }
+
+  &-menu {
+    @include flexbox(flex-start, center, column);
+    position: absolute;
+    top: 2.65rem;
+    left: -0.15rem;
+  }
+
+  &-item {
+    @include flexbox(center);
+    cursor: pointer;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+    height: 1.5rem;
+    padding: 0.5rem;
+    background-color: $white;
+    z-index: 20;
+  }
 }
 
 @mixin h1 {
