@@ -13,21 +13,18 @@
     &-date {
       @include flexbox;
       width: 60%;
-      max-width: 15rem;
 
       @include tablet {
-        width: 60%;
         margin-bottom: 0;
       }
 
       & span {
-        width: 33.3%;
-        max-width: 4.25rem;
+        width: 5rem;
+      }
 
-        @include tablet {
-          width: 40%;
-          max-width: 5rem;
-        }
+      &-input {
+        @include input;
+        width: 10rem;
       }
     }
     &-time {
@@ -35,11 +32,6 @@
 
       @include tablet {
         width: 37.5%;
-      }
-
-      &-input {
-        @include input;
-        width: 52%;
       }
 
       & span {
@@ -51,6 +43,11 @@
           width: 40%;
           max-width: 7rem;
         }
+      }
+
+      &-input {
+        @include input;
+        width: 5rem;
       }
     }
     &-team {
@@ -70,26 +67,42 @@
       &-input {
         @include input;
         width: 78%;
+
+        & span {
+          width: 50%;
+        }
       }
     }
 
     &-type {
-      width: 100%;
+      @include flexbox;
+      width: 60%;
       margin-top: 0.75rem;
 
       & span {
         display: inline-block;
-        width: 20%;
-        max-width: 4.25rem;
-
-        @include tablet {
-          max-width: 5rem;
-        }
+        width: 5rem;
       }
 
       &-input {
         @include input;
-        width: 78%;
+        width: 10rem;
+      }
+    }
+
+    &-season {
+      @include flexbox;
+      width: 40%;
+      margin-top: 0.75rem;
+
+      & span {
+        display: inline-block;
+        width: 6rem;
+      }
+
+      &-input {
+        @include input;
+        width: 6rem;
       }
     }
 
@@ -132,21 +145,21 @@
     }
 
     @include tablet {
-      max-width: 400px;
+      max-width: 28rem;
     }
   }
 }
 
-.react-datepicker {
-  &__input-container input {
-    @include input;
-    width: 6.5rem;
+// .react-datepicker {
+//   &__input-container input {
+//     @include input;
+//     width: 6.5rem;
 
-    @include tablet {
-      width: 9rem;
-    }
-  }
-  &-popper {
-    z-index: 3 !important;
-  }
-}
+//     @include tablet {
+//       width: 12rem;
+//     }
+//   }
+//   &-popper {
+//     z-index: 3 !important;
+//   }
+// }

@@ -42,6 +42,10 @@ const ManageGames = ({ authUser }) => {
         return 3;
       case "Kraken Beers":
         return 4;
+      case "The Witless Bay Liners":
+        return 5;
+      case "Quidi Vidi Bears":
+        return 6;
       default:
         return null;
     }

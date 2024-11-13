@@ -29,7 +29,8 @@ const AddGames = ({ fetchGames, getIdByTeam }) => {
       team2_score: null,
       team2_result: null,
       notes: formData.get("notes"),
-      game_type: formData.get("game_type")
+      game_type: formData.get("game_type"),
+      season: formData.get("season"),
     };
     try {
       await axios.post(postGame(), game);
@@ -53,6 +54,7 @@ const AddGames = ({ fetchGames, getIdByTeam }) => {
           <CustomDatePicker
             selectedDate={newGame.date}
             handleDateChange={handleDateChange}
+            className={"addGames__form-date-input"}
           />
         </label>
         <label className="addGames__form-time">
@@ -71,6 +73,10 @@ const AddGames = ({ fetchGames, getIdByTeam }) => {
             <option value="Duck Island Saints">Duck Island Saints</option>
             <option value="Mighty Moose">Mighty Moose</option>
             <option value="Kraken Beers">Kraken Beers</option>
+            <option value="The Witless Bay Liners">
+              The Witless Bay Liners
+            </option>
+            <option value="Quidi Vidi Bears">Quidi Vidi Bears</option>
           </select>
         </label>
         <label className="addGames__form-team">
@@ -81,6 +87,10 @@ const AddGames = ({ fetchGames, getIdByTeam }) => {
             <option value="Duck Island Saints">Duck Island Saints</option>
             <option value="Mighty Moose">Mighty Moose</option>
             <option value="Kraken Beers">Kraken Beers</option>
+            <option value="The Witless Bay Liners">
+              The Witless Bay Liners
+            </option>
+            <option value="Quidi Vidi Bears">Quidi Vidi Bears</option>
           </select>
         </label>
         <label className="addGames__form-type">
@@ -91,10 +101,20 @@ const AddGames = ({ fetchGames, getIdByTeam }) => {
             <option value="Playoffs">Playoffs</option>
           </select>
         </label>
+        <label className="addGames__form-season">
+          <span>Season:</span>
+          <select className="addGames__form-season-input" name="season">
+            <option value="none">Pick one...</option>
+            <option value="24-25">24-25</option>
+            <option value="23-24">23-24</option>
+          </select>
+        </label>
         <label className="addGames__form-notes">
           <span>Notes:</span>
-          <textarea className="addGames__form-notes-input" name="notes">
-          </textarea>
+          <textarea
+            className="addGames__form-notes-input"
+            name="notes"
+          ></textarea>
         </label>
         <button className="addGames__form-button" type="submit">
           ADD GAME

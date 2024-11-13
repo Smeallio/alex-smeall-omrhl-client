@@ -49,6 +49,7 @@
   background-color: $omr-lightblue;
   color: $white;
   border: none;
+  border-radius: 5px;
   padding: 0.375rem 0.75rem;
   font-family: $Rubik;
   font-size: 0.875rem;
@@ -71,6 +72,7 @@
   &:active {
     box-shadow: 0 0 #0560ad;
     transform: translateY(5px) translateX(5px);
+    border-radius: 5px;
   }
 }
 

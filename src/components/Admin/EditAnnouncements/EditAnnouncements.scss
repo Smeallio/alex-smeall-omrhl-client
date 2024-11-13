@@ -177,23 +177,23 @@
         }
 
         @include desktop {
-            width: 100%;
+          width: 100%;
         }
       }
     }
   }
 }
 
-.react-datepicker {
-  &__input-container input {
-    @include input;
-    width: 6.5rem;
+// .react-datepicker {
+//   &__input-container input {
+//     @include input;
+//     width: 6.5rem;
 
-    @include tablet {
-      width: 9rem;
-    }
-  }
-  &-popper {
-    z-index: 3 !important;
-  }
-}
+//     @include tablet {
+//       width: 9rem;
+//     }
+//   }
+//   &-popper {
+//     z-index: 3 !important;
+//   }
+// }

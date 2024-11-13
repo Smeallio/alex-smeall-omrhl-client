@@ -2,6 +2,8 @@ import saintsLogo from "../../../assets/images/logos/Duck-Island-Saints-vector.w
 import krakenLogo from "../../../assets/images/logos/Kraken-Beers-vector.webp";
 import lepLogo from "../../../assets/images/logos/Leprechauns-vector.webp";
 import mooseLogo from "../../../assets/images/logos/Moose-vector.webp";
+import linersLogo from "../../../assets/images/logos/Witless-Bay-Liners-Vector.webp";
+import bearsLogo from "../../../assets/images/logos/Quidi-Vidi-Bears-vector.webp";
 import chevLeft from "../../../assets/images/icons/chevron-left-icon.png";
 import chevRight from "../../../assets/images/icons/chevron-right-icon.png";
 import { useRef } from "react";
@@ -22,6 +24,10 @@ const ScoreBar = ({ games }) => {
         return mooseLogo;
       case 4:
         return krakenLogo;
+      case 5:
+        return linersLogo;
+      case 6:
+        return bearsLogo;
       default:
         return null;
     }
