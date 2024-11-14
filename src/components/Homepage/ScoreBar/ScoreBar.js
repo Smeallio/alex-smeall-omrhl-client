@@ -2,7 +2,7 @@ import saintsLogo from "../../../assets/images/logos/Duck-Island-Saints-vector.w
 import krakenLogo from "../../../assets/images/logos/Kraken-Beers-vector.webp";
 import lepLogo from "../../../assets/images/logos/Leprechauns-vector.webp";
 import mooseLogo from "../../../assets/images/logos/Moose-vector.webp";
-import linersLogo from "../../../assets/images/logos/Witless-Bay-Liners-Vector.webp";
+import linersLogo from "../../../assets/images/logos/Witless-Bay-Liners-vector.webp";
 import bearsLogo from "../../../assets/images/logos/Quidi-Vidi-Bears-vector.webp";
 import chevLeft from "../../../assets/images/icons/chevron-left-icon.png";
 import chevRight from "../../../assets/images/icons/chevron-right-icon.png";

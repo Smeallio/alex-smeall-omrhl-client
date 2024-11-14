@@ -4,11 +4,13 @@ import krakenLogo from "../../../assets/images/logos/Kraken-Beers-vector.webp";
 import lepLogo from "../../../assets/images/logos/Leprechauns-vector.webp";
 import mooseLogo from "../../../assets/images/logos/Moose-vector.webp";
 import bearsLogo from "../../../assets/images/logos/Quidi-Vidi-Bears-vector.webp";
-import linersLogo from "../../../assets/images/logos/Witless-Bay-Liners-Vector.webp";
+import linersLogo from "../../../assets/images/logos/Witless-Bay-Liners-vector.webp";
 import saintsLogoGrey from "../../../assets/images/logos/Duck-Island-Saints-vector-grey.webp";
 import krakenLogoGrey from "../../../assets/images/logos/Kraken-Beers-vector-grey.webp";
 import lepLogoGrey from "../../../assets/images/logos/Leprechauns-vector-grey.webp";
 import mooseLogoGrey from "../../../assets/images/logos/Moose-vector-grey.webp";
+import bearsLogoGrey from "../../../assets/images/logos/Quidi-Vidi-Bears-grey.webp";
+import linersLogoGrey from "../../../assets/images/logos/Witless-Bay-Liners-grey.webp";
 import { Link, useParams } from "react-router-dom";
 import "./Header.scss";
 
@@ -31,47 +33,47 @@ const Header = () => {
       kraken = krakenLogoGrey;
       leprechauns = lepLogoGrey;
       moose = mooseLogoGrey;
-      bears = bearsLogo;
-      liners = linersLogo;
+      bears = bearsLogoGrey;
+      liners = linersLogoGrey;
       break;
     case "kraken":
       saints = saintsLogoGrey;
       kraken = krakenLogo;
       leprechauns = lepLogoGrey;
       moose = mooseLogoGrey;
-      bears = bearsLogo;
-      liners = linersLogo;
+      bears = bearsLogoGrey;
+      liners = linersLogoGrey;
       break;
     case "leprechauns":
       saints = saintsLogoGrey;
       kraken = krakenLogoGrey;
       leprechauns = lepLogo;
       moose = mooseLogoGrey;
-      bears = bearsLogo;
-      liners = linersLogo;
+      bears = bearsLogoGrey;
+      liners = linersLogoGrey;
       break;
     case "moose":
       saints = saintsLogoGrey;
       kraken = krakenLogoGrey;
       leprechauns = lepLogoGrey;
       moose = mooseLogo;
-      bears = bearsLogo;
-      liners = linersLogo;
+      bears = bearsLogoGrey;
+      liners = linersLogoGrey;
       break;
     case "bears":
       saints = saintsLogoGrey;
       kraken = krakenLogoGrey;
       leprechauns = lepLogoGrey;
-      moose = mooseLogo;
+      moose = mooseLogoGrey;
       bears = bearsLogo;
-      liners = linersLogo;
+      liners = linersLogoGrey;
       break;
     case "liners":
       saints = saintsLogoGrey;
       kraken = krakenLogoGrey;
       leprechauns = lepLogoGrey;
-      moose = mooseLogo;
-      bears = bearsLogo;
+      moose = mooseLogoGrey;
+      bears = bearsLogoGrey;
       liners = linersLogo;
       break;
     default:
