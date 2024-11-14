@@ -46,9 +46,12 @@ const EditPlayers = ({ players, teamId, fetchPlayers }) => {
       team_id: teamId,
       position: editablePlayer.position,
       number: editablePlayer.number || undefined,
+      played_23_24: editablePlayer.played_23_24,
+      played_24_25: editablePlayer.played_24_25,
     };
     try {
       await axios.put(updatePlayer(editablePlayer.id), updatedPlayer);
+      console.log(updatedPlayer);
       fetchPlayers();
     } catch (err) {
       console.log("Error updating player: ", err);
@@ -57,9 +60,10 @@ const EditPlayers = ({ players, teamId, fetchPlayers }) => {
   };
 
   const handleInputChange = (event) => {
+    const { name, type, checked, value } = event.target;
     setEditablePlayer((prevEditablePlayer) => ({
       ...prevEditablePlayer,
-      [event.target.name]: event.target.value,
+      [name]: type === "checkbox" ? (checked ? 1 : 0) : value,
     }));
   };
 
@@ -77,6 +81,8 @@ const EditPlayers = ({ players, teamId, fetchPlayers }) => {
                 <th scope="col">Name</th>
                 <th scope="col">No.</th>
                 <th scope="col">Pos.</th>
+                <th scope="col">23-24</th>
+                <th scope="col">24-25</th>
                 <th scope="col" colSpan="2">
                   Edit
                 </th>
@@ -99,7 +105,11 @@ const EditPlayers = ({ players, teamId, fetchPlayers }) => {
                         <input
                           type="number"
                           name="number"
-                          value={editablePlayer.number === 0 ? "" : editablePlayer.number}
+                          value={
+                            editablePlayer.number === 0
+                              ? ""
+                              : editablePlayer.number
+                          }
                           onChange={handleInputChange}
                         />
                       </td>
@@ -113,6 +123,26 @@ const EditPlayers = ({ players, teamId, fetchPlayers }) => {
                           <option value="D">D</option>
                           <option value="G">G</option>
                         </select>
+                      </td>
+                      <td className="editPlayers__table-box editPlayers__table-season">
+                        <label>
+                          <input
+                            type="checkbox"
+                            name="played_23_24"
+                            checked={editablePlayer.played_23_24}
+                            onChange={handleInputChange}
+                          />
+                        </label>
+                      </td>
+                      <td className="editPlayers__table-box editPlayers__table-season">
+                        <label>
+                          <input
+                            type="checkbox"
+                            name="played_24_25"
+                            checked={editablePlayer.played_24_25}
+                            onChange={handleInputChange}
+                          />
+                        </label>
                       </td>
                       <td className="editPlayers__table-box editPlayers__table-box-check">
                         <FontAwesomeIcon
@@ -139,6 +169,26 @@ const EditPlayers = ({ players, teamId, fetchPlayers }) => {
                       </td>
                       <td className="editPlayers__table-box editPlayers__table-position">
                         {player.position}
+                      </td>
+                      <td className="editPlayers__table-box editPlayers__table-box-season">
+                        {player.played_23_24 ? (
+                          <FontAwesomeIcon
+                            icon={faCheck}
+                            style={{ color: "green" }}
+                          />
+                        ) : (
+                          "-"
+                        )}
+                      </td>
+                      <td className="editPlayers__table-box editPlayers__table-box-season">
+                        {player.played_24_25 ? (
+                          <FontAwesomeIcon
+                            icon={faCheck}
+                            style={{ color: "green" }}
+                          />
+                        ) : (
+                          "-"
+                        )}
                       </td>
                       <td className="editPlayers__table-box editPlayers__table-box-edit">
                         <FontAwesomeIcon
