@@ -13,6 +13,8 @@ const AddPlayers = ({ teamId, fetchPlayers }) => {
       team_id: teamId,
       position: formRef.current.position.value,
       number: formRef.current.number.value,
+      played_23_24: formRef.current.played_23_24.checked ? 1 : 0,
+      played_24_25: formRef.current.played_24_25.checked ? 1 : 0,
     };
     try {
       await axios.post(postPlayer(teamId), player);
@@ -20,6 +22,8 @@ const AddPlayers = ({ teamId, fetchPlayers }) => {
       formRef.current.name.value = "";
       formRef.current.position.value = "F";
       formRef.current.number.value = "";
+      formRef.current.played_23_24.checked = false;
+      formRef.current.played_24_25.checked = false;
     } catch (err) {
       console.log(err.message);
     }
@@ -52,6 +56,22 @@ const AddPlayers = ({ teamId, fetchPlayers }) => {
             <option value="D">D</option>
             <option value="G">G</option>
           </select>
+        </label>
+        <label className="addPlayers__form-season">
+          <span>23-24:</span>
+          <input
+            className="addPlayers__form-season-input"
+            type="checkbox"
+            name="played_23_24"
+          ></input>
+        </label>
+        <label className="addPlayers__form-season">
+          <span>24-25:</span>
+          <input
+            className="addPlayers__form-season-input"
+            type="checkbox"
+            name="played_24_25"
+          ></input>
         </label>
         <button className="addPlayers__form-button" type="submit">
           ADD PLAYER

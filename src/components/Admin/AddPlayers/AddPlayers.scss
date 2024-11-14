@@ -8,6 +8,7 @@
 
     @include desktop {
       @include flexbox(flex-start, center, row, nowrap);
+      max-width: 1000px;
     }
 
     &-name {
@@ -21,7 +22,7 @@
       }
 
       @include desktop {
-        width: 37.5%;
+        width: 30%;
       }
 
       &-input {
@@ -61,7 +62,7 @@
         }
 
         @include desktop {
-            width: 35%;
+          width: 35%;
         }
       }
     }
@@ -73,8 +74,8 @@
         text-align: left;
       }
 
-      @include desktop{
-        width: 17.5%;
+      @include desktop {
+        width: 20%;
       }
 
       &-input {
@@ -83,8 +84,21 @@
         width: 30%;
 
         @include desktop {
-            width: 35%;
+          width: 35%;
         }
+      }
+    }
+
+    &-season {
+      @include flexbox;
+      margin-right: 1rem;
+
+      & span {
+        white-space: nowrap;
+      }
+
+      &-input {
+        margin-left: 0.5rem;
       }
     }
 

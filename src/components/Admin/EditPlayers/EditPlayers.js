@@ -51,7 +51,6 @@ const EditPlayers = ({ players, teamId, fetchPlayers }) => {
     };
     try {
       await axios.put(updatePlayer(editablePlayer.id), updatedPlayer);
-      console.log(updatedPlayer);
       fetchPlayers();
     } catch (err) {
       console.log("Error updating player: ", err);
