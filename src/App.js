@@ -15,7 +15,6 @@ import NotFound from "./pages/NotFound/NotFound";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { getUsers } from "./utils/api-utils";
-import "./App.scss";
 import ReactGA from "react-ga4";
 
 function App() {

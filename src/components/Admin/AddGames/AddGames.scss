@@ -10,99 +10,139 @@
     @include flexbox(space-between, center, row, wrap);
     @include biggerp;
 
+    &-type {
+      @include flexbox;
+      width: 55%;
+      margin-top: 0.75rem;
+
+      & span {
+        display: inline-block;
+        width: 4.25rem;
+
+        @include tablet {
+          width: 5rem;
+        }
+      }
+
+      &-input {
+        @include input;
+        width: 7.75rem;
+
+        @include tablet {
+          width: 10.25rem;
+        }
+      }
+    }
+
+    &-season {
+      @include flexbox;
+      width: 45%;
+      margin-top: 0.75rem;
+
+      @include tablet {
+        width: 40%;
+      }
+
+      & span {
+        width: 4.5rem;
+
+        @include tablet {
+          width: 5rem;
+        }
+      }
+
+      &-input {
+        @include input;
+        width: 5.75rem;
+      }
+    }
+
     &-date {
       @include flexbox;
-      width: 60%;
+      margin-top: 0.75rem;
+      width: 55%;
 
       @include tablet {
         margin-bottom: 0;
       }
 
       & span {
-        width: 5rem;
-      }
-
-      &-input {
-        @include input;
-        width: 10rem;
-      }
-    }
-    &-time {
-      width: 40%;
-
-      @include tablet {
-        width: 37.5%;
-      }
-
-      & span {
         display: inline-block;
-        width: 40%;
-        max-width: 5rem;
+        width: 4.25rem;
 
         @include tablet {
-          width: 40%;
-          max-width: 7rem;
+          width: 5rem;
         }
       }
 
       &-input {
         @include input;
-        width: 5rem;
+        width: 7.5rem;
+
+        @include tablet {
+          width: 10rem;
+        }
       }
     }
+
+    &-time {
+      width: 45%;
+      margin-top: 0.75rem;
+
+      @include tablet {
+        width: 40%;
+      }
+
+      & span {
+        display: inline-block;
+        width: 4.5rem;
+
+        @include tablet {
+          width: 5rem;
+        }
+      }
+
+      &-input {
+        @include input;
+        width: 5.5rem;
+      }
+    }
+
+    &-arena {
+      width: 100%;
+      margin-top: 0.75rem;
+
+      & span {
+        display: inline-block;
+        width: 4.25rem;
+
+        @include tablet {
+          width: 5rem;
+        }
+      }
+
+      &-input {
+        @include input;
+        width: 81%;
+      }
+    }
+
     &-team {
       width: 100%;
       margin-top: 0.75rem;
 
       & span {
         display: inline-block;
-        width: 20%;
-        max-width: 4.25rem;
+        width: 4.25rem;
 
         @include tablet {
-          max-width: 5rem;
+          width: 5rem;
         }
       }
 
       &-input {
         @include input;
-        width: 78%;
-
-        & span {
-          width: 50%;
-        }
-      }
-    }
-
-    &-type {
-      @include flexbox;
-      width: 60%;
-      margin-top: 0.75rem;
-
-      & span {
-        display: inline-block;
-        width: 5rem;
-      }
-
-      &-input {
-        @include input;
-        width: 10rem;
-      }
-    }
-
-    &-season {
-      @include flexbox;
-      width: 40%;
-      margin-top: 0.75rem;
-
-      & span {
-        display: inline-block;
-        width: 6rem;
-      }
-
-      &-input {
-        @include input;
-        width: 6rem;
+        width: 81%;
       }
     }
 
@@ -112,7 +152,7 @@
 
       &-input {
         @include input;
-        width: 77%;
+        width: 80%;
         height: 5rem;
       }
 
@@ -123,11 +163,10 @@
       & span {
         display: inline-block;
         vertical-align: top;
-        width: 20%;
-        max-width: 4.25rem;
+        width: 4.25rem;
 
         @include tablet {
-          max-width: 5rem;
+          width: 5rem;
         }
       }
     }
@@ -149,17 +188,3 @@
     }
   }
 }
-
-// .react-datepicker {
-//   &__input-container input {
-//     @include input;
-//     width: 6.5rem;
-
-//     @include tablet {
-//       width: 12rem;
-//     }
-//   }
-//   &-popper {
-//     z-index: 3 !important;
-//   }
-// }

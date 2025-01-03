@@ -49,6 +49,22 @@ const AddGames = ({ fetchGames, getIdByTeam }) => {
     <article className="addGames">
       <h2 className="addGames__header">Add Games</h2>
       <form className="addGames__form" onSubmit={addGame} ref={formRef}>
+        <label className="addGames__form-type">
+          <span>Type:</span>
+          <select className="addGames__form-type-input" name="game_type">
+            <option value="none">Pick one...</option>
+            <option value="Regular Season">Regular Season</option>
+            <option value="Playoffs">Playoffs</option>
+          </select>
+        </label>
+        <label className="addGames__form-season">
+          <span>Season:</span>
+          <select className="addGames__form-season-input" name="season">
+            <option value="none">Pick one...</option>
+            <option value="24-25">24-25</option>
+            <option value="23-24">23-24</option>
+          </select>
+        </label>
         <label className="addGames__form-date">
           <span>Date:</span>
           <CustomDatePicker
@@ -64,6 +80,14 @@ const AddGames = ({ fetchGames, getIdByTeam }) => {
             type="text"
             name="time"
           ></input>
+        </label>
+        <label className="addGames__form-arena">
+          <span>Arena:</span>
+          <select className="addGames__form-arena-input" name="arena">
+            <option value="none">Pick one...</option>
+            <option value="Capital Subaru Arena">Capital Subaru Arena</option>
+            <option value="St. Bon's Forum">St. Bon's Forum</option>
+          </select>
         </label>
         <label className="addGames__form-team">
           <span>Team 1:</span>
@@ -91,22 +115,6 @@ const AddGames = ({ fetchGames, getIdByTeam }) => {
               The Witless Bay Liners
             </option>
             <option value="Quidi Vidi Bears">Quidi Vidi Bears</option>
-          </select>
-        </label>
-        <label className="addGames__form-type">
-          <span>Type:</span>
-          <select className="addGames__form-type-input" name="game_type">
-            <option value="none">Pick one...</option>
-            <option value="Regular Season">Regular Season</option>
-            <option value="Playoffs">Playoffs</option>
-          </select>
-        </label>
-        <label className="addGames__form-season">
-          <span>Season:</span>
-          <select className="addGames__form-season-input" name="season">
-            <option value="none">Pick one...</option>
-            <option value="24-25">24-25</option>
-            <option value="23-24">23-24</option>
           </select>
         </label>
         <label className="addGames__form-notes">
