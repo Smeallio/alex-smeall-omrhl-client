@@ -86,7 +86,7 @@ const Dashboard = ({ authUser }) => {
               </Link>
             </section>
             <section className="dashboard__flex-boxscores">
-              <h2 className="dashboard__subtitle">Update Boxscores</h2>
+              <h2 className="dashboard__subtitle">Update Boxscores:</h2>
               <ul>
                 {games.map((game) => (
                   <li key={game.id}>
