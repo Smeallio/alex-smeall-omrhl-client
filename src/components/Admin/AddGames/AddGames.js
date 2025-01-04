@@ -17,6 +17,9 @@ const AddGames = ({ fetchGames, getIdByTeam }) => {
       dateOptions
     );
     const game = {
+      game_type: formData.get("game_type"),
+      season: formData.get("season"),
+      arena: formData.get("arena"),
       date: formattedDate,
       time: formData.get("time"),
       complete: 0,
@@ -29,8 +32,6 @@ const AddGames = ({ fetchGames, getIdByTeam }) => {
       team2_score: null,
       team2_result: null,
       notes: formData.get("notes"),
-      game_type: formData.get("game_type"),
-      season: formData.get("season"),
     };
     try {
       await axios.post(postGame(), game);
