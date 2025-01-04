@@ -6,7 +6,21 @@
   overflow: hidden;
 
   &__header {
-    @include h2;
+    @include tablet {
+      @include flexbox(space-between);
+    }
+    &-text {
+      @include h2;
+    }
+
+    &-dropdown {
+      @include dropdown;
+
+      &-select,
+      &-item {
+        width: 9.5rem;
+      }
+    }
   }
 
   &__block {

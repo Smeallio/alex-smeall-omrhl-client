@@ -5,7 +5,7 @@ import EditGames from "../../components/Admin/EditGames/EditGames";
 import Footer from "../../components/Globals/Footer/Footer";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { getGames } from "../../utils/api-utils";
+import { getOneSeasonGames } from "../../utils/api-utils";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
@@ -13,6 +13,7 @@ import "./ManageGames.scss";
 
 const ManageGames = ({ authUser }) => {
   const [games, setGames] = useState(null);
+  const [seasonYear, setSeasonYear] = useState("23-24");
 
   useEffect(() => {
     document.title = "Odd Man Rush Hockey League - Games Dashboard";
@@ -20,7 +21,7 @@ const ManageGames = ({ authUser }) => {
 
   const fetchGames = async () => {
     try {
-      const response = await axios.get(getGames());
+      const response = await axios.get(getOneSeasonGames(seasonYear));
       const allGames = response.data;
       setGames(allGames);
     } catch (err) {
@@ -30,7 +31,7 @@ const ManageGames = ({ authUser }) => {
 
   useEffect(() => {
     fetchGames();
-  }, []);
+  }, [seasonYear]);
 
   const getIdByTeam = (teamName) => {
     switch (teamName) {
@@ -94,6 +95,8 @@ const ManageGames = ({ authUser }) => {
           games={games}
           fetchGames={fetchGames}
           getIdByTeam={getIdByTeam}
+          seasonYear={seasonYear}
+          setSeasonYear={setSeasonYear}
         />
       </main>
       <Footer />

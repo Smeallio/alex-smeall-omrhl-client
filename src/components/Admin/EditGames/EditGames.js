@@ -1,16 +1,37 @@
 import ConfirmModal from "../../Globals/ConfirmModal/ConfirmModal";
 import CustomDatePicker from "../../Globals/DatePicker/DatePicker";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCheck,
+  faChevronDown,
+  faChevronUp,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import axios from "axios";
 import { useState } from "react";
 import { updateGame, deleteGame } from "../../../utils/api-utils";
 import "./EditGames.scss";
 
-const EditGames = ({ games, fetchGames, getIdByTeam }) => {
+const EditGames = ({
+  games,
+  fetchGames,
+  getIdByTeam,
+  seasonYear,
+  setSeasonYear,
+}) => {
   const [confirmDelete, setConfirmDelete] = useState(null);
   const [editableGame, setEditableGame] = useState(0);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const handleSeasonChange = (event) => {
+    setSeasonYear(event.target.value);
+    setIsDropdownOpen(false);
+  };
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen((prev) => !prev);
+  };
 
   const handleDeleteGame = async (gameId) => {
     setConfirmDelete(gameId);
@@ -120,7 +141,42 @@ const EditGames = ({ games, fetchGames, getIdByTeam }) => {
 
   return (
     <article className="editGames">
-      <h2 className="editGames__header">Edit Games</h2>
+      <section className="editGames__header">
+        <h2 className="editGames__header-text">Edit Games</h2>
+        <section
+          className="editGames__header-dropdown"
+          onClick={toggleDropdown}
+        >
+          <section
+            value={seasonYear}
+            className="editGames__header-dropdown-select"
+          >
+            <span class="editGames__header-dropdown-text">
+              {`${seasonYear} Season`}
+            </span>
+            <FontAwesomeIcon
+              icon={isDropdownOpen ? faChevronUp : faChevronDown}
+              className="editGames__header-dropdown-icon"
+            />
+          </section>
+          {isDropdownOpen && (
+            <section className="editGames__header-dropdown-menu">
+              <section
+                onClick={() => handleSeasonChange("24-25")}
+                className="editGames__header-dropdown-item"
+              >
+                24-25 Season
+              </section>
+              <section
+                onClick={() => handleSeasonChange("23-24")}
+                className="editGames__header-dropdown-item"
+              >
+                23-24 Season
+              </section>
+            </section>
+          )}
+        </section>
+      </section>
       <section className="editGames__block">
         <form className="editGames__form">
           <table className="editGames__table">
@@ -191,17 +247,13 @@ const EditGames = ({ games, fetchGames, getIdByTeam }) => {
                           <option value="none">Pick one...</option>
                           <option
                             value="Regular Season"
-                            selected={
-                              editableGame.type === "Regular Season"
-                            }
+                            selected={editableGame.type === "Regular Season"}
                           >
                             Regular Season
                           </option>
                           <option
                             value="Playoffs"
-                            selected={
-                              editableGame.type === "Playoffs"
-                            }
+                            selected={editableGame.type === "Playoffs"}
                           >
                             Playoffs
                           </option>
